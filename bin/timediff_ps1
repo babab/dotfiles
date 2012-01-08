@@ -2,7 +2,7 @@
 <?php
 # vim: set ft=php:
 
-$file = "/tmp/{$_SERVER['USER']}__dateps1";
+$file = "/tmp/dateps1_" . hash('md4', $argv[1]);
 
 if (!file_exists($file)) {
     $secs = 0;

@@ -28,7 +28,7 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 1)\]\$(exitcode_ps1 \$?)\
 \[$(tput setaf 5)\] \!\
 \[$(tput setaf 4)\] \$(date +'%H:%M:%S')\
-\[$(tput setaf 2)\] \$(timediff_ps1)\
+\[$(tput setaf 2)\] \$(timediff_ps1 ${USER}`tty`)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op)\] "
@@ -48,8 +48,8 @@ zzz()
 {
     case "$1" in
     "")
-        echo "Usage: zzz <minutes>\t\tShutdown in <minutes> from now"
-        echo "       zzz now      \t\tSutdown instandly"
+        echo "Usage: zzz <minutes>          Shutdown in <minutes> from now"
+        echo "       zzz now                Shutdown instandly"
         ;;
     "now")
         sudo pkill shutdown
