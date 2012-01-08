@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ ! "$1" ]; then
+    echo "USAGE: `basename $0` <command>"
+    exit
+fi
+
+$@ 2>&1 >/dev/null &
+exit $?

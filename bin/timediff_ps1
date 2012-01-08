@@ -1,0 +1,33 @@
+#!/usr/bin/php
+<?php
+# vim: set ft=php:
+
+$file = "/tmp/{$_SERVER['USER']}__dateps1";
+
+if (!file_exists($file)) {
+    $secs = 0;
+}
+else {
+    $last_time = (int) file_get_contents($file);
+    $secs = time() - $last_time;
+}
+
+if ($secs < 60) {
+    echo ($secs) . 's';
+}
+else if ($secs < (60 * 60)) {
+    echo floor($secs / 60) . 'm' . $secs % 60 . 's';
+}
+else {
+    $h = floor($secs / (60 * 60));
+
+    $mdiv = $secs % (60 * 60);
+    $m = floor($mdiv / 60);
+
+    $sdiv = $mdiv % 60;
+    $s = ceil($sdiv);
+    echo $h.'h' . $m.'m' . $s.'s';
+}
+
+file_put_contents($file, time(), LOCK_EX);
+?>
