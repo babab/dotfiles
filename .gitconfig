@@ -1,6 +1,6 @@
 [user]
 	name = Benjamin Althues
-	email = benjamin@babab.nl
+	email = benjamin@aethon.nl
 [alias]
 	st = status
 	ci = commit
@@ -12,3 +12,8 @@
 	diff = auto
 	interactive = auto
 	status = auto
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = benjamin@aethon.nl
+	smtpserverport = 587
