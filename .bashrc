@@ -18,8 +18,24 @@ fi
 exitcode_ps1()
 {
     if [ $1 -gt 0 ]; then
-        echo " Err:$1"
+        echo " err:$1"
     fi
+}
+
+sshkey_ps1()
+{
+    ssh-add -l 2>&1 >/dev/null
+    case $? in
+        0)
+            echo "+"
+            ;;
+        1)
+            echo "-"
+            ;;
+        2)
+            echo "n/a"
+            ;;
+    esac
 }
 
 PS1="\[$(tput bold; tput setaf 1)\]\n\u\
@@ -27,6 +43,7 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 3)\]\h\
 \[$(tput setaf 1)\]\$(exitcode_ps1 \$?)\
 \[$(tput setaf 5)\] \!\
+\[$(tput setaf 6)\] \$(sshkey_ps1)\
 \[$(tput setaf 4)\] \$(date +'%H:%M:%S')\
 \[$(tput setaf 2)\] \$(timediff_ps1 ${USER}`tty`)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
