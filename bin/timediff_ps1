@@ -5,7 +5,9 @@
 $file = "/tmp/dateps1_" . hash('md4', $argv[1]);
 
 if (!file_exists($file)) {
-    $secs = 0;
+    echo 'new';
+    file_put_contents($file, time(), LOCK_EX);
+    exit;
 }
 else {
     $last_time = (int) file_get_contents($file);
