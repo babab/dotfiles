@@ -53,11 +53,11 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 alias la='/bin/ls -FA --color=auto'
 ll()
 {
-    ls -Flh  --color=auto "$@" | less -FXRS
+    ls -Flh  --color=always "$@" | less -FXRS
 }
 lla()
 {
-    ls -FlhA --color=auto "$@" | less -FXRS
+    ls -FlhA --color=always "$@" | less -FXRS
 }
 alias ls='/bin/ls -F  --color=auto'
 
