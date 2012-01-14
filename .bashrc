@@ -24,7 +24,7 @@ exitcode_ps1()
 
 sshkey_ps1()
 {
-    ssh-add -l 2>&1 >/dev/null
+    ssh-add -l 2>/dev/null >/dev/null
     case $? in
         0)
             echo "+"
