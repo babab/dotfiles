@@ -83,6 +83,7 @@ alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
+alias sshagent='eval `ssh-agent` >/dev/null'
 
 alias ..='cd ..'
 alias ...='cd ../..'
