@@ -90,6 +90,11 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# Bash completion
+complete -d ll
+complete -d lla
+complete -ac xs
+
 if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
 fi
