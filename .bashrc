@@ -24,7 +24,7 @@ exitcode_ps1()
 
 sshkey_ps1()
 {
-    ssh-add -l 2>&1 >/dev/null
+    ssh-add -l 2>/dev/null >/dev/null
     case $? in
         0)
             echo "+"
@@ -53,22 +53,28 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 alias la='/bin/ls -FA --color=auto'
 ll()
 {
-    ls -Flh  --color=auto "$@" | less -FXRS
+    ls -Flh  --color=always "$@" | less -FXRS
 }
 lla()
 {
-    ls -FlhA --color=auto "$@" | less -FXRS
+    ls -FlhA --color=always "$@" | less -FXRS
 }
 alias ls='/bin/ls -F  --color=auto'
 
-zzz()
+shutdown()
 {
+    # $SHUTDOWN_ALLOWED is defined in .bashrc.local
+    if [ "$SHUTDOWN_ALLOWED" != "YES" ]; then
+        echo SHUTDOWN_ALLOWED=YES is not defined
+        return
+    fi
+
     case "$1" in
     "")
         echo "Usage: zzz <minutes>          Shutdown in <minutes> from now"
         echo "       zzz now                Shutdown instandly"
         ;;
-    "now")
+    "n" | "now")
         sudo pkill shutdown
         sudo shutdown -hP now
         ;;
@@ -83,12 +89,18 @@ alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
+alias sshagent='eval `ssh-agent` >/dev/null'
 
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-if [ -f $HOME/.shaliases ]; then
-    . $HOME/.shaliases
+# Bash completion
+complete -d ll
+complete -d lla
+complete -ac xs
+
+if [ -f "$HOME/.bashrc.local" ]; then
+    . ${HOME}/.bashrc.local
 fi
