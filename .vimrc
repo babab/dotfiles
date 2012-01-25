@@ -26,6 +26,7 @@ set hidden          " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 
 set modeline        " Use modelines if found
+set ttymouse=xterm  " So vim doesn't hang inside tmux
 colo elflord        " Elflord color scheme
 
 " Use 4 spaces for tabs by default
@@ -52,3 +53,4 @@ vnoremap <Space> zf
 " Save folds
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
+
