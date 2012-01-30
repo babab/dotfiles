@@ -251,16 +251,18 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
+
     <keybind key="Print">
       <action name="Execute">
-        <execute>gnome-screenshot</execute>
+        <command>scrot -cd 5 /home/benjamin/Desktop/screenshot_%d_%m_%y_%H_%M_%S.png</command>
       </action>
     </keybind>
-    <keybind key="A-Print">
+    <keybind key="S-Print">
       <action name="Execute">
-        <execute>gnome-screenshot -w</execute>
+        <command>scrot -bs /home/benjamin/Desktop/screenshot_%d_%m_%y_%H_%M_%S.png</command>
       </action>
     </keybind>
+
     <!-- Keybindings for window switching -->
     <keybind key="W-Up">
       <action name="PreviousWindow"/>
