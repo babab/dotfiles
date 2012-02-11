@@ -15,6 +15,10 @@ if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
 
+if [ ! -d "$HOME/Pictures/scrot" ]; then
+    mkdir -p "$HOME/Pictures/scrot"
+fi
+
 exitcode_ps1()
 {
     if [ $1 -gt 0 ]; then
@@ -90,6 +94,7 @@ alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias sshagent='eval `ssh-agent` >/dev/null'
+alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 
 alias ..='cd ..'
 alias ...='cd ../..'
