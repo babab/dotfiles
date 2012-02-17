@@ -330,6 +330,15 @@
         <command>xlock -mode blank</command>
       </action>
     </keybind>
+    <keybind key="W-p">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>gmrun</name>
+        </startupnotify>
+        <command>gmrun</command>
+      </action>
+    </keybind>
   </keyboard>
   <mouse>
     <dragThreshold>8</dragThreshold>
