@@ -55,3 +55,5 @@ vnoremap <Space> zf
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
 
+" pathogen.vim
+call pathogen#infect()
