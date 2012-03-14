@@ -27,7 +27,8 @@ set hidden          " Hide buffers when they are abandoned
 
 set modeline        " Use modelines if found
 set ttymouse=xterm  " So vim doesn't hang inside tmux
-colo elflord        " Elflord color scheme
+colo babab          " color scheme based on elflord, slightly altered
+                    " see .vim/colors/babab.vim
 
 " Use 4 spaces for tabs by default
 set et
@@ -54,3 +55,5 @@ vnoremap <Space> zf
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
 
+" pathogen.vim
+call pathogen#infect()
