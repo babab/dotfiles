@@ -57,3 +57,12 @@ au BufWinEnter * silent! loadview
 
 " pathogen.vim
 call pathogen#infect()
+
+" HTML Tag ending
+let @t='bi<A>bhyf>$pbi/h'
+
+" HTML Tag ending and attribute
+let @y='bi<A>bhyf>$pbi/hhi id="" name=""8h'
+
+" Create div between cursor and '!!'
+let @d='a<div>/!!i</div>lC<!-- #name -->v>?divwi id=""'
