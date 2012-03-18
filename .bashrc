@@ -66,31 +66,6 @@ lla()
     ls -FlhA --color=always "$@" | less -FXRS
 }
 alias ls='/bin/ls -F  --color=auto'
-
-shutdown()
-{
-    # $SHUTDOWN_ALLOWED is defined in .bashrc.local
-    if [ "$SHUTDOWN_ALLOWED" != "YES" ]; then
-        echo SHUTDOWN_ALLOWED=YES is not defined
-        return
-    fi
-
-    case "$1" in
-    "")
-        echo "Usage: zzz <minutes>          Shutdown in <minutes> from now"
-        echo "       zzz now                Shutdown instandly"
-        ;;
-    "n" | "now")
-        sudo pkill shutdown
-        sudo shutdown -hP now
-        ;;
-    *)
-        sudo pkill shutdown
-        sudo shutdown -hP "+$1"
-        ;;
-    esac
-}
-
 alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
