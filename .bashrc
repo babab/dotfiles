@@ -7,6 +7,8 @@ HISTFILESIZE=200
 shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+set -o vi
+
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
@@ -64,37 +66,15 @@ lla()
     ls -FlhA --color=always "$@" | less -FXRS
 }
 alias ls='/bin/ls -F  --color=auto'
-
-shutdown()
-{
-    # $SHUTDOWN_ALLOWED is defined in .bashrc.local
-    if [ "$SHUTDOWN_ALLOWED" != "YES" ]; then
-        echo SHUTDOWN_ALLOWED=YES is not defined
-        return
-    fi
-
-    case "$1" in
-    "")
-        echo "Usage: zzz <minutes>          Shutdown in <minutes> from now"
-        echo "       zzz now                Shutdown instandly"
-        ;;
-    "n" | "now")
-        sudo pkill shutdown
-        sudo shutdown -hP now
-        ;;
-    *)
-        sudo pkill shutdown
-        sudo shutdown -hP "+$1"
-        ;;
-    esac
-}
-
 alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+
+alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
+alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 
 alias ..='cd ..'
 alias ...='cd ../..'
