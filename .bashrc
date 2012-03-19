@@ -73,6 +73,9 @@ alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 
+alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
+alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
