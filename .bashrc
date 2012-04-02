@@ -75,6 +75,13 @@ alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
+alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+
+git_stashed_checkout()
+{
+    branch="$1"
+    git stash && git checkout $branch && git stash pop
+}
 
 alias ..='cd ..'
 alias ...='cd ../..'
