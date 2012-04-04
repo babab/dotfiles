@@ -175,7 +175,19 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+    <keybind key="W-h">
+      <action name="DesktopLeft">
+        <dialog>no</dialog>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
     <keybind key="W-Right">
+      <action name="DesktopRight">
+        <dialog>no</dialog>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-l">
       <action name="DesktopRight">
         <dialog>no</dialog>
         <wrap>no</wrap>
@@ -189,7 +201,19 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+    <keybind key="S-W-h">
+      <action name="SendToDesktopLeft">
+        <dialog>no</dialog>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
     <keybind key="S-W-Right">
+      <action name="SendToDesktopRight">
+        <dialog>no</dialog>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="S-W-l">
       <action name="SendToDesktopRight">
         <dialog>no</dialog>
         <wrap>no</wrap>
@@ -267,7 +291,13 @@
     <keybind key="W-Up">
       <action name="PreviousWindow"/>
     </keybind>
+    <keybind key="W-k">
+      <action name="PreviousWindow"/>
+    </keybind>
     <keybind key="W-Down">
+      <action name="NextWindow"/>
+    </keybind>
+    <keybind key="W-j">
       <action name="NextWindow"/>
     </keybind>
     <keybind key="A-Tab">
@@ -321,7 +351,7 @@
         <command>chromium-browser</command>
       </action>
     </keybind>
-    <keybind key="W-l">
+    <keybind key="W-q">
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
