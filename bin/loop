@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ ! "$1" ]; then
+    echo "USAGE: `basename $0` <command>"
+    exit
+fi
+
+while [ 1 -lt 2 ]; do
+    $@
+    sleep 1
+done
