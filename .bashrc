@@ -91,16 +91,6 @@ if [ -x /usr/bin/scrot ]; then
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
 
-git_stashed_checkout()
-{
-    if [ ! $1 ]; then
-        echo "USAGE: git_stashed_checkout <branch>"
-        return
-    fi
-    branch="$1"
-    git stash && git checkout $branch && git stash pop
-}
-
 # Bash completion
 complete -d ll
 complete -d lla
