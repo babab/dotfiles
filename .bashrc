@@ -73,6 +73,9 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
+alias kk='echo git status && git status'
+alias kl='echo git diff && git diff'
+alias lk='echo git diff --cached && git diff --cached'
 
 # Setting default flags
 alias less='less -FXRS'
