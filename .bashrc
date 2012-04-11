@@ -82,6 +82,10 @@ fi
 
 git_stashed_checkout()
 {
+    if [ ! $1 ]; then
+        echo "USAGE: git_stashed_checkout <branch>"
+        return
+    fi
     branch="$1"
     git stash && git checkout $branch && git stash pop
 }
