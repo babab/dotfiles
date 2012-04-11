@@ -17,7 +17,7 @@ if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
 
-if [ ! -d "$HOME/Pictures/scrot" ]; then
+if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
 fi
 
@@ -71,11 +71,14 @@ alias xx="> $HOME/.bash_history && exit"
 alias less='less -FXRS'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias sshagent='eval `ssh-agent` >/dev/null'
-alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+
+if [ -x /usr/bin/scrot ]; then
+    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+fi
 
 git_stashed_checkout()
 {
