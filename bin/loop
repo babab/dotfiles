@@ -5,4 +5,7 @@ if [ ! "$1" ]; then
     exit
 fi
 
-$@ 2>/dev/null >/dev/null &
+while [ 1 -lt 2 ]; do
+    $@
+    sleep 1
+done

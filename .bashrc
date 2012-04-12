@@ -17,7 +17,7 @@ if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
 
-if [ ! -d "$HOME/Pictures/scrot" ]; then
+if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
 fi
 
@@ -56,37 +56,40 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op)\] "
 
+# Quick shortcuts
+alias ls='/bin/ls -F  --color=auto'
 alias la='/bin/ls -FA --color=auto'
 ll()
 {
-    ls -Flh  --color=always "$@" | less -FXRS
+    /bin/ls -Flh  --color=always "$@" | less -FXRS
 }
 lla()
 {
-    ls -FlhA --color=always "$@" | less -FXRS
+    /bin/ls -FlhA --color=always "$@" | less -FXRS
 }
-alias ls='/bin/ls -F  --color=auto'
-alias x='exit'
-alias xx="> $HOME/.bash_history && exit"
-alias less='less -FXRS'
-alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
-alias sshagent='eval `ssh-agent` >/dev/null'
-alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
-
-alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
-alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
-alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
-
-git_stashed_checkout()
-{
-    branch="$1"
-    git stash && git checkout $branch && git stash pop
-}
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias x='exit'
+alias xx="> $HOME/.bash_history && exit"
+alias kk='echo git status && git status'
+alias kl='echo git diff && git diff'
+alias lk='echo git diff --cached && git diff --cached'
+
+# Setting default flags
+alias less='less -FXRS'
+alias sshagent='eval `ssh-agent` >/dev/null'
+
+# Custom aliases
+alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
+alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
+alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
+alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+
+if [ -x /usr/bin/scrot ]; then
+    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+fi
 
 # Bash completion
 complete -d ll
