@@ -51,7 +51,7 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 5)\] \!\
 \[$(tput setaf 6)\] \$(sshkey_ps1)\
 \[$(tput setaf 4)\] \$(date +'%H:%M:%S')\
-\[$(tput setaf 2)\] \$(timediff_ps1 ${USER}`tty`)\
+\[$(tput setaf 2)\] \$(timediff_ps1 ${USER} `tty`)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op)\] "

@@ -2,10 +2,15 @@
 <?php
 # vim: set ft=php:
 
-$file = "/tmp/dateps1_" . hash('md4', $argv[1]);
+$file = "/tmp/dateps1_" . hash('md4', $argv[1] . $argv[2]);
+
+$tty = str_replace('dev', '', $argv[2]);
+$tty = str_replace('/', '', $tty);
+$tty = str_replace('tty', 't', $tty);
+$tty = str_replace('pts', 'p', $tty);
 
 if (!file_exists($file)) {
-    echo 'new';
+    echo $tty . ':new';
     file_put_contents($file, time(), LOCK_EX);
     exit;
 }
@@ -15,10 +20,10 @@ else {
 }
 
 if ($secs < 60) {
-    echo ($secs) . 's';
+    echo "$tty:$secs" . 's';
 }
 else if ($secs < (60 * 60)) {
-    echo floor($secs / 60) . 'm' . $secs % 60 . 's';
+    echo "$tty:" . floor($secs / 60) . 'm' . $secs % 60 . 's';
 }
 else {
     $h = floor($secs / (60 * 60));
@@ -28,7 +33,7 @@ else {
 
     $sdiv = $mdiv % 60;
     $s = ceil($sdiv);
-    echo $h.'h' . $m.'m' . $s.'s';
+    echo "$tty:" . $h.'h' . $m.'m' . $s.'s';
 }
 
 file_put_contents($file, time(), LOCK_EX);

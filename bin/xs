@@ -5,4 +5,10 @@ if [ ! "$1" ]; then
     exit
 fi
 
+which $1 >/dev/null
+if [ $? -gt 0 ]; then
+    echo "Error: $1 could not be found"
+    exit
+fi
+
 $@ 2>/dev/null >/dev/null &
