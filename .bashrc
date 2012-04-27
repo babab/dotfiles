@@ -16,6 +16,9 @@ fi
 if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
+if [ -d "/var/lib/gems/1.8/bin" ]; then
+    PATH="$PATH:/var/lib/gems/1.8/bin"
+fi
 
 if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
@@ -95,6 +98,7 @@ fi
 complete -d ll
 complete -d lla
 complete -ac xs
+complete -ac loop
 
 if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
