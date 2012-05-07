@@ -355,9 +355,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Xlock</name>
+          <name>xtrlock</name>
         </startupnotify>
-        <command>xlock -mode blank</command>
+        <command>xtrlock</command>
       </action>
     </keybind>
     <keybind key="W-p">
