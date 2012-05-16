@@ -1,0 +1,2 @@
+#!/bin/sh
+ack-grep --ignore-dir=migrations --color $@ | less -FXRS
