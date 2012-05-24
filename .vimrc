@@ -30,6 +30,11 @@ set ttymouse=xterm  " So vim doesn't hang inside tmux
 colo babab          " color scheme based on elflord, slightly altered
                     " see .vim/colors/babab.vim
 
+" Keep bak and swp files in a dedicated folder
+set directory=/home/benjamin/.vim-bak-swp
+set backup
+set backupdir=/home/benjamin/.vim-bak-swp
+
 " Use 4 spaces for tabs by default
 set et
 set ts=4
@@ -38,14 +43,6 @@ set sts=4
 
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
-
-"" Indent folding with manual folds
-" set foldcolumn=4
-" set foldlevel=3
-" augroup vimrc
-    " au BufReadPre * setlocal foldmethod=indent
-    " au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-" augroup END
 
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -62,12 +59,3 @@ set guioptions-=r  "remove right-hand scroll bar
 
 " pathogen.vim
 call pathogen#infect()
-
-" HTML Tag ending
-let @t='bi<A>bhyf>$pbi/h'
-
-" HTML Tag ending and attribute
-let @y='bi<A>bhyf>$pbi/hhi id="" name=""8h'
-
-" Create div between cursor and '!!'
-let @d='a<div>/!!i</div>lC<!-- #name -->v>?divwi id=""'
