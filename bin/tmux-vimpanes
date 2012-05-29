@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Setup a tmux session with a 80-char wide vim session or a 160-char wide
+# split window vim session on the left.
+
+session_name=proj
+layout80='2b7a,170x50,0,0{80x50,0,0,89x50,81,0}'
+vim_executable=/usr/bin/vim
+
+_usage()
+{
+    echo "USAGE: tmux-vimpanes -1 [file1] [file2] [file3] [...]"
+    echo "       tmux-vimpanes -2 [file1] [file2] [file3] [...]"
+    exit 1
+}
+
+_error()
+{
+    echo tmux is already started
+    exit 1
+}
+
+_layout80()
+{
+    tmux new -s ${session_name} -d -n vim ${vim_executable} $1
+    tmux split-window -h -t ${session_name}:0
+    tmux select-layout -t ${session_name} ${layout80} >/dev/null
+    tmux select-pane -l
+}
+
+_main()
+{
+    test -z ${TMUX} || _error
+    case "$1" in
+        -1)
+            exec_layout=_layout80
+            ;;
+        -2)
+            exec_layout=_layout80
+            ;;
+        *)
+            _usage
+            ;;
+    esac
+
+    # if [ "$2" ]; then
+    #     shift
+    #     vim_args="-O $@"
+    # else
+    #     vim_args=""
+    # fi
+
+    ${exec_layout}
+    tmux attach-session -t ${session_name}
+}
+
+_main $@
