@@ -5,6 +5,7 @@
 
 session_name=proj
 layout80='2b7a,170x50,0,0{80x50,0,0,89x50,81,0}'
+layout160='5eda,239x70,0,0{161x70,0,0,77x70,162,0}'
 vim_executable=/usr/bin/vim
 
 _usage()
@@ -22,10 +23,12 @@ _error()
 
 _layout80()
 {
-    tmux new -s ${session_name} -d -n vim ${vim_executable} $1
-    tmux split-window -h -t ${session_name}:0
     tmux select-layout -t ${session_name} ${layout80} >/dev/null
-    tmux select-pane -l
+}
+
+_layout160()
+{
+    tmux select-layout -t ${session_name} ${layout160} >/dev/null
 }
 
 _main()
@@ -36,7 +39,7 @@ _main()
             exec_layout=_layout80
             ;;
         -2)
-            exec_layout=_layout80
+            exec_layout=_layout160
             ;;
         *)
             _usage
@@ -50,7 +53,10 @@ _main()
     #     vim_args=""
     # fi
 
+    tmux new -s ${session_name} -d -n vim ${vim_executable}
+    tmux split-window -h -t ${session_name}:0
     ${exec_layout}
+    tmux select-pane -l
     tmux attach-session -t ${session_name}
 }
 
