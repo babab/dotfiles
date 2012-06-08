@@ -3,5 +3,6 @@
 loadplugins '\.(js|penta)$'
 group user
 set hintkeys=asdfg;lkjh
+set showtabline=never
 
 " vim: set ft=pentadactyl:
