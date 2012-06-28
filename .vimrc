@@ -43,6 +43,10 @@ set sts=4
 
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+"
+" Highlight chars of lines exceeding 78 chars
+au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>79v', -1)
+au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -56,6 +60,7 @@ au BufWinEnter * silent! loadview
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
+
 
 " pathogen.vim
 call pathogen#infect()
