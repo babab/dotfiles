@@ -31,9 +31,9 @@ colo babab          " color scheme based on elflord, slightly altered
                     " see .vim/colors/babab.vim
 
 " Keep bak and swp files in a dedicated folder
-set directory=/home/benjamin/.vim-bak-swp
+set directory=~/.vim-bak-swp
 set backup
-set backupdir=/home/benjamin/.vim-bak-swp
+set backupdir=~/.vim-bak-swp
 
 " Use 4 spaces for tabs by default
 set et
