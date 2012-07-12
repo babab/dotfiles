@@ -35,12 +35,6 @@ set directory=~/.vim-bak-swp
 set backup
 set backupdir=~/.vim-bak-swp
 
-" Use 4 spaces for tabs by default
-set et
-set ts=4
-set sw=4
-set sts=4
-
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 "
@@ -84,3 +78,14 @@ function Settabbing(tabbing)
 endfunction
 
 nmap <silent> ;t :call Settabbing('input')<CR>
+
+" Use 4 spaces for tabs by default
+" Use 2 spaces when editing html files
+" Do not use spaces at all when editing Makefiles
+set expandtab
+call Settabbing(4)
+
+augroup Tabbing
+    autocmd BufEnter *.html call Settabbing(2)
+    autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
+augroup END
