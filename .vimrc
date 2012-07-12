@@ -61,6 +61,22 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 
-
 " pathogen.vim
 call pathogen#infect()
+
+" Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
+function Settabbing()
+    let tabbing = input("Set number of spaces [current = "
+                        \ . &tabstop . "]: ")
+
+    " TODO: test if integer
+    if empty(l:tabbing) || l:tabbing < '1'
+        return
+    endif
+
+    let &tabstop = l:tabbing
+    let &shiftwidth = l:tabbing
+    let &softtabstop = l:tabbing
+endfunction
+
+nmap <silent> ;t :call Settabbing()<CR>
