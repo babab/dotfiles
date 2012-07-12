@@ -65,9 +65,13 @@ set guioptions-=r  "remove right-hand scroll bar
 call pathogen#infect()
 
 " Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
-function Settabbing()
-    let tabbing = input("Set number of spaces [current = "
-                        \ . &tabstop . "]: ")
+function Settabbing(tabbing)
+    if a:tabbing == 'input'
+        let tabbing = input("Set number of spaces [current = "
+                            \ . &tabstop . "]: ")
+    else
+        let tabbing = a:tabbing
+    endif
 
     " TODO: test if integer
     if empty(l:tabbing) || l:tabbing < '1'
@@ -79,4 +83,4 @@ function Settabbing()
     let &softtabstop = l:tabbing
 endfunction
 
-nmap <silent> ;t :call Settabbing()<CR>
+nmap <silent> ;t :call Settabbing('input')<CR>
