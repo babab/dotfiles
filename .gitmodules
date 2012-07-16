@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/marvim"]
 	path = .vim/bundle/marvim
 	url = git://github.com/vim-scripts/marvim.git
+[submodule ".vim/bundle/vim-repeat"]
+	path = .vim/bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
