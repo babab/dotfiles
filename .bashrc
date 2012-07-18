@@ -102,3 +102,5 @@ complete -ac loop
 if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
 fi
+
+export PYTHONSTARTUP=~/.pythonrc

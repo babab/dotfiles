@@ -31,15 +31,9 @@ colo babab          " color scheme based on elflord, slightly altered
                     " see .vim/colors/babab.vim
 
 " Keep bak and swp files in a dedicated folder
-set directory=/home/benjamin/.vim-bak-swp
+set directory=~/.vim-bak-swp
 set backup
-set backupdir=/home/benjamin/.vim-bak-swp
-
-" Use 4 spaces for tabs by default
-set et
-set ts=4
-set sw=4
-set sts=4
+set backupdir=~/.vim-bak-swp
 
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -61,6 +55,37 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 
-
 " pathogen.vim
 call pathogen#infect()
+
+" Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
+function Settabbing(tabbing)
+    if a:tabbing == 'input'
+        let tabbing = input("Set number of spaces [current = "
+                            \ . &tabstop . "]: ")
+    else
+        let tabbing = a:tabbing
+    endif
+
+    " TODO: test if integer
+    if empty(l:tabbing) || l:tabbing < '1'
+        return
+    endif
+
+    let &tabstop = l:tabbing
+    let &shiftwidth = l:tabbing
+    let &softtabstop = l:tabbing
+endfunction
+
+nmap <silent> ;t :call Settabbing('input')<CR>
+
+" Use 4 spaces for tabs by default
+" Use 2 spaces when editing html files
+" Do not use spaces at all when editing Makefiles
+set expandtab
+call Settabbing(4)
+
+augroup Tabbing
+    autocmd BufEnter *.html call Settabbing(2)
+    autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
+augroup END
