@@ -78,6 +78,7 @@ alias xx="> $HOME/.bash_history && exit"
 alias kk='echo git status && git status'
 alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
+alias vv='ranger'
 
 # Setting default flags
 alias less='less -FXRS'
@@ -103,4 +104,5 @@ if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
 fi
 
+# Environment vars
 export PYTHONSTARTUP=~/.pythonrc
