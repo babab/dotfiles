@@ -58,6 +58,11 @@ set guioptions-=r  "remove right-hand scroll bar
 " pathogen.vim
 call pathogen#infect()
 
+" VimOrganizer settings and loading
+let g:ft_ignore_pat = '\.org'
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+au BufEnter *.org call org#SetOrgFileType()
+
 " Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
 function Settabbing(tabbing)
     if a:tabbing == 'input'
