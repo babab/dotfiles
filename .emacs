@@ -1,15 +1,15 @@
 ; Emacs settings
-;
+
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(setq default-frame-alist '((left-fringe . 0) (right-fringe . 0)))
-(setq initial-frame-alist '((left-fringe . 0) (right-fringe . 0)))
 
 (setq inhibit-startup-message t)
 (defalias 'yes-or-no-p 'y-or-n-p "`y-or-n-p' is easier.")
 
-(setq default-frame-alist '((background-color . "black")
-			    (foreground-color . "gray")))
+(setq default-frame-alist '((left-fringe . 0)
+			    (right-fringe . 0)
+			    (background-color . "gray10")
+			    (foreground-color . "white")))
 
 ; Packages
 
@@ -42,4 +42,4 @@
 	     (define-key evil-normal-state-local-map "t"
 	       '(lambda ()
 		  (interactive)
-		  (if (org-on-heading-p) (org-todo) (evil-fin-char-to))))))
+		  (if (org-on-heading-p) (org-todo) (evil-find-char-to))))))
