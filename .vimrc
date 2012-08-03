@@ -27,6 +27,7 @@ set hidden          " Hide buffers when they are abandoned
 
 set modeline        " Use modelines if found
 set ttymouse=xterm  " So vim doesn't hang inside tmux
+set showtabline=0   " Don't need to ever show a tabline
 colo babab          " color scheme based on elflord, slightly altered
                     " see .vim/colors/babab.vim
 

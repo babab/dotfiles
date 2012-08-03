@@ -3,7 +3,7 @@ HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 HISTCONTROL=ignoreboth
 shopt -s histappend
 HISTSIZE=999
-HISTFILESIZE=200
+HISTFILESIZE=999
 shopt -s checkwinsize
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
