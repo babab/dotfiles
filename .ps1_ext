@@ -1,0 +1,36 @@
+exitcode_ps1()
+{
+    if [ $1 -gt 0 ]; then
+        echo " err:$1"
+    fi
+}
+
+sshkey_ps1()
+{
+    ssh-add -l 2>/dev/null >/dev/null
+    case $? in
+        0)
+            echo "+"
+            ;;
+        1)
+            echo "-"
+            ;;
+        2)
+            echo "n/a"
+            ;;
+    esac
+}
+
+# For baps1, see https://github.com/ryuslash/baps1
+
+PS1="\[$(tput bold; tput setaf 1)\]\n\u\
+\[$(tput op)\] at \
+\[$(tput setaf 3)\]\h\
+\[$(tput setaf 1)\]\$(exitcode_ps1 \$?)\
+\[$(tput setaf 5)\] \!\
+\[$(tput setaf 6)\] \$(sshkey_ps1)\
+\[$(tput setaf 2)\] \$(baps1)\
+\[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
+\[$(tput setaf 6)\] \$(acpi | awk '{print \$4 \$5}')\
+\[$(tput setaf 2)\]\n\w\
+\[$(tput setaf 3)\]\$\[$(tput op)\] "
