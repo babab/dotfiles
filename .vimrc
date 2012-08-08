@@ -98,12 +98,12 @@ augroup END
 
 " Mappings for saving all buffers and writing a vim session file
 function SessionSave()
-    mksession!
+    mksession! .session.vim
     confirm wall
 endfunction
 
 function SessionSaveAndQuit()
-    mksession!
+    mksession! .session.vim
     confirm wqall
 endfunction
 
