@@ -95,3 +95,17 @@ augroup Tabbing
     autocmd BufEnter *.html call Settabbing(2)
     autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
 augroup END
+
+" Mappings for saving all buffers and writing a vim session file
+function SessionSave()
+    mksession!
+    confirm wall
+endfunction
+
+function SessionSaveAndQuit()
+    mksession!
+    confirm wqall
+endfunction
+
+nmap <silent> ;w :call SessionSave()<CR>
+nmap <silent> ;q :call SessionSaveAndQuit()<CR>
