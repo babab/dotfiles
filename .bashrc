@@ -74,3 +74,19 @@ fi
 
 # Environment vars
 export PYTHONSTARTUP=~/.pythonrc
+
+# Wrapper for sourcing and protecting vim session
+vims()
+{
+    if [ -f "$PWD/.session.vim" ]; then
+        if [ -f "/tmp/$USER.vimsession" ]; then
+            echo Vim session already started
+        else
+            touch /tmp/$USER.vimsession
+            vim -S .session.vim
+            rm /tmp/$USER.vimsession
+        fi
+    else
+        echo No .session.vim file found
+    fi
+}
