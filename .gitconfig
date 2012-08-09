@@ -1,3 +1,5 @@
+[core]
+	excludesfile = ~/.gitignore_global
 [user]
 	name = Benjamin Althues
 	email = benjamin@babab.nl
