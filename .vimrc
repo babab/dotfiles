@@ -24,12 +24,25 @@ set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 set hidden          " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
-
 set modeline        " Use modelines if found
 set ttymouse=xterm  " So vim doesn't hang inside tmux
 set showtabline=0   " Don't need to ever show a tabline
 colo babab          " color scheme based on elflord, slightly altered
                     " see .vim/colors/babab.vim
+set scrolloff=10    " Minimal number of lines above and below the cursor.
+
+" Keep things centered
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap } }zz
+nnoremap { {zz
+
+" Not used and annoying
+nnoremap Q <nop>
+nnoremap K <nop>
+
+" Only yank after the cursor instead of the line as a whole
+nnoremap Y y$
 
 " Keep bak and swp files in a dedicated folder
 set directory=~/.vim-bak-swp
