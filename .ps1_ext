@@ -21,6 +21,9 @@ sshkey_ps1()
     esac
 }
 
+# Source __git_ps1
+. ~/bin/git-prompt.sh
+
 # For baps1, see https://github.com/ryuslash/baps1
 
 PS1="\[$(tput bold; tput setaf 1)\]\n\u\

@@ -1,10 +1,6 @@
 URxvt*loginShell:true
 URxvt*scrollBar: off
-
-XTerm*faceName: Liberation Mono
-XTerm*faceSize: 12
-URxvt*font: xft:monospace:pixelsize=13
-
+URxvt.font: xft:Liberation Mono:weight=medium:pixelsize=13
 URxvt*colorMode: on
 URxvt*boldColors: on
 URxvt*dynamicColors: on
@@ -12,13 +8,10 @@ URxvt*colorULMode: on
 URxvt*colorUL: red
 URxvt*colorBDMode: on
 URxvt*colorBD: white
-!*colorAttrMode: on
-
 URxvt*background: #000000
 URxvt*foreground: #e2e2e2
 URxvt.cursorColor:  #c53525
 URxvt.pointerColor: #c52325
-
 URxvt*color0: #000000
 URxvt*color1: #ca3626
 URxvt*color2: #0dd743
@@ -36,3 +29,34 @@ URxvt*color13: #d93ed9
 URxvt*color14: #32cdf2
 URxvt*color15: #ffffff
 
+XTerm*loginShell:true
+XTerm*scrollBar: off
+XTerm*faceName: Liberation Mono
+XTerm*faceSize: 12
+XTerm*colorMode: on
+XTerm*boldColors: on
+XTerm*dynamicColors: on
+XTerm*colorULMode: on
+XTerm*colorUL: red
+XTerm*colorBDMode: on
+XTerm*colorBD: white
+XTerm*background: #000000
+XTerm*foreground: #e2e2e2
+XTerm.cursorColor:  #c53525
+XTerm.pointerColor: #c52325
+XTerm*color0: #000000
+XTerm*color1: #ca3626
+XTerm*color2: #0dd743
+XTerm*color3: #aed726
+XTerm*color4: #2a19e4
+XTerm*color5: #ca19c8
+XTerm*color6: #0dbbe4
+XTerm*color7: #e2e2e2
+XTerm*color8: #808080
+XTerm*color9: #d9574b
+XTerm*color10: #32e564
+XTerm*color11: #c0e54b
+XTerm*color12: #4a3ef2
+XTerm*color13: #d93ed9
+XTerm*color14: #32cdf2
+XTerm*color15: #ffffff
