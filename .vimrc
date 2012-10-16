@@ -68,6 +68,8 @@ au BufWinEnter * silent! loadview
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=l  "remove left-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar on split screen
 
 " pathogen.vim
 call pathogen#infect()
