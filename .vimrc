@@ -16,20 +16,20 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
-set showcmd		    " Show (partial) command in status line.
-set showmatch		" Show matching brackets.
-set ignorecase		" Do case insensitive matching
-set smartcase		" Do smart case matching
-set incsearch		" Incremental search
-set autowrite		" Automatically save before commands like :next and :make
-set hidden          " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-set modeline        " Use modelines if found
-set ttymouse=xterm  " So vim doesn't hang inside tmux
-set showtabline=0   " Don't need to ever show a tabline
-colo babab          " color scheme based on elflord, slightly altered
-                    " see .vim/colors/babab.vim
-set scrolloff=10    " Minimal number of lines above and below the cursor.
+set showcmd             " Show (partial) command in status line.
+set showmatch           " Show matching brackets.
+set ignorecase          " Do case insensitive matching
+set smartcase           " Do smart case matching
+set incsearch           " Incremental search
+set autowrite           " Automatically save before commands like :next and :make
+set hidden              " Hide buffers when they are abandoned
+"set mouse=a            " Enable mouse usage (all modes)
+set modeline            " Use modelines if found
+set ttymouse=xterm      " So vim doesn't hang inside tmux
+set showtabline=0       " Don't need to ever show a tabline
+colo babab              " color scheme based on elflord, slightly altered
+                        " see .vim/colors/babab.vim
+set scrolloff=10        " Minimal number of lines above and below the cursor.
 
 " Keep things centered
 nnoremap n nzz
