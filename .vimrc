@@ -124,3 +124,4 @@ endfunction
 
 nmap <silent> ;w :call SessionSave()<CR>
 nmap <silent> ;q :call SessionSaveAndQuit()<CR>
+imap <silent> <M-M> <C-R>=<ESC><CR>
