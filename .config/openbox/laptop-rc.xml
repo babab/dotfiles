@@ -319,9 +319,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Gnome terminal</name>
+          <name>urxvt</name>
         </startupnotify>
-        <command>gnome-terminal</command>
+        <command>urxvt</command>
       </action>
     </keybind>
     <keybind key="W-f">
@@ -368,6 +368,9 @@
         </startupnotify>
         <command>xtrlock</command>
       </action>
+    </keybind>
+    <keybind key="W-S-f">
+      <action name="ToggleFullscreen"/>
     </keybind>
   </keyboard>
   <mouse>
@@ -734,6 +737,14 @@
     <application name="gnome-terminal" class="Gnome-terminal">
       <decor>no</decor>
       <maximized>Vertical</maximized>
+    </application>
+    <application name="urxvt" class="URxvt">
+      <decor>no</decor>
+      <maximized>yes</maximized>
+    </application>
+    <application name="gvim" class="Gvim">
+      <decor>no</decor>
+      <maximized>yes</maximized>
     </application>
     <application name="Pidgin" class="Pidgin" role="conversation">
       <decor>no</decor>
