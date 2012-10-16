@@ -115,13 +115,10 @@ augroup END
 function SessionSave()
     mksession! .session.vim
     confirm wall
+    echo "Session saved"
 endfunction
 
-function SessionSaveAndQuit()
-    mksession! .session.vim
-    confirm wqall
-endfunction
-
-nmap <silent> ;w :call SessionSave()<CR>
-nmap <silent> ;q :call SessionSaveAndQuit()<CR>
+nmap <silent> ;s :call SessionSave()<CR>
+nmap <silent> ;w :confirm wall<CR>
+nmap <silent> ;q :confirm wqall<CR>
 imap <silent> <M-M> <C-R>=<ESC><CR>
