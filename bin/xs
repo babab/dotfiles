@@ -11,4 +11,4 @@ if [ $? -gt 0 ]; then
     exit
 fi
 
-$@ 2>/dev/null >/dev/null &
+$@ >/dev/null 2>&1 &
