@@ -57,6 +57,7 @@ alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 
 if [ -x /usr/bin/scrot ]; then
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
