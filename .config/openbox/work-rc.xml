@@ -364,9 +364,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>xtrlock</name>
+          <name>i3lock</name>
         </startupnotify>
-        <command>xtrlock</command>
+        <command>i3lock --color 000000</command>
       </action>
     </keybind>
   </keyboard>
