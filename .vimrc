@@ -52,9 +52,8 @@ set backupdir=~/.vim-bak-swp
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 "
-" Highlight chars of lines exceeding 78 chars
-au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>79v', -1)
-au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+" Highlight chars of lines exceeding 79 chars
+au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%>79v.\+', -1)
 
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
