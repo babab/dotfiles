@@ -76,6 +76,7 @@ fi
 
 # Environment vars
 export PYTHONSTARTUP=~/.pythonrc
+export DISPASS_LABELFILE=~/.dispass
 
 # Wrapper for sourcing and protecting vim session
 svim()
