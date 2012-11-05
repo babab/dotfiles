@@ -34,6 +34,5 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 6)\] \$(sshkey_ps1)\
 \[$(tput setaf 2)\] \$(baps1)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
-\[$(tput setaf 6)\] \$(acpi | awk '{print \$4 \$5}')\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op)\] "
