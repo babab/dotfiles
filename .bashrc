@@ -53,6 +53,7 @@ alias less='less -FXRS'
 alias sshagent='eval `ssh-agent` >/dev/null'
 
 # Custom aliases
+alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
