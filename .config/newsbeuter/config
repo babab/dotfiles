@@ -1,38 +1,30 @@
-auto-reload yes
-reload-threads 3
-reload-time 60
+article-sort-order  date-desc
+auto-reload         yes
+browser             firefox
+confirm-exit        no
+max-items           500
+notify-program      "/usr/bin/notify-send"
+reload-threads      3
+reload-time         60
+show-read-articles  no
+show-read-feeds     no
 
-browser firefox
-
-confirm-exit no
+color listfocus     default red
+color info          default black bold
 
 feedlist-format "%-35t %?d?- %-35d&? %> %u"
 articlelist-format "%-4i %f %t"
 feedlist-title-format "%N %V %> %u feeds with new articles"
 articlelist-title-format "%T"
-
-max-items 500
-
-show-read-feeds no
-show-read-articles no
-
 html-renderer "w3m -dump -T text/HTML -cols 72"
-
-color listfocus default red
-color info default black bold
-
 highlight article "^(Feed|Title|Author|Link|Date):.*" yellow default bold
-
-article-sort-order date-desc
-
-notify-program "/usr/bin/notify-send"
 
 # keybindings
 bind-key j next
 bind-key k previous
-bind-key j down feedlist
-bind-key k up feedlist
-bind-key j down articlelist
-bind-key k up articlelist
-bind-key j down tagselection
-bind-key k up tagselection
+bind-key j down         feedlist
+bind-key k up           feedlist
+bind-key j down         articlelist
+bind-key k up           articlelist
+bind-key j down         tagselection
+bind-key k up           tagselection
