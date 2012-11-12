@@ -319,9 +319,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Gnome terminal</name>
+          <name>rxvt-unicode</name>
         </startupnotify>
-        <command>gnome-terminal</command>
+        <command>urxvt</command>
       </action>
     </keybind>
     <keybind key="W-f">
@@ -731,7 +731,7 @@
   <!-- show the manage desktops section in the client-list-(combined-)menu -->
 </menu>
   <applications>
-    <application name="gnome-terminal" class="Gnome-terminal">
+    <application name="urxvt" class="URxvt">
       <decor>no</decor>
       <desktop>all</desktop>
       <maximized>Vertical</maximized>
