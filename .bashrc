@@ -31,12 +31,13 @@ alias ls='/bin/ls -F  --color=auto'
 alias la='/bin/ls -FA --color=auto'
 ll()
 {
-    /bin/ls -Flh  --color=always "$@" | less -FXRS
+    ls -Flh  --color=always "$@" | less -FXRS
 }
 lla()
 {
-    /bin/ls -FlhA --color=always "$@" | less -FXRS
+    ls -FlhA --color=always "$@" | less -FXRS
 }
+alias llgrep='find | grep'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
