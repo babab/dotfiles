@@ -26,7 +26,6 @@ fi
 
 . $HOME/.ps1
 
-# Quick shortcuts
 alias ls='/bin/ls -F  --color=auto'
 alias la='/bin/ls -FA --color=auto'
 ll()
@@ -37,33 +36,30 @@ lla()
 {
     ls -FlhA --color=always "$@" | less -FXRS
 }
-alias llgrep='find | grep'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias x='exit'
-alias xx="> $HOME/.bash_history && exit"
+alias gotoproject='cd `projectpad --get`'
 alias kk='echo git status && git status'
 alias kl='echo git diff && git diff'
-alias lk='echo git diff --cached && git diff --cached'
-alias vv='ranger'
-
-# Setting default flags
 alias less='less -FXRS'
-alias sshagent='eval `ssh-agent` >/dev/null'
-
-# Custom aliases
-alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
+alias lk='echo git diff --cached && git diff --cached'
+alias llgrep='find | grep'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
-alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
-alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
-
+alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
+alias setproject='projectpad --set && cd `projectpad --get`'
+alias sshagent='eval `ssh-agent` >/dev/null'
+alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
+alias vv='ranger'
 if [ -x /usr/bin/scrot ]; then
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
+alias x='exit'
+alias xx="> $HOME/.bash_history && exit"
 
 # Bash completion
 complete -d ll
@@ -109,6 +105,3 @@ sgvim()
         echo No .session.vim file found
     fi
 }
-
-alias gotoproject='cd `projectpad --get`'
-alias setproject='projectpad --set && cd `projectpad --get`'
