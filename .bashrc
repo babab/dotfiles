@@ -76,6 +76,7 @@ if [ -f "$HOME/.bashrc.local" ]; then
 fi
 
 # Environment vars
+export EDITOR="$(which vim)"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
 
