@@ -7,7 +7,7 @@ exitcode_ps1()
 
 sshkey_ps1()
 {
-    ssh-add -l 2>/dev/null >/dev/null
+    ssh-add -l >/dev/null 2>&1
     case $? in
         0)
             echo "+"
@@ -17,6 +17,19 @@ sshkey_ps1()
             ;;
         2)
             echo "n/a"
+            ;;
+    esac
+}
+
+pscheck_ps1()
+{
+    pgrep "$1" >/dev/null 2>&1
+    case $? in
+        0)
+            echo "+"
+            ;;
+        *)
+            echo "-"
             ;;
     esac
 }
@@ -32,6 +45,7 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 1)\]\$(exitcode_ps1 \$?)\
 \[$(tput setaf 5)\] \!\
 \[$(tput setaf 6)\] \$(sshkey_ps1)\
+\$(pscheck_ps1 dropbox)\
 \[$(tput setaf 2)\] \$(baps1)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
 \[$(tput setaf 2)\]\n\w\
