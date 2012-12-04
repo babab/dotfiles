@@ -109,3 +109,6 @@ sgvim()
         echo No .session.vim file found
     fi
 }
+
+alias gotoproject='cd `projectpad --get`'
+alias setproject='projectpad --set && cd `projectpad --get`'
