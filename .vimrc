@@ -44,6 +44,9 @@ nnoremap K <nop>
 " Only yank after the cursor instead of the line as a whole
 nnoremap Y y$
 
+" Mapping for changing to PWD of file
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
 " Keep bak and swp files in a dedicated folder
 set directory=~/.vim-bak-swp
 set backup
