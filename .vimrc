@@ -2,6 +2,9 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
+" Add $GOROOT to runtimepath
+set rtp+=$GOROOT/misc/vim
+
 if has("syntax")
   syntax on
 endif
@@ -108,9 +111,9 @@ nmap <silent> ;t :call Settabbing('input')<CR>
 " Do not use spaces at all when editing Makefiles
 set expandtab
 call Settabbing(4)
-
 augroup Tabbing
     autocmd BufEnter *.html call Settabbing(2)
+    autocmd BufEnter *.go set noexpandtab | call Settabbing(4)
     autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
 augroup END
 
@@ -125,3 +128,10 @@ nmap <silent> ;s :call SessionSave()<CR>
 nmap <silent> ;w :confirm wall<CR>
 nmap <silent> ;q :confirm wqall<CR>
 imap <silent> <M-M> <C-R>=<ESC><CR>
+
+" Mappings for Go programming
+nmap <silent> ;gb :!go build %<CR>
+nmap <silent> ;gr :!go run %<CR>
+nmap <silent> ;gg ;gr
+nmap <silent> ;gf :!go fmt %<CR>
+nmap <silent> ;gd :Godoc<CR>

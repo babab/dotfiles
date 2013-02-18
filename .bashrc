@@ -13,6 +13,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+if [ -d "/usr/local/go" ]; then
+    export GOROOT=/usr/local/go
+    PATH="$PATH:$GOROOT/bin"
+fi
+
 if [ -d "$HOME/bin" ]; then
     PATH="$PATH:$HOME/bin"
 fi
