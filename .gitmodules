@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/vim-djazz"]
 	path = .vim/bundle/vim-djazz
 	url = git://github.com/babab/vim-djazz.git
+[submodule ".vim/bundle/MatchTagAlways"]
+	path = .vim/bundle/MatchTagAlways
+	url = git://github.com/Valloric/MatchTagAlways.git
