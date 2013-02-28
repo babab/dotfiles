@@ -54,10 +54,8 @@ alias llgrep='find | grep'
 alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
-alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
-alias runserver='find . -name "*.pyc" | xargs /bin/rm -f && ./manage.py runserver'
 alias setproject='projectpad --set && cd `projectpad --get`'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
@@ -82,6 +80,23 @@ fi
 export EDITOR="$(which vim)"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
+
+# Start the Django development server on varying port numbers
+runserver()
+{
+    if [ -f "$PWD/manage.py" ]; then
+        find . -name "*.pyc" | xargs /bin/rm -f
+        if [ ! "$1" ]; then
+            portn="8000"
+        else
+            portn="$1"
+        fi
+        ./manage.py runserver 127.0.0.1:${portn}
+    else
+        echo "Error: not in a Django project folder"
+        return
+    fi
+}
 
 # Wrapper for sourcing and protecting vim session
 svim()
