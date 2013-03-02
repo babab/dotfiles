@@ -92,17 +92,38 @@ export EDITOR="/usr/bin/vim"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
 
-# Start the Django development server on varying port numbers
+# Wrapper for starting the Django development server on varying
+# addresses and port numbers. Allowing to also run if manage.py is in
+# the (parent directory of a) parent directory of $PWD.
+# Usage: runserver [port number=8000] [listening address=127.0.0.1]
 runserver()
 {
-    if [ -f "$PWD/manage.py" ]; then
+    startdjangoserver()
+    {
         find . -name "*.pyc" | xargs /bin/rm -f
         if [ ! "$1" ]; then
             portn="8000"
         else
             portn="$1"
         fi
-        ./manage.py runserver 127.0.0.1:${portn}
+        if [ ! "$2" ]; then
+            addr="127.0.0.1"
+        else
+            addr="$2"
+        fi
+        ./manage.py runserver ${addr}:${portn}
+    }
+
+    if [ -f "$PWD/manage.py" ]; then
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../manage.py" ]; then
+        cd ..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../../manage.py" ]; then
+        cd ../..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
     else
         echo "Error: not in a Django project folder"
     fi
