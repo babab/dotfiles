@@ -12,8 +12,7 @@ set -o vi
 # Add dirs to $PATH; checks if dir exists and is not already in $PATH
 addtopath()
 {
-    test ! "$1" && return
-    test ! -d "$1" && return
+    (test ! "$1" || test ! -d "$1") && return 1
     found=0
     for i in $(echo "${PATH}" | sed 's/:/\n/g'); do
         if [ "$1" == "$i" ]; then
