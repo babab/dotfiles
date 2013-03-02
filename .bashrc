@@ -29,10 +29,11 @@ if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
 fi
 
+# Source prompt settings
 . $HOME/.ps1
 
-alias ls='/bin/ls -F  --color=auto'
-alias la='/bin/ls -FA --color=auto'
+# Aliases
+alias la='ls -FA --color=auto'
 ll()
 {
     ls -Flh  --color=always "$@" | less -FXRS
@@ -41,11 +42,11 @@ lla()
 {
     ls -FlhA --color=always "$@" | less -FXRS
 }
+alias ls='ls -F  --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias gotoproject='cd `projectpad --get`'
 alias kk='echo git status && git status'
 alias kl='echo git diff && git diff'
 alias less='less -FXRS'
@@ -56,7 +57,6 @@ alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
-alias setproject='projectpad --set && cd `projectpad --get`'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
 alias vv='ranger'
@@ -66,18 +66,18 @@ fi
 alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 
-# Bash completion
+# Projectpad aliases
+alias gotoproject='cd `projectpad --get`'
+alias setproject='projectpad --set && cd `projectpad --get`'
+
+# Bash completion for custom functions and scripts
 complete -d ll
 complete -d lla
 complete -ac xs
 complete -ac loop
 
-if [ -f "$HOME/.bashrc.local" ]; then
-    . ${HOME}/.bashrc.local
-fi
-
 # Environment vars
-export EDITOR="$(which vim)"
+export EDITOR="/usr/bin/vim"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
 
@@ -94,7 +94,6 @@ runserver()
         ./manage.py runserver 127.0.0.1:${portn}
     else
         echo "Error: not in a Django project folder"
-        return
     fi
 }
 
@@ -113,17 +112,8 @@ svim()
         echo No .session.vim file found
     fi
 }
-sgvim()
-{
-    if [ -f "$PWD/.session.vim" ]; then
-        if [ -f "/tmp/$USER.vimsession" ]; then
-            echo Vim session already started
-        else
-            touch /tmp/$USER.vimsession
-            gvim -S .session.vim >/dev/null 2>&1 &
-            rm /tmp/$USER.vimsession
-        fi
-    else
-        echo No .session.vim file found
-    fi
-}
+
+# Source local settings and overrides
+if [ -f "$HOME/.bashrc.local" ]; then
+    . ${HOME}/.bashrc.local
+fi
