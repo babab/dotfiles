@@ -9,21 +9,33 @@ shopt -s checkwinsize
 
 set -o vi
 
+# Add dirs to $PATH; checks if dir exists and is not already in $PATH
+addtopath()
+{
+    test ! "$1" && return
+    test ! -d "$1" && return
+    found=0
+    for i in $(echo "${PATH}" | sed 's/:/\n/g'); do
+        if [ "$1" == "$i" ]; then
+            found=1
+        fi
+    done
+    if [ ${found} -eq 0 ]; then
+        export PATH="${PATH}:$1"
+    fi
+}
+
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go
-    PATH="$PATH:$GOROOT/bin"
+    addtopath "$GOROOT/bin"
 fi
 
-if [ -d "$HOME/bin" ]; then
-    PATH="$PATH:$HOME/bin"
-fi
-if [ -d "/var/lib/gems/1.8/bin" ]; then
-    PATH="$PATH:/var/lib/gems/1.8/bin"
-fi
+addtopath "$HOME/bin"
+addtopath "/var/lib/gems/1.8/bin"
 
 if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
