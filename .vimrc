@@ -66,9 +66,9 @@ au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%>79v.\+', -1)
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" Save folds
-au BufWinLeave * silent! mkview
-au BufWinEnter * silent! loadview
+" " Save folds
+" au BufWinLeave * silent! mkview
+" au BufWinEnter * silent! loadview
 
 " gvim options
 set guioptions-=m  "remove menu bar
