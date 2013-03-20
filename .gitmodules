@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/MatchTagAlways"]
 	path = .vim/bundle/MatchTagAlways
 	url = git://github.com/Valloric/MatchTagAlways.git
+[submodule ".vim/bundle/vim-gnupg"]
+	path = .vim/bundle/vim-gnupg
+	url = git://github.com/jamessan/vim-gnupg.git

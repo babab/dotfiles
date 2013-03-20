@@ -91,6 +91,7 @@ complete -ac loop
 export EDITOR="/usr/bin/vim"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
+export GPG_TTY="$(tty)"
 
 # Wrapper for starting the Django development server on varying
 # addresses and port numbers. Allowing to also run if manage.py is in
