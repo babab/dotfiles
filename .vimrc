@@ -122,6 +122,9 @@ nmap <silent> ;gg ;gr
 nmap <silent> ;gf :!go fmt %<CR>
 nmap <silent> ;gd :Godoc<CR>
 
+" Mapping for quickly executing macro's
+nmap <silent> m @q
+
 " pathogen.vim
 call pathogen#infect()
 
