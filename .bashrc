@@ -9,9 +9,9 @@ shopt -s checkwinsize
 
 set -o vi
 
-# Add dirs to $PATH; checks if dir exists and is not already in $PATH
 addtopath()
 {
+    # Add dirs to $PATH; checks if dir exists and is not already in $PATH
     (test ! "$1" || test ! -d "$1") && return 1
     found=0
     for i in $(echo "${PATH}" | sed 's/:/\n/g'); do
@@ -38,6 +38,7 @@ addtopath "/var/lib/gems/1.8/bin"
 
 if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
     mkdir -p "$HOME/Pictures/scrot"
+    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
 
 # Source prompt settings
@@ -62,30 +63,18 @@ alias kk='echo git status && git status'
 alias kl='echo git diff && git diff'
 alias less='less -FXRS'
 alias lk='echo git diff --cached && git diff --cached'
-alias llgrep='find | grep'
-alias openboxwindowinfo='obxprop | grep "^_OB_APP"'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
-alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
+alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
+alias sinstall='sudo make install'
 alias sshagent='eval `ssh-agent` >/dev/null'
-alias startenv_myaethon2='. ~/.virtualenv/myaethon2/bin/activate'
-alias vv='ranger'
-if [ -x /usr/bin/scrot ]; then
-    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
-fi
 alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 
 # Projectpad aliases
 alias gotoproject='cd `projectpad --get`'
 alias setproject='projectpad --set && cd `projectpad --get`'
-
-# Bash completion for custom functions and scripts
-complete -d ll
-complete -d lla
-complete -ac xs
-complete -ac loop
 
 # Environment vars
 export EDITOR="/usr/bin/vim"
@@ -145,6 +134,12 @@ svim()
         echo No .session.vim file found
     fi
 }
+
+# Bash completion for custom functions and scripts
+complete -d ll
+complete -d lla
+complete -ac xs
+complete -ac loop
 
 # Source local settings and overrides
 if [ -f "$HOME/.bashrc.local" ]; then

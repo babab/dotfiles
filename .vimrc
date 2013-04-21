@@ -1,7 +1,3 @@
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
-
 " Add $GOROOT to runtimepath
 set rtp+=$GOROOT/misc/vim
 
@@ -26,14 +22,11 @@ set smartcase           " Do smart case matching
 set incsearch           " Incremental search
 set autowrite           " Automatically save before commands like :next and :make
 set hidden              " Hide buffers when they are abandoned
-"set mouse=a            " Enable mouse usage (all modes)
 set modeline            " Use modelines if found
 set ttymouse=xterm      " So vim doesn't hang inside tmux
 set showtabline=0       " Don't need to ever show a tabline
-" colo babab              " color scheme based on elflord, slightly altered
-"                         " see .vim/colors/babab.vim
-colo vividchalk         " Color scheme by Tim Pope
 set scrolloff=10        " Minimal number of lines above and below the cursor.
+colo vividchalk         " Color scheme by Tim Pope
 
 " Keep things centered
 nnoremap n nzz
@@ -77,14 +70,6 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=l  "remove left-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar on split screen
 
-" pathogen.vim
-call pathogen#infect()
-
-" VimOrganizer settings and loading
-let g:ft_ignore_pat = '\.org'
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org call org#SetOrgFileType()
-
 " Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
 function Settabbing(tabbing)
     if a:tabbing == 'input'
@@ -108,7 +93,8 @@ nmap <silent> ;t :call Settabbing('input')<CR>
 
 " Use 4 spaces for tabs by default
 " Use 2 spaces when editing html files
-" Do not use spaces at all when editing Makefiles
+" Use tabs (tabbing with 4 spaces) when programming in Go
+" Use tabs (tabbing with 8 spaces) when editing Makefiles
 set expandtab
 call Settabbing(4)
 augroup Tabbing
@@ -135,3 +121,11 @@ nmap <silent> ;gr :!go run %<CR>
 nmap <silent> ;gg ;gr
 nmap <silent> ;gf :!go fmt %<CR>
 nmap <silent> ;gd :Godoc<CR>
+
+" pathogen.vim
+call pathogen#infect()
+
+" VimOrganizer settings and loading
+let g:ft_ignore_pat = '\.org'
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+au BufEnter *.org call org#SetOrgFileType()
