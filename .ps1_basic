@@ -11,4 +11,4 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 1)\]\$(exitcode_ps1 \$?)\
 \[$(tput setaf 5)\] \!\
 \[$(tput setaf 2)\]\n\w\
-\[$(tput setaf 3)\]\$\[$(tput op)\] "
+\[$(tput setaf 3)\]\$\[$(tput op; tput sgr0)\] "
