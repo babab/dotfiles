@@ -146,3 +146,6 @@ complete -ac loop
 if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
 fi
+
+# Check date, one of my boxes has a broken clock battery
+test $(date +%s) -lt 1366700000 && echo Date is incorrect, fix it!
