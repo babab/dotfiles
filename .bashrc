@@ -81,6 +81,7 @@ export EDITOR="/usr/bin/vim"
 export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
 export GPG_TTY="$(tty)"
+export EXEC_FOR_PYTHON="python2"
 
 # Wrapper for starting the Django development server on varying
 # addresses and port numbers. Allowing to also run if manage.py is in
@@ -101,7 +102,7 @@ runserver()
         else
             addr="$2"
         fi
-        ./manage.py runserver ${addr}:${portn}
+        ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
     }
 
     if [ -f "$PWD/manage.py" ]; then
