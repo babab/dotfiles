@@ -36,8 +36,10 @@ fi
 addtopath "$HOME/bin"
 addtopath "/var/lib/gems/1.8/bin"
 
-if [ -x /usr/bin/scrot ] && [ ! -d "$HOME/Pictures/scrot" ]; then
-    mkdir -p "$HOME/Pictures/scrot"
+if [ -x /usr/bin/scrot ]; then
+    if [ ! -d "$HOME/Pictures/scrot" ]; then
+        mkdir -p "$HOME/Pictures/scrot"
+    fi
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
 
