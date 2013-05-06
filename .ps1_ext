@@ -49,7 +49,6 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 6)\] \$(sshkey_ps1)\
 \$(pscheck_ps1 dropbox)\
 \[$(tput setaf 2)\]\
-\[$(tput op)\] \$(projectpad name)\
 \[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op; tput sgr0)\] "
