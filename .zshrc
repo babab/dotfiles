@@ -5,7 +5,8 @@ bindkey -v
 
 PATH="$PATH:$HOME/bin"
 
-setopt autocd completealiases
+setopt autocd completealiases autopushd pushdignoredups
+setopt PROMPT_SUBST
 
 autoload -U compinit && compinit
 autoload -U colors && colors
@@ -41,8 +42,6 @@ export LANG=en_US.UTF-8
 # Instructions found here:
 # http://sebastiancelis.com/2009/11/16/zsh-prompt-git-users/
 
-# Allow for functions in the prompt.
-setopt PROMPT_SUBST
 
 # Autoload zsh functions.
 fpath=(~/.zsh/functions $fpath)
