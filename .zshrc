@@ -3,13 +3,15 @@ HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
 
-PATH="$PATH:$HOME/bin"
-
 setopt autocd completealiases autopushd pushdignoredups
 setopt PROMPT_SUBST
 
 autoload -U compinit && compinit
 autoload -U colors && colors
+
+# Autoload zsh functions.
+fpath=(~/.zsh/functions $fpath)
+autoload -U ~/.zsh/functions/*(:t)
 
 ### Aliases ##################################################################
 alias la='ls -FA --color=auto'
@@ -37,15 +39,9 @@ alias setproject='projectpad --set && cd `projectpad --get`'
 
 ### Environment variables ####################################################
 export LANG=en_US.UTF-8
+export PATH="$PATH:$HOME/bin"
 
 ### Prompt ###################################################################
-# Instructions found here:
-# http://sebastiancelis.com/2009/11/16/zsh-prompt-git-users/
-
-
-# Autoload zsh functions.
-fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
 
 # Enable auto-execution of functions.
 typeset -ga preexec_functions
@@ -61,12 +57,12 @@ chpwd_functions+='chpwd_update_git_vars'
 sshkey_ps1()
 {
     ssh-add -l >/dev/null 2>&1
-    case $? in
+    case "$?" in
         0)
-            echo "+"
+            echo +
             ;;
         1)
-            echo "-"
+            echo - -
             ;;
         2)
             echo "n/a"
@@ -74,7 +70,21 @@ sshkey_ps1()
     esac
 }
 
+# Check if a particular process is running
+pscheck_ps1()
+{
+    pgrep "$1" >/dev/null 2>&1
+    case $? in
+        0)
+            echo +
+            ;;
+        *)
+            echo - -
+            ;;
+    esac
+}
+
 # Set the prompt.
 PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1)$(pscheck_ps1 dropbox) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
