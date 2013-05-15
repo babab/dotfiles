@@ -1,21 +1,21 @@
+# vim: set fenc=utf-8:
+
 if [ -n "$__CURRENT_GIT_BRANCH" ]; then
-    local s=""
-    s+="$__CURRENT_GIT_BRANCH"
+    local s="$__CURRENT_GIT_BRANCH"
     case "$__CURRENT_GIT_BRANCH_STATUS" in
         ahead)
-        s+="+"
-        ;;
+            s+="↑"
+            ;;
         diverged)
-        s+="0"
-        ;;
+            s+="↕"
+            ;;
         behind)
-        s+="-"
-        ;;
+            s+="↓"
+            ;;
     esac
     if [ -n "$__CURRENT_GIT_BRANCH_IS_DIRTY" ]; then
-        s+=" (dirty)"
+        s+="⚡"
     fi
-    # s+=""
 
     printf "%s%s" "%{${fg[red]}%}" $s
 fi

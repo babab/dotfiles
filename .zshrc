@@ -10,6 +10,7 @@ setopt autocd completealiases
 autoload -U compinit && compinit
 autoload -U colors && colors
 
+### Aliases ##################################################################
 alias la='ls -FA --color=auto'
 ll() { ls -Flh  --color=always "$@" | less -FXRS }
 lla() { ls -FlhA --color=always "$@" | less -FXRS }
@@ -33,7 +34,8 @@ alias x='exit'
 alias gotoproject='cd `projectpad --get`'
 alias setproject='projectpad --set && cd `projectpad --get`'
 
-
+### Environment variables ####################################################
+export LANG=en_US.UTF-8
 
 ### Prompt ###################################################################
 # Instructions found here:
@@ -58,7 +60,6 @@ chpwd_functions+='chpwd_update_git_vars'
 
 # Set the prompt.
 # RPROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} '
-
 
 PROMPT='
 %{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}%l %{$fg_bold[red]%}$(prompt_git_info)%{$reset_color%}

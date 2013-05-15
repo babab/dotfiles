@@ -29,7 +29,7 @@ URxvt*color13: #d93ed9
 URxvt*color14: #32cdf2
 URxvt*color15: #ffffff
 
-URxvt*termName: rxvt-256color
+URxvt*termName: rxvt-unicode-256color
 URxvt*visualBell: false
 
 URxvt.perl-lib:        /usr/lib/urxvt/perl/
