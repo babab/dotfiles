@@ -58,9 +58,24 @@ preexec_functions+='preexec_update_git_vars'
 precmd_functions+='precmd_update_git_vars'
 chpwd_functions+='chpwd_update_git_vars'
 
-# Set the prompt.
-# RPROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} '
+# Check if ssh-agent and key are loaded
+sshkey_ps1()
+{
+    ssh-add -l >/dev/null 2>&1
+    case $? in
+        0)
+            echo "+"
+            ;;
+        1)
+            echo "-"
+            ;;
+        2)
+            echo "n/a"
+            ;;
+    esac
+}
 
+# Set the prompt.
 PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}%l %{$fg_bold[red]%}$(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
