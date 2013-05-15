@@ -3,22 +3,17 @@ HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
 
+PATH="$PATH:$HOME/bin"
+
 setopt autocd completealiases
 
 autoload -U compinit && compinit
 autoload -U colors && colors
 
 alias la='ls -FA --color=auto'
-# ll()
-# {
-#     ls -Flh  --color=always "$@" | less -FXRS
-# }
-# lla()
-# {
-#     ls -FlhA --color=always "$@" | less -FXRS
-# }
+ll() { ls -Flh  --color=always "$@" | less -FXRS }
+lla() { ls -FlhA --color=always "$@" | less -FXRS }
 alias ls='ls -F  --color=auto'
-alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
@@ -38,5 +33,33 @@ alias x='exit'
 alias gotoproject='cd `projectpad --get`'
 alias setproject='projectpad --set && cd `projectpad --get`'
 
-PROMPT="%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m%{$reset_color%} %(?..%{$fg_bold[red]%}err:%?%{$reset_color%} )%{$fg_bold[magenta]%}%!%{$reset_color%}
-%{$fg_bold[green]%}%~%{$reset_color%}%{$fg_bold[yellow]%}%#%{$reset_color%} "
+
+
+### Prompt ###################################################################
+# Instructions found here:
+# http://sebastiancelis.com/2009/11/16/zsh-prompt-git-users/
+
+# Allow for functions in the prompt.
+setopt PROMPT_SUBST
+
+# Autoload zsh functions.
+fpath=(~/.zsh/functions $fpath)
+autoload -U ~/.zsh/functions/*(:t)
+
+# Enable auto-execution of functions.
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
+
+# Append git functions needed for prompt.
+preexec_functions+='preexec_update_git_vars'
+precmd_functions+='precmd_update_git_vars'
+chpwd_functions+='chpwd_update_git_vars'
+
+# Set the prompt.
+# RPROMPT=$'%{${fg[cyan]}%}%B%~%b$(prompt_git_info)%{${fg[default]}%} '
+
+
+PROMPT='
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}%l %{$fg_bold[red]%}$(prompt_git_info)%{$reset_color%}
+%{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
