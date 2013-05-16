@@ -88,3 +88,6 @@ pscheck_ps1()
 PROMPT='
 %{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1)$(pscheck_ps1 dropbox) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+
+### Plugins ##################################################################
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
