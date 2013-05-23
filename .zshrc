@@ -35,8 +35,8 @@ alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 
 # Projectpad aliases
-alias gotoproject='cd `projectpad --get`'
-alias setproject='projectpad --set && cd `projectpad --get`'
+alias gotoproject='cd `projectpad get`'
+alias setproject='projectpad set && cd `projectpad get`'
 
 ### Environment variables ####################################################
 export LANG=en_US.UTF-8

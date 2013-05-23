@@ -75,8 +75,8 @@ alias x='exit'
 alias xx="> $HOME/.bash_history && exit"
 
 # Projectpad aliases
-alias gotoproject='cd `projectpad --get`'
-alias setproject='projectpad --set && cd `projectpad --get`'
+alias gotoproject='cd `projectpad get`'
+alias setproject='projectpad set && cd `projectpad get`'
 
 # Environment vars
 export EDITOR="/usr/bin/vim"
