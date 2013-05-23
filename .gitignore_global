@@ -16,5 +16,7 @@
 *.tar
 *.tar.gz
 *.zip
+virt-env
+devdb.sqlite-bak
 Session*.vim
 .session.vim
