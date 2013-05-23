@@ -1,2 +1,2 @@
 #!/bin/sh
-ack-grep --ignore-dir=migrations --color $@ | less -FXRS
+ack --ignore-dir=migrations --ignore-dir=virt-env --color $@ | less -FXRS
