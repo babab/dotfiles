@@ -31,6 +31,7 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sinstall='sudo make install'
 alias sshagent='eval `ssh-agent` >/dev/null'
+alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 
 # Projectpad aliases
@@ -40,6 +41,45 @@ alias setproject='projectpad --set && cd `projectpad --get`'
 ### Environment variables ####################################################
 export LANG=en_US.UTF-8
 export PATH="$PATH:$HOME/bin"
+export EXEC_FOR_PYTHON="python2"
+
+### Custom functions #########################################################
+# Wrapper for starting the Django development server on varying
+# addresses and port numbers. Allowing to also run if manage.py is in
+# the (parent directory of a) parent directory of $PWD.
+# Usage: runserver [port number=8000] [listening address=127.0.0.1]
+runserver()
+{
+    startdjangoserver()
+    {
+        find . -name "*.pyc" | xargs /bin/rm -f
+        if [ ! "$1" ]; then
+            portn="8000"
+        else
+            portn="$1"
+        fi
+        if [ ! "$2" ]; then
+            addr="127.0.0.1"
+        else
+            addr="$2"
+        fi
+        ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
+    }
+
+    if [ -f "$PWD/manage.py" ]; then
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../manage.py" ]; then
+        cd ..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../../manage.py" ]; then
+        cd ../..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
+    else
+        echo "Error: not in a Django project folder"
+    fi
+}
 
 ### Prompt ###################################################################
 
