@@ -43,6 +43,7 @@ export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export LANG=en_US.UTF-8
 export PATH="$PATH:$HOME/bin"
+export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
 # Wrapper for starting the Django development server on varying
