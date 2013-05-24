@@ -100,10 +100,10 @@ sshkey_ps1()
     ssh-add -l >/dev/null 2>&1
     case "$?" in
         0)
-            echo ✓
+            echo ★
             ;;
         1)
-            echo ✗
+            echo ☆
             ;;
         2)
             echo "n/a"
@@ -117,10 +117,10 @@ pscheck_ps1()
     pgrep "$1" >/dev/null 2>&1
     case $? in
         0)
-            echo ✓
+            echo ★
             ;;
         *)
-            echo ✗
+            echo ☆
             ;;
     esac
 }
