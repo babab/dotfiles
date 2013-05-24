@@ -125,9 +125,19 @@ pscheck_ps1()
     esac
 }
 
+# Check if a python virtualenv is activated
+venv_ps1()
+{
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo ☆
+    else
+        echo ★
+    fi
+}
+
 # Set the prompt.
 PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1)$(pscheck_ps1 dropbox) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[cyan]%}$(sshkey_ps1)$(pscheck_ps1 dropbox)$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
 ### Plugins ##################################################################
