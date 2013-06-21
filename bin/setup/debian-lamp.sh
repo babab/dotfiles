@@ -1,19 +1,11 @@
-# Quick setup of Apache, MySQL and PHP on Debian squeeze
+# Quick setup of Apache, MySQL and PHP on Debian 7 (wheezy)
 
 apt-get install vim nano- openssh-server sudo tmux git tig
 update-alternatives --config editor
 visudo
-echo "
-deb http://packages.dotdeb.org stable all
-deb-src http://packages.dotdeb.org stable all
-" >> /etc/apt/sources.list
-cd /root
-wget http://www.dotdeb.org/dotdeb.gpg
-cat dotdeb.gpg | apt-key add -
-rm -f dotdeb.gpg
 apt-get update
 apt-get install apache2 php5 mysql-server
-apt-get install phpmyadmin php5-imap
+apt-get install phpmyadmin
 a2enmod rewrite
 a2enmod auth_digest
 service apache2 stop
