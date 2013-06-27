@@ -2,4 +2,10 @@
 setxkbmap -layout us -option ctrl:nocaps
 /usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
-exec ssh-agent spectrwm
+
+ssh-add -l
+if [ $? -lt 2 ]; then
+    exec spectrwm
+else
+    exec ssh-agent spectrwm
+fi
