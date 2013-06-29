@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# ctb - create temporary backup(s)
+
+if [ ! "$1" ]; then
+    echo supply one or more files and/or directories
+fi
+
+cp -ra $1 "/tmp/$1$(date +_%Y-%m-%d-%s)"
