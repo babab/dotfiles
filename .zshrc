@@ -46,12 +46,26 @@ export PATH="$PATH:$HOME/bin"
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
+
+# Django development server ##################################################
+#
 # Wrapper for starting the Django development server on varying
 # addresses and port numbers. Allowing to also run if manage.py is in
-# the (parent directory of a) parent directory of $PWD.
+# the (parent directory of a) parent directory of $PWD. It automatically
+# uses runserver_plus with the Werkzeug debugger when django_extensions
+# is installed.
+#
 # Usage: runserver [port number=8000] [listening address=127.0.0.1]
+#
+# Make sure that an environment var 'EXEC_FOR_PYTHON' is set before loading
+# and/or using this function
 runserver()
 {
+    # Use the python exec from within the virtualenv if it is loaded
+    if [ ! -z "$VIRTUAL_ENV" ]; then
+        EXEC_FOR_PYTHON="python"
+    fi
+
     startdjangoserver()
     {
         find . -name "*.pyc" | xargs /bin/rm -f
@@ -65,7 +79,13 @@ runserver()
         else
             addr="$2"
         fi
-        ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
+
+        ${EXEC_FOR_PYTHON} manage.py | grep runserver_plus >/dev/null
+        if [ $? -eq 0 ]; then
+            ${EXEC_FOR_PYTHON} manage.py runserver_plus ${addr}:${portn}
+        else
+            ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
+        fi
     }
 
     if [ -f "$PWD/manage.py" ]; then
