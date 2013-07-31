@@ -34,6 +34,13 @@ alias sshagent='eval `ssh-agent` >/dev/null'
 alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 
+if [ -x /usr/bin/scrot ]; then
+    if [ ! -d "$HOME/Pictures/scrot" ]; then
+        mkdir -p "$HOME/Pictures/scrot"
+    fi
+    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+fi
+
 # Projectpad aliases
 alias gotoproject='cd `projectpad get`'
 alias setproject='projectpad set && cd `projectpad get`'
@@ -47,8 +54,6 @@ export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
 
-# Django development server ##################################################
-#
 # Wrapper for starting the Django development server on varying
 # addresses and port numbers. Allowing to also run if manage.py is in
 # the (parent directory of a) parent directory of $PWD. It automatically
@@ -100,6 +105,22 @@ runserver()
         startdjangoserver "$1" "$2"
     else
         echo "Error: not in a Django project folder"
+    fi
+}
+
+# Wrapper for sourcing (and protecting) a vim session
+svim()
+{
+    if [ -f "$PWD/.session.vim" ]; then
+        if [ -f "/tmp/$USER.vimsession" ]; then
+            echo Vim session already started
+        else
+            touch /tmp/$USER.vimsession
+            vim -S .session.vim
+            rm /tmp/$USER.vimsession
+        fi
+    else
+        echo No .session.vim file found
     fi
 }
 
