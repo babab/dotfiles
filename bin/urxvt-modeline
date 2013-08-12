@@ -1,0 +1,9 @@
+#!/bin/sh
+# script for urxvt-modeline, see:
+# http://code.ryuslash.org/urxvt-modeline/about/
+
+echo -n "`hostname`   "
+echo -n "`date +%H:%M`   "
+echo -n "$(uname -r)   "
+echo -n "$(cat /proc/loadavg | awk '{ print $1" "$2" "$3 }')"
+

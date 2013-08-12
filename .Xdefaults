@@ -33,7 +33,7 @@ URxvt*termName: rxvt-unicode-256color
 URxvt*visualBell: false
 
 URxvt.perl-lib:        /usr/lib/urxvt/perl/
-URxvt.perl-ext-common: default,url-select,keyboard-select
+URxvt.perl-ext-common: default,url-select,keyboard-select,modeline
 URxvt.urlLauncher:     firefox
 URxvt.url-select.launcher: firefox
 URxvt.url-select.underline: true
@@ -41,6 +41,9 @@ URxvt.matcher.button:  1
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.modeline.fg: 15
+URxvt.modeline.bg: 12
+URxvt.modeline.command: urxvt-modeline
 
 XTerm*loginShell:true
 XTerm*scrollBar: off
