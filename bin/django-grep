@@ -1,2 +1,7 @@
 #!/bin/sh
-ack --ignore-dir=migrations --ignore-dir=virt-env --color $@ | less -FXRS
+
+ack --ignore-dir=migrations \
+    --ignore-dir=aethon_splash \
+    --ignore-dir=static \
+    --ignore-dir=virt-env \
+    --nosql --color $@ | less -FXRS
