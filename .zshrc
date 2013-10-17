@@ -34,12 +34,12 @@ alias sshagent='eval `ssh-agent` >/dev/null'
 alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 
-if [ -x /usr/bin/scrot ]; then
-    if [ ! -d "$HOME/Pictures/scrot" ]; then
-        mkdir -p "$HOME/Pictures/scrot"
-    fi
-    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
-fi
+# if [ -x /usr/bin/scrot ]; then
+#     if [ ! -d "$HOME/Pictures/scrot" ]; then
+#         mkdir -p "$HOME/Pictures/scrot"
+#     fi
+#     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+# fi
 
 # Projectpad aliases
 alias gotoproject='cd `projectpad get`'
