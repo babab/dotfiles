@@ -40,3 +40,9 @@
 [submodule ".vim/bundle/vim-gnupg"]
 	path = .vim/bundle/vim-gnupg
 	url = git://github.com/jamessan/vim-gnupg.git
+[submodule ".vim/bundle/ack-vim"]
+	path = .vim/bundle/ack-vim
+	url = git://github.com/mileszs/ack.vim.git
+[submodule ".vim/bundle/Vim-Jinja2-Syntax"]
+	path = .vim/bundle/Vim-Jinja2-Syntax
+	url = git://github.com/Glench/Vim-Jinja2-Syntax.git
