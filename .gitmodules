@@ -34,15 +34,9 @@
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = git://github.com/Valloric/YouCompleteMe.git
 [submodule ".vim/bundle/vim-djazz"]
 	path = .vim/bundle/vim-djazz
 	url = git://github.com/babab/vim-djazz.git
-[submodule ".vim/bundle/MatchTagAlways"]
-	path = .vim/bundle/MatchTagAlways
-	url = git://github.com/Valloric/MatchTagAlways.git
 [submodule ".vim/bundle/vim-gnupg"]
 	path = .vim/bundle/vim-gnupg
 	url = git://github.com/jamessan/vim-gnupg.git
