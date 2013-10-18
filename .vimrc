@@ -91,7 +91,7 @@ endfunction
 nmap <silent> ;t :call Settabbing('input')<CR>
 
 " Use 4 spaces for tabs by default
-" Use 2 spaces when editing html files
+" Use 2 spaces when editing html and tmpl files
 " Use 3 spaces when editing reStructuredText files
 " Use tabs (tabbing with 4 spaces) when programming in Go
 " Use tabs (tabbing with 8 spaces) when editing Makefiles
@@ -99,6 +99,7 @@ set expandtab
 call Settabbing(4)
 augroup Tabbing
     autocmd BufEnter *.html call Settabbing(2)
+    autocmd BufEnter *.tmpl call Settabbing(2)
     autocmd BufEnter *.rst call Settabbing(3)
     autocmd BufEnter *.go set noexpandtab | call Settabbing(4)
     autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
