@@ -124,11 +124,17 @@ nmap <silent> ;gg ;gr
 nmap <silent> ;gf :!go fmt %<CR>
 nmap <silent> ;gd :Godoc<CR>
 
-" Mapping for quickly executing macro's
+" Mappings for quickly executing (common) macro's
 nmap <silent> m @q
+nmap <silent> ;pd ^dwx$x
+nmap <silent> ;pp Iprint(<ESC>A)<ESC>
+nmap <silent> ;S (V}k:!sort<CR>
 
 " pathogen.vim
 call pathogen#infect()
+
+" Tagbar
+nnoremap <F8> :TagbarToggle<CR>
 
 " VimOrganizer settings and loading
 let g:ft_ignore_pat = '\.org'
