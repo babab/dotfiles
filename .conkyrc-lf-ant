@@ -1,0 +1,8 @@
+out_to_x no
+out_to_console yes
+update_interval 1.0
+total_run_times 0
+use_spacer no
+alignment middle_right
+TEXT
+${kernel}    ${cpu}% ${acpitemp}C    ${memperc}% ${mem}    ${loadavg} ${uptime_short}    WLAN: ${downspeedf wlp0s26f7u3}KiB -- ${upspeedf wlp0s26f7u3}KiB [${wireless_link_bar wlp0s26f7u3}]
