@@ -1,5 +1,4 @@
-" Add $GOROOT to runtimepath
-set rtp+=$GOROOT/misc/vim
+"++ Main settings and configuration ------------------------------------------
 
 if has("syntax")
   syntax on
@@ -15,6 +14,12 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
+" Delete trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Highlight chars of lines exceeding 79 chars
+au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%>79v.\+', -1)
+
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set ignorecase          " Do case insensitive matching
@@ -27,6 +32,23 @@ set ttymouse=xterm      " So vim doesn't hang inside tmux
 set showtabline=0       " Don't need to ever show a tabline
 set scrolloff=10        " Minimal number of lines above and below the cursor.
 colo vividchalk         " Color scheme by Tim Pope
+
+" Keep bak and swp files in a dedicated folder
+set directory=~/.vim-bak-swp
+set backup
+set backupdir=~/.vim-bak-swp
+
+"+----------------------------------------------------------------------------
+"++ gVim GUI options ---------------------------------------------------------
+
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=l  "remove left-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar on split screen
+
+"+----------------------------------------------------------------------------
+"++ Remappings / overrides of normal mode commands  --------------------------
 
 " Keep things centered
 nnoremap n nzz
@@ -41,34 +63,37 @@ nnoremap K <nop>
 " Only yank after the cursor instead of the line as a whole
 nnoremap Y y$
 
-" Mapping for changing to PWD of file
-nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
-
-" Keep bak and swp files in a dedicated folder
-set directory=~/.vim-bak-swp
-set backup
-set backupdir=~/.vim-bak-swp
-
-" Delete trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-"
-" Highlight chars of lines exceeding 79 chars
-au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%>79v.\+', -1)
+"+----------------------------------------------------------------------------
+"++ Convenience mappings -----------------------------------------------------
 
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-" " Save folds
-" au BufWinLeave * silent! mkview
-" au BufWinEnter * silent! loadview
+" Mapping for changing to PWD of file
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-" gvim options
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=l  "remove left-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar on split screen
+nmap <silent> m @q
+nmap <silent> ;pd ^dwx$x
+nmap <silent> ;pp Iprint(<ESC>A)<ESC>
+nmap <silent> ;S (V}k:!sort<CR>
+
+"+----------------------------------------------------------------------------
+"++ Mappings for saving all buffers and writing a vim session file -----------
+
+function SessionSave()
+    mksession! .session.vim
+    confirm wall
+    echo "Session saved"
+endfunction
+
+nmap <silent> ;s :call SessionSave()<CR>
+nmap <silent> ;w :confirm wall<CR>
+nmap <silent> ;q :confirm wqall<CR>
+imap <silent> <M-M> <C-R>=<ESC><CR>
+
+"+----------------------------------------------------------------------------
+"++ Tabbing/indents function, mapping and filetype settings ------------------
 
 " Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
 function Settabbing(tabbing)
@@ -105,17 +130,11 @@ augroup Tabbing
     autocmd BufEnter Makefile set noexpandtab | call Settabbing(8)
 augroup END
 
-" Mappings for saving all buffers and writing a vim session file
-function SessionSave()
-    mksession! .session.vim
-    confirm wall
-    echo "Session saved"
-endfunction
+"+----------------------------------------------------------------------------
+"++ Go Programming -----------------------------------------------------------
 
-nmap <silent> ;s :call SessionSave()<CR>
-nmap <silent> ;w :confirm wall<CR>
-nmap <silent> ;q :confirm wqall<CR>
-imap <silent> <M-M> <C-R>=<ESC><CR>
+" Add $GOROOT to runtimepath
+set rtp+=$GOROOT/misc/vim
 
 " Mappings for Go programming
 nmap <silent> ;gb :!go build %<CR>
@@ -124,11 +143,8 @@ nmap <silent> ;gg ;gr
 nmap <silent> ;gf :!go fmt %<CR>
 nmap <silent> ;gd :Godoc<CR>
 
-" Mappings for quickly executing (common) macro's
-nmap <silent> m @q
-nmap <silent> ;pd ^dwx$x
-nmap <silent> ;pp Iprint(<ESC>A)<ESC>
-nmap <silent> ;S (V}k:!sort<CR>
+"+----------------------------------------------------------------------------
+"++ Plugins ------------------------------------------------------------------
 
 " pathogen.vim
 call pathogen#infect()
@@ -140,3 +156,5 @@ nnoremap <F8> :TagbarToggle<CR>
 let g:ft_ignore_pat = '\.org'
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org call org#SetOrgFileType()
+
+"+- vim: fdm=marker fmr="++,"+-:
