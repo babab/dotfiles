@@ -65,6 +65,12 @@ nnoremap K <nop>
 " Only yank after the cursor instead of the line as a whole
 nnoremap Y y$
 
+" Swap v and CTRL-V
+nnoremap    v   <C-V>
+nnoremap <C-V>     v
+vnoremap    v   <C-V>
+vnoremap <C-V>     v
+
 "+----------------------------------------------------------------------------
 "++ Convenience mappings -----------------------------------------------------
 
