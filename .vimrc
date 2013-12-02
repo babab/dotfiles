@@ -77,6 +77,7 @@ nmap <silent> m @q
 nmap <silent> ;pd ^dwx$x
 nmap <silent> ;pp Iprint(<ESC>A)<ESC>
 nmap <silent> ;S (V}k:!sort<CR>
+nmap <silent> <F5> :!./%<CR>
 
 "+----------------------------------------------------------------------------
 "++ Mappings for saving all buffers and writing a vim session file -----------
