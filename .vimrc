@@ -17,9 +17,6 @@ endif
 " Delete trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
-" Highlight chars of lines exceeding 79 chars
-au BufWinEnter * let w:m1=matchadd('ErrorMsg', '\%>79v.\+', -1)
-
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.
 set ignorecase          " Do case insensitive matching
@@ -32,6 +29,11 @@ set ttymouse=xterm      " So vim doesn't hang inside tmux
 set showtabline=0       " Don't need to ever show a tabline
 set scrolloff=10        " Minimal number of lines above and below the cursor.
 colo vividchalk         " Color scheme by Tim Pope
+
+" Highlight chars of lines exceeding 79 chars
+highlight ColorColumn ctermbg=yellow
+call matchadd('ColorColumn', '\%80v', 100)
+
 
 " Keep bak and swp files in a dedicated folder
 set directory=~/.vim-bak-swp
