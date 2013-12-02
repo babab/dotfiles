@@ -31,6 +31,7 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sinstall='sudo make install'
 alias sshagent='eval `ssh-agent` >/dev/null'
+alias djangoproject='django-admin.py startproject --template=~/git/p/django-project-template -e py,fcgi,sh,html'
 alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 
