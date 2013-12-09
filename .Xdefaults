@@ -1,6 +1,7 @@
 URxvt*loginShell:true
 URxvt*scrollBar: off
-URxvt.font: xft:Liberation Mono:weight=medium:pixelsize=13
+/* URxvt.font: xft:Liberation Mono:weight=medium:pixelsize=13 */
+URxvt.font: xft:Cosmic Sans Neue Mono:weight=medium:pixelsize=17
 URxvt*colorMode: on
 URxvt*boldColors: on
 URxvt*dynamicColors: on
