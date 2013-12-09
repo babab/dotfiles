@@ -43,8 +43,8 @@ alias x='exit'
 # fi
 
 # Projectpad aliases
-alias gotoproject='cd `projectpad get`'
-alias setproject='projectpad set && cd `projectpad get`'
+alias g='cd `projectpad get`'
+alias s='projectpad set && cd `projectpad get`'
 
 ### Environment variables ####################################################
 export EDITOR="/usr/bin/vim"
