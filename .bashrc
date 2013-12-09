@@ -61,7 +61,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias kk='echo git status && git status'
+kk()
+{
+    git status | head -2 | tail -1; git status -s
+}
 alias kl='echo git diff && git diff'
 alias less='less -FXRS'
 alias lk='echo git diff --cached && git diff --cached'
