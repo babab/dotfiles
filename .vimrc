@@ -31,7 +31,7 @@ set scrolloff=10        " Minimal number of lines above and below the cursor.
 colo vividchalk         " Color scheme by Tim Pope
 
 " Highlight chars of lines exceeding 79 chars
-highlight ColorColumn ctermbg=yellow
+highlight ColorColumn ctermbg=darkgrey
 call matchadd('ColorColumn', '\%80v', 100)
 
 
@@ -67,6 +67,10 @@ nnoremap Y y$
 
 "+----------------------------------------------------------------------------
 "++ Convenience mappings -----------------------------------------------------
+
+" Write and quit auto-return
+nmap <silent> :W :w<CR>
+nmap <silent> :Q :wq<CR>
 
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
