@@ -68,10 +68,6 @@ nnoremap Y y$
 "+----------------------------------------------------------------------------
 "++ Convenience mappings -----------------------------------------------------
 
-" Write and quit auto-return
-nmap <silent> :W :w<CR>
-nmap <silent> :Q :wq<CR>
-
 " Fold and unfold with spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
@@ -82,7 +78,7 @@ nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 nmap <silent> m @q
 nmap <silent> ;pd ^dwx$x
 nmap <silent> ;pp Iprint(<ESC>A)<ESC>
-nmap <silent> ;S (V}k:!sort<CR>
+nmap <silent> ;S (V}k:sort<CR>
 nmap <silent> <F5> :!./%<CR>
 vmap <silent> <F9> :!par<CR>
 
