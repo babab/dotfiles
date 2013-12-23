@@ -46,40 +46,8 @@ fi
 # Source prompt settings
 . $HOME/.ps1
 
-# Aliases
-alias la='ls -FA --color=auto'
-ll()
-{
-    ls -Flh  --color=always "$@" | less -FXRS
-}
-lla()
-{
-    ls -FlhA --color=always "$@" | less -FXRS
-}
-alias ls='ls -F  --color=auto'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-kk()
-{
-    git status | head -2 | tail -1; git status -s
-}
-alias kl='echo git diff && git diff'
-alias less='less -FXRS'
-alias lk='echo git diff --cached && git diff --cached'
-alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
-alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
-alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
-alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
-alias sinstall='sudo make install'
-alias sshagent='eval `ssh-agent` >/dev/null'
-alias x='exit'
-alias xx="> $HOME/.bash_history && exit"
-
-# Projectpad aliases
-alias g='cd `projectpad get`'
-alias s='projectpad set && cd `projectpad get`'
+# Source aliases
+. $HOME/.aliases
 
 # Environment vars
 export EDITOR="/usr/bin/vim"

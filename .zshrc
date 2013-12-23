@@ -14,37 +14,14 @@ fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
 
 ### Aliases ##################################################################
-alias la='ls -FA --color=auto'
-ll() { ls -Flh  --color=always "$@" | less -FXRS }
-lla() { ls -FlhA --color=always "$@" | less -FXRS }
-alias ls='ls -F  --color=auto'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-kk() { git status | head -2 | tail -1; git status -s }
-alias kl='echo git diff && git diff'
-alias less='less -FXRS'
-alias lk='echo git diff --cached && git diff --cached'
-alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
-alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'
-alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
-alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
-alias sinstall='sudo make install'
-alias sshagent='eval `ssh-agent` >/dev/null'
-alias djangoproject='django-admin.py startproject --template=~/git/p/django-project-template -e py,fcgi,sh,html'
-alias venvinit='source virt-env/bin/activate'
-alias x='exit'
+source ${HOME}/.aliases
 
-# if [ -x /usr/bin/scrot ]; then
-#     if [ ! -d "$HOME/Pictures/scrot" ]; then
-#         mkdir -p "$HOME/Pictures/scrot"
-#     fi
-#     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
-# fi
-
-# Projectpad aliases
-alias g='cd `projectpad get`'
-alias s='projectpad set && cd `projectpad get`'
+if [ -x /usr/bin/scrot ]; then
+    if [ ! -d "$HOME/Pictures/scrot" ]; then
+        mkdir -p "$HOME/Pictures/scrot"
+    fi
+    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
+fi
 
 ### Environment variables ####################################################
 export EDITOR="/usr/bin/vim"
