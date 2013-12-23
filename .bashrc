@@ -88,6 +88,10 @@ export DISPASS_LABELFILE=~/.dispass
 export GPG_TTY="$(tty)"
 export EXEC_FOR_PYTHON="python2"
 
+if [ ! -z "${SSH_CONNECTION}" ]; then
+    export TERM=screen
+fi
+
 # Wrapper for starting the Django development server on varying
 # addresses and port numbers. Allowing to also run if manage.py is in
 # the (parent directory of a) parent directory of $PWD.
