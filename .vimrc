@@ -31,8 +31,9 @@ set scrolloff=10        " Minimal number of lines above and below the cursor.
 colo vividchalk         " Color scheme by Tim Pope
 
 " Highlight chars of lines exceeding 79 chars
-highlight ColorColumn ctermbg=darkgrey
-call matchadd('ColorColumn', '\%80v', 100)
+highlight ColorColumn ctermfg=243 ctermbg=232
+set colorcolumn=80
+"call matchadd('ColorColumn', '\%80v', 100)
 
 
 " Keep bak and swp files in a dedicated folder
