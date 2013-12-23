@@ -83,6 +83,11 @@ nmap <silent> ;S (V}k:sort<CR>
 nmap <silent> <F5> :!./%<CR>
 vmap <silent> <F9> :!par<CR>
 
+" ConqueTerm Mappings
+nmap <silent> <F9> :ConqueTermVSplit zsh<CR>
+nmap <silent> <F10> :ConqueTermVSplit bpython2<CR>
+nmap <silent> <F11> :ConqueTermVSplit bpython<CR>
+
 "+----------------------------------------------------------------------------
 "++ Mappings for saving all buffers and writing a vim session file -----------
 
