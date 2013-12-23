@@ -3,7 +3,7 @@
 # ctb - create temporary backup(s)
 
 if [ ! "$1" ]; then
-    echo supply one or more files and/or directories
+    echo supply a file or directory
 fi
-
-cp -ra $1 "/tmp/$1$(date +_%Y-%m-%d-%s)"
+bakname="/tmp/$1$(date +_%Y-%m-%d-%s)"
+cp -ra "$1" "$bakname" && echo Saved as "$bakname"
