@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/conque-term"]
 	path = .vim/bundle/conque-term
 	url = git://github.com/rosenfeld/conque-term
+[submodule ".vim/bundle/vim-vinegar.git"]
+	path = .vim/bundle/vim-vinegar.git
+	url = git://github.com/tpope/vim-vinegar.git
