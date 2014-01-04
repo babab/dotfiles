@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/vim-vinegar.git"]
 	path = .vim/bundle/vim-vinegar.git
 	url = git://github.com/tpope/vim-vinegar.git
+[submodule ".vim/bundle/snipMate"]
+	path = .vim/bundle/snipMate
+	url = git://github.com/vim-scripts/snipMate.git
