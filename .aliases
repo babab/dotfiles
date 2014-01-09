@@ -1,19 +1,20 @@
+# vim:set ft=sh:
+
 alias la='ls -FA --color=auto'
 ll() {
-    ls -Flh  --color=always "$@" | less -FXRS
+    ls -Flh  --color=always "$@" | less
 }
 lla() {
-    ls -FlhA --color=always "$@" | less -FXRS
+    ls -FlhA --color=always "$@" | less
  }
 alias ls='ls -F  --color=auto'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 kk() {
-    git status | head -2 | tail -1; git status -s
+    git status | head -2 | tail -1; git status --short
 }
 alias kl='echo git diff && git diff'
-alias less='less -FXRS'
 alias lk='echo git diff --cached && git diff --cached'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
 alias rm_pyc='find . -name "*.pyc" | xargs /bin/rm -f'

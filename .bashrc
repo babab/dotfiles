@@ -50,11 +50,12 @@ fi
 . $HOME/.aliases
 
 # Environment vars
-export EDITOR="/usr/bin/vim"
-export PYTHONSTARTUP=~/.pythonrc
 export DISPASS_LABELFILE=~/.dispass
-export GPG_TTY="$(tty)"
+export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
+export GPG_TTY="$(tty)"
+export LESS="iFXRS"
+export PYTHONSTARTUP=~/.pythonrc
 
 if [ ! -z "${SSH_CONNECTION}" ]; then
     export TERM=screen

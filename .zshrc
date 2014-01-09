@@ -27,6 +27,7 @@ fi
 export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export LANG=en_US.UTF-8
+export LESS="iFXRS"
 export PATH="$PATH:$HOME/bin"
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
