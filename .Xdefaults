@@ -10,7 +10,7 @@ URxvt*colorUL: red
 URxvt*colorBDMode: on
 URxvt*colorBD: white
 URxvt*background: #000000
-URxvt*foreground: #e2e2e2
+URxvt*foreground: #CC9A00
 URxvt.cursorColor:  #c53525
 URxvt.pointerColor: #c52325
 URxvt*color0: #000000
