@@ -1,0 +1,11 @@
+#!/bin/sh
+
+synclient | grep "TouchpadOff" | grep 1 > /dev/null
+
+if [ $? -eq 0 ]; then
+    synclient TouchpadOff=0
+    echo Touchpad is now on
+else
+    synclient TouchpadOff=1
+    echo Touchpad is now off
+fi
