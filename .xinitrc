@@ -5,6 +5,7 @@ xbindkeys
 #pulseaudio --start
 /usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
+random-wallpaper
 
 wm=spectrwm
 
@@ -14,3 +15,6 @@ if [ $? -lt 2 ]; then
 else
     exec ssh-agent $wm
 fi
+
+
+# vim: set ft=sh:
