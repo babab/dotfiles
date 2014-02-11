@@ -33,7 +33,7 @@ set autowrite           " Automatically save before commands like :next and :mak
 set hidden              " Hide buffers when they are abandoned
 set modeline            " Use modelines if found
 set ttymouse=xterm      " So vim doesn't hang inside tmux
-set showtabline=0       " Don't need to ever show a tabline
+set showtabline=1       " Show only if there are at least two tab pages
 set scrolloff=10        " Minimal number of lines above and below the cursor.
 set colorcolumn=80      " Show a colored column at 80 chars
 colo vividchalk         " Color scheme by Tim Pope
