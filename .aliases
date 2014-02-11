@@ -14,6 +14,8 @@ alias .....='cd ../../../..'
 kk() {
     git status | head -2 | tail -1; git status --short
 }
+
+alias b='xs thunar .'
 alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
 alias rm_migrations='find . -wholename "*/migrations/*" | xargs /bin/rm -f'
