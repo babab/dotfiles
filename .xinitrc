@@ -2,7 +2,7 @@
 #xrandr --output LVDS1 --mode 1920x1080
 setxkbmap -layout us -option ctrl:nocaps
 xbindkeys
-pulseaudio --start
+#pulseaudio --start
 /usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
 
