@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/vim-MagicKey"]
 	path = .vim/bundle/vim-MagicKey
 	url = git://github.com/babab/vim-MagicKey.git
+[submodule ".vim/bundle/emmet-vim"]
+	path = .vim/bundle/emmet-vim
+	url = git://github.com/mattn/emmet-vim.git
