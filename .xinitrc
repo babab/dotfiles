@@ -1,5 +1,11 @@
 #xrandr --output HDMI1 --pos 1920x0 --left-of VGA1
 #xrandr --output LVDS1 --mode 1920x1080
+
+xrandr | grep VGA1 | grep disconnected
+if [ $? -ne 0 ]; then
+    xrandr --output VGA1 --mode 1920x1080 --right-of eDP1
+fi
+
 setxkbmap -layout us -option ctrl:nocaps
 xbindkeys
 #pulseaudio --start
