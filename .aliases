@@ -32,3 +32,7 @@ alias x='exit'
 # Projectpad aliases
 alias g='cd `projectpad get`'
 alias s='projectpad set && cd `projectpad get`'
+
+if [ -f $HOME/.aliases_local ]; then
+    source $HOME/.aliases_local
+fi
