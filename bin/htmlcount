@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 '''
-Simple script draft for counting HTML tags and showing locations of
+Simple script draft for counting HTML/XML tags and showing locations of
 unbalanced start and end tags. Pass a valid url as argument and it will
 fetch its contents. Use without arguments to parse from stdin.
 
@@ -26,152 +26,17 @@ import sys
 from html.parser import HTMLParser
 from urllib.request import FancyURLopener
 
-tags = {
-    'a': {'start': [], 'end': []},
-    'abbr': {'start': [], 'end': []},
-    'acronym': {'start': [], 'end': []},
-    'address': {'start': [], 'end': []},
-    'applet': {'start': [], 'end': []},
-    'area': {'start': [], 'end': []},
-    'article': {'start': [], 'end': []},
-    'aside': {'start': [], 'end': []},
-    'audio': {'start': [], 'end': []},
-    'b': {'start': [], 'end': []},
-    'base': {'start': [], 'end': []},
-    'basefont': {'start': [], 'end': []},
-    'bdi': {'start': [], 'end': []},
-    'bdo': {'start': [], 'end': []},
-    'bgsound': {'start': [], 'end': []},
-    'big': {'start': [], 'end': []},
-    'blink': {'start': [], 'end': []},
-    'blockquote': {'start': [], 'end': []},
-    'body': {'start': [], 'end': []},
-    'br': {'start': [], 'end': []},
-    'button': {'start': [], 'end': []},
-    'canvas': {'start': [], 'end': []},
-    'caption': {'start': [], 'end': []},
-    'center': {'start': [], 'end': []},
-    'cite': {'start': [], 'end': []},
-    'code': {'start': [], 'end': []},
-    'col': {'start': [], 'end': []},
-    'colgroup': {'start': [], 'end': []},
-    'content': {'start': [], 'end': []},
-    'data': {'start': [], 'end': []},
-    'datalist': {'start': [], 'end': []},
-    'dd': {'start': [], 'end': []},
-    'decorator': {'start': [], 'end': []},
-    'del': {'start': [], 'end': []},
-    'details': {'start': [], 'end': []},
-    'dfn': {'start': [], 'end': []},
-    'dir': {'start': [], 'end': []},
-    'div': {'start': [], 'end': []},
-    'dl': {'start': [], 'end': []},
-    'dt': {'start': [], 'end': []},
-    'element': {'start': [], 'end': []},
-    'em': {'start': [], 'end': []},
-    'embed': {'start': [], 'end': []},
-    'fieldset': {'start': [], 'end': []},
-    'figcaption': {'start': [], 'end': []},
-    'figure': {'start': [], 'end': []},
-    'font': {'start': [], 'end': []},
-    'footer': {'start': [], 'end': []},
-    'form': {'start': [], 'end': []},
-    'frame': {'start': [], 'end': []},
-    'frameset': {'start': [], 'end': []},
-    'h1': {'start': [], 'end': []},
-    'h2': {'start': [], 'end': []},
-    'h3': {'start': [], 'end': []},
-    'h4': {'start': [], 'end': []},
-    'h5': {'start': [], 'end': []},
-    'h6': {'start': [], 'end': []},
-    'head': {'start': [], 'end': []},
-    'header': {'start': [], 'end': []},
-    'hgroup': {'start': [], 'end': []},
-    'hr': {'start': [], 'end': []},
-    'html': {'start': [], 'end': []},
-    'i': {'start': [], 'end': []},
-    'iframe': {'start': [], 'end': []},
-    'img': {'start': [], 'end': []},
-    'input': {'start': [], 'end': []},
-    'ins': {'start': [], 'end': []},
-    'isindex': {'start': [], 'end': []},
-    'kbd': {'start': [], 'end': []},
-    'keygen': {'start': [], 'end': []},
-    'label': {'start': [], 'end': []},
-    'legend': {'start': [], 'end': []},
-    'li': {'start': [], 'end': []},
-    'link': {'start': [], 'end': []},
-    'listing': {'start': [], 'end': []},
-    'main': {'start': [], 'end': []},
-    'map': {'start': [], 'end': []},
-    'mark': {'start': [], 'end': []},
-    'marquee': {'start': [], 'end': []},
-    'menu': {'start': [], 'end': []},
-    'menuitem': {'start': [], 'end': []},
-    'meta': {'start': [], 'end': []},
-    'meter': {'start': [], 'end': []},
-    'nav': {'start': [], 'end': []},
-    'nobr': {'start': [], 'end': []},
-    'noframes': {'start': [], 'end': []},
-    'noscript': {'start': [], 'end': []},
-    'object': {'start': [], 'end': []},
-    'ol': {'start': [], 'end': []},
-    'optgroup': {'start': [], 'end': []},
-    'option': {'start': [], 'end': []},
-    'output': {'start': [], 'end': []},
-    'p': {'start': [], 'end': []},
-    'param': {'start': [], 'end': []},
-    'plaintext': {'start': [], 'end': []},
-    'pre': {'start': [], 'end': []},
-    'progress': {'start': [], 'end': []},
-    'q': {'start': [], 'end': []},
-    'rp': {'start': [], 'end': []},
-    'rt': {'start': [], 'end': []},
-    'ruby': {'start': [], 'end': []},
-    's': {'start': [], 'end': []},
-    'samp': {'start': [], 'end': []},
-    'script': {'start': [], 'end': []},
-    'section': {'start': [], 'end': []},
-    'select': {'start': [], 'end': []},
-    'shadow': {'start': [], 'end': []},
-    'small': {'start': [], 'end': []},
-    'source': {'start': [], 'end': []},
-    'spacer': {'start': [], 'end': []},
-    'span': {'start': [], 'end': []},
-    'strike': {'start': [], 'end': []},
-    'strong': {'start': [], 'end': []},
-    'style': {'start': [], 'end': []},
-    'sub': {'start': [], 'end': []},
-    'summary': {'start': [], 'end': []},
-    'sup': {'start': [], 'end': []},
-    'table': {'start': [], 'end': []},
-    'tbody': {'start': [], 'end': []},
-    'td': {'start': [], 'end': []},
-    'template': {'start': [], 'end': []},
-    'textarea': {'start': [], 'end': []},
-    'tfoot': {'start': [], 'end': []},
-    'th': {'start': [], 'end': []},
-    'thead': {'start': [], 'end': []},
-    'time': {'start': [], 'end': []},
-    'title': {'start': [], 'end': []},
-    'tr': {'start': [], 'end': []},
-    'track': {'start': [], 'end': []},
-    'tt': {'start': [], 'end': []},
-    'u': {'start': [], 'end': []},
-    'ul': {'start': [], 'end': []},
-    'var': {'start': [], 'end': []},
-    'video': {'start': [], 'end': []},
-    'wbr': {'start': [], 'end': []},
-    'xmp': {'start': [], 'end': []},
-}
-
 
 class Parser(HTMLParser):
+    tags = {}
+
     def handle_starttag(self, tag, attrs):
-        tags[tag]['start'].append(self.getpos())
+        if tag not in self.tags:
+            self.tags[tag] = {'start': [], 'end': []}
+        self.tags[tag]['start'].append(self.getpos())
 
     def handle_endtag(self, tag):
-        tags[tag]['end'].append(self.getpos())
+        self.tags[tag]['end'].append(self.getpos())
 
 if __name__ == '__main__':
     contents = ''
@@ -189,15 +54,15 @@ if __name__ == '__main__':
     parser = Parser()
     parser.feed(contents)
 
-    for k, v in tags.items():
+    for k, v in parser.tags.items():
         if v['start']:
             start = len(v['start'])
             diff = start - len(v['end'])
             if diff == 0:
-                print('{0:10}: {1:4}'.format(k, start))
+                print('{0:20}: {1:4}'.format(k, start))
             elif diff > 0:
-                print('{0:10}: {1:4} +{2} unbalanced starttag'
+                print('{0:20}: {1:4} +{2} unbalanced starttag'
                       .format(k, start, diff))
             else:
-                print('{0:10}: {1:4} {2} unbalanced endtag'
+                print('{0:20}: {1:4} {2} unbalanced endtag'
                       .format(k, start, diff))
