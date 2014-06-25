@@ -5,4 +5,4 @@ total_run_times 0
 use_spacer no
 alignment middle_right
 TEXT
-${kernel}    ${cpu}% ${acpitemp}C    ${memperc}% ${mem}    ${loadavg} ${uptime_short}    WLAN: ${downspeedf wlp0s26f7u3}KiB -- ${upspeedf wlp0s26f7u3}KiB [${wireless_link_bar wlp0s26f7u3}]
+${kernel}    ${cpu}% ${acpitemp}C    ${memperc}% ${mem}    ${loadavg} ${uptime_short}    WLAN: ${downspeedf wlp7s0}KiB -- ${upspeedf wlp7s0}KiB [${wireless_link_bar wlp7s0}]
