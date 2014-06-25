@@ -5,7 +5,8 @@
 	email = benjamin@babab.nl
 [alias]
 	st = status
-	ci = commit
+    ci = commit
+	ca = commit --amend --reset-author
 	co = checkout
 	di = diff
 	br = branch
