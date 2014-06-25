@@ -35,11 +35,15 @@ _stripsuffix()
 
 _main()
 {
-    echo "name      : $1"
-    echo "type      : "$(_stripprefix "$1" file)
-    echo "mimetype  : "$(_stripprefix "$1" file --mime)
-    echo "sha1 sum  : "$(_stripsuffix "$1" sha1sum)
-    echo "md5 sum   : "$(_stripsuffix "$1" md5sum)
+    if [ "$1" ]; then
+        echo "name      : $1"
+        echo "type      : "$(_stripprefix "$1" file)
+        echo "mimetype  : "$(_stripprefix "$1" file --mime)
+        echo "sha1 sum  : "$(_stripsuffix "$1" sha1sum)
+        echo "md5 sum   : "$(_stripsuffix "$1" md5sum)
+    else
+        _usage
+    fi
 }
 
 _main "$1"
