@@ -1,0 +1,37 @@
+#!/bin/sh
+# Wrapper for schemaspy MySQL database graphviz dumps
+#
+# Created for usage in archlinux, since it would try to find the java
+# connector in /mysql
+
+DB_NAME="$1"
+DB_USER=root
+DB_PASS=
+DUMPDIR=schemaspy-dump
+JAVA_CONNECTOR=/usr/share/java/mysql-jdbc/mysql-connector-java-5.1.31-bin.jar
+
+which schemaspy > /dev/null 2>&1
+if [ $? -ge 1 ]; then
+    echo schemaspy cannot be found
+    exit
+fi
+
+if [ ! "$1" ]; then
+    echo "usage: $(basename $0) <database_name> [db_root_password]"
+    exit
+fi
+
+if [ "$2" ]; then
+    DB_PASS="$2"
+fi
+
+mkdir -p ${DUMPDIR} || exit
+
+if [ -z ${DB_PASS} ]; then
+    schemaspy -t mysql -host 127.0.0.1 -db ${DB_NAME} -u ${DB_USER} \
+        -o ${DUMPDIR} -dp ${JAVA_CONNECTOR}
+else
+    schemaspy -t mysql -host 127.0.0.1 -db ${DB_NAME} -u ${DB_USER} \
+        -p ${DB_PASS} -o ${DUMPDIR} -dp ${JAVA_CONNECTOR}
+fi
+
