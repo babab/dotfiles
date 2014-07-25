@@ -1,0 +1,22 @@
+#!/bin/sh
+# slowcate - A slow database-less alternative to locate
+
+_usage()
+{
+    echo "usage: slowcate <part-of-filename>"
+}
+
+_main()
+{
+    if [ ! "$1" ]; then
+        _usage
+        exit 1
+    fi
+    sudo find / | grep "$1" 2>/tmp/slowcate-errors
+
+    if [ -f /tmp/slowcate-errors ]; then
+        echo There were errors: check /tmp/slowcate-errors
+    fi
+}
+
+_main $@
