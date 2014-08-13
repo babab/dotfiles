@@ -202,6 +202,11 @@ au BufEnter *.org call org#SetOrgFileType()
 "++ Plugin remappings --------------------------------------------------------
 
 nmap ,, <C-y>,
+nmap <Leader>' ysW'
+
+" snipmate - https://github.com/garbas/vim-snipmate
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 
 "+----------------------------------------------------------------------------
 "++ Statusline ---------------------------------------------------------------
