@@ -28,10 +28,18 @@ alias sshagent='eval `ssh-agent` >/dev/null'
 alias djangoproject='django-admin.py startproject --template=~/git/p/django-project-template -e py,fcgi,sh,html'
 alias venvinit='source virt-env/bin/activate'
 alias x='exit'
+alias phpserver='php -S 127.0.0.1:8000'
 
 # Projectpad aliases
 alias g='cd `projectpad get`'
 alias s='projectpad set && cd `projectpad get`'
+
+# Recursively delete trailing whitespace -- Zsh only
+# if [ "${SHELL}" == "/usr/bin/zsh" ]; then
+#     if [ -x /usr/bin/perl ]; then
+        alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
+    # fi
+# fi
 
 if [ -f $HOME/.aliases_local ]; then
     source $HOME/.aliases_local
