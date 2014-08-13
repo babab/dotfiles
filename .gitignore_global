@@ -10,7 +10,6 @@
 *.pyc
 *.rar
 *.so
-*.sql
 *.sqlite
 *.swp
 *.tar
