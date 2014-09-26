@@ -24,11 +24,12 @@ if [ -x /usr/bin/scrot ]; then
 fi
 
 ### Environment variables ####################################################
+export BROWSER="/usr/bin/firefox"
 export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export LANG=en_US.UTF-8
 export LESS="iFXRS"
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin:$HOME/usr/bin:/srv/http/mrWatson/build/node_modules/bower/bin"
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
