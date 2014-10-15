@@ -30,6 +30,7 @@ alias djangoproject='django-admin.py startproject --template=~/git/p/django-proj
 alias venvinit='source virt-env/bin/activate'
 alias x='exit'
 alias phpserver='php -S 127.0.0.1:8000'
+alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 
 # Projectpad aliases
 alias g='cd `projectpad get`'
