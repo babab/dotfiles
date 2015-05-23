@@ -58,8 +58,8 @@ set guioptions-=L  "remove left-hand scroll bar on split screen
 "++ Remappings / overrides of normal mode commands  --------------------------
 
 " Use jk instead of <Esc> key
-inoremap jk <Esc>
-inoremap <Esc> <nop>
+"inoremap jk <Esc>
+"inoremap <Esc> <nop>
 
 " Keep things centered
 nnoremap n nzz
