@@ -157,10 +157,15 @@ venv_ps1()
     fi
 }
 
-# Set the prompt.
-PROMPT='
+
+# Machine dependent settings
+if [[ $(uname) == "OpenBSD" ]]; then
+    PROMPT='
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[yellow]%}$(pscheck_ps1 owncloud)%{$fg_bold[cyan]%}$(pscheck_ps1 dropbox)%{$fg_bold[magenta]%}$(venv_ps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+else
+    PROMPT='
 %{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[yellow]%}$(pscheck_ps1 owncloud)%{$fg_bold[cyan]%}$(pscheck_ps1 dropbox)%{$fg_bold[magenta]%}$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
-
-### Plugins ##################################################################
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
