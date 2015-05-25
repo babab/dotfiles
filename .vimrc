@@ -36,6 +36,7 @@ set ttymouse=xterm      " So vim doesn't hang inside tmux
 set showtabline=1       " Show only if there are at least two tab pages
 set scrolloff=10        " Minimal number of lines above and below the cursor.
 set colorcolumn=80      " Show a colored column at 80 chars
+set hlsearch            " Highlight search pattern
 colo vividchalk         " Color scheme by Tim Pope
 
 highlight ColorColumn ctermfg=243 ctermbg=232
@@ -92,14 +93,21 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
 " Normal mode mappings
-nnoremap <silent> m @q
+nnoremap <silent> M @q
 nnoremap <silent> <F5> :!./%<CR>
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
-nnoremap <silent> <Leader>pd ^dwx$x
-nnoremap <silent> <Leader>pp Iprint(<ESC>A)<ESC>
 nnoremap <silent> <Leader>S (V}k:sort<CR>
 nnoremap <silent> <Leader>ve :sp $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>
+nnoremap <silent> <Leader>i :setl noai nocin nosi inde=<CR>
+
+" Debugging
+nnoremap <silent> <Leader>pd ^dwx$x
+augroup DebuggingMappings
+    autocmd!
+    autocmd Filetype python nnoremap <silent> <Leader>pp Iprint(<ESC>A)<ESC>
+    autocmd Filetype php nnoremap <silent> <Leader>pp Iqdebug(<ESC>A)<ESC>
+augroup END
 
 " Virtual mode mappings
 vnoremap <silent> <Return> :!par<CR>
@@ -109,6 +117,12 @@ vnoremap <silent> <F9> :!par w78<CR>
 nnoremap <silent> <F9> :ConqueTermVSplit zsh<CR>
 nnoremap <silent> <F10> :ConqueTermVSplit bpython2<CR>
 nnoremap <silent> <F11> :ConqueTermVSplit bpython<CR>
+
+
+" Macros
+
+" PHP Setters and Getters
+let @s = 'yyppkk~Ipublic function setjkA($jkJxA)jko{jkjo}jkkyypkI$this->jkA = jkJi@jkxi$jkA;jkv>jVkkk>jjjj'
 
 "+----------------------------------------------------------------------------
 "++ Mappings for saving all buffers and writing a vim session file -----------
@@ -157,8 +171,11 @@ augroup Tabbing
     autocmd Filetype html call Settabbing(2)
     autocmd Filetype htmldjango call Settabbing(2)
     autocmd Filetype jinja call Settabbing(2)
+    autocmd Filetype twig call Settabbing(2)
     autocmd FileType rst call Settabbing(3)
-    autocmd BufEnter *.go set noexpandtab | call Settabbing(4)
+    autocmd FileType php call Settabbing(4)
+    autocmd BufEnter *.html call Settabbing(2)
+    autocmd BufEnter *.tpl call Settabbing(2)
     autocmd FileType make set noexpandtab | call Settabbing(8)
 augroup END
 
@@ -174,6 +191,18 @@ nnoremap <silent> <Leader>gr :!go run %<CR>
 nnoremap <silent> <Leader>gg ;gr
 nnoremap <silent> <Leader>gf :!go fmt %<CR>
 nnoremap <silent> <Leader>gd :Godoc<CR>
+
+"+----------------------------------------------------------------------------
+"++ PHP Programming ----------------------------------------------------------
+
+function! PhpGetter()
+    " TODO: test if line is empty and has only a single word
+    execute "normal! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+    call setline('.', substitute(getline("."), '^\$', '', ''))
+    execute "normal! YpIreturn $this->A;k^~Ipublic function getA(){j>>o}<<V3k=3joj"
+endfunction
+
+command! PhpGetter      call PhpGetter()
 
 "+----------------------------------------------------------------------------
 "++ Abbreviations ------------------------------------------------------------
