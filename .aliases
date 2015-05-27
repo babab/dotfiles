@@ -39,6 +39,7 @@ alias envinit='source .virtualenv/bin/activate'
 alias x='exit'
 alias phpserver='php -S 127.0.0.1:8000'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
+alias tm='ssh-agent tmux'
 
 # Projectpad aliases
 alias g='cd `projectpad get`'
