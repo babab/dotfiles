@@ -1,8 +1,0 @@
-#!/bin/sh
-
-wp=$(python -c "import os.path; import random
-wp_path = os.path.expanduser('~/Pictures/wallpapers/')
-print(wp_path + random.choice(os.listdir(wp_path)))
-")
-
-feh --bg-scale "$wp"

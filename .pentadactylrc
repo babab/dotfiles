@@ -1,8 +1,0 @@
-"hg6973
-
-loadplugins '\.(js|penta)$'
-group user
-set hintkeys=asdfg;lkjh
-set showtabline=multitab
-
-" vim: set ft=pentadactyl:
