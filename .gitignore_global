@@ -15,7 +15,9 @@
 *.tar
 *.tar.gz
 *.zip
-virt-env
+/virt-env/
+/.virtualenv/
 devdb.sqlite-bak
 Session*.vim
 .session.vim
+/doc/tags
