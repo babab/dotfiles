@@ -20,4 +20,6 @@
 devdb.sqlite-bak
 Session*.vim
 .session.vim
+application.log
 /doc/tags
+/.svn/
