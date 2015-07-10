@@ -222,10 +222,10 @@ call pathogen#infect()
 " Tagbar
 nnoremap <F8> :TagbarToggle<CR>
 
-" VimOrganizer settings and loading
-let g:ft_ignore_pat = '\.org'
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org call org#SetOrgFileType()
+" " VimOrganizer settings and loading
+" let g:ft_ignore_pat = '\.org'
+" au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+" au BufEnter *.org call org#SetOrgFileType()
 
 "+----------------------------------------------------------------------------
 "++ Plugin remappings --------------------------------------------------------

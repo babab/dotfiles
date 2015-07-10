@@ -25,9 +25,6 @@
 [submodule ".vim/bundle/utl"]
 	path = .vim/bundle/utl
 	url = git://github.com/vim-scripts/utl.vim.git
-[submodule ".vim/bundle/VimOrganizer"]
-	path = .vim/bundle/VimOrganizer
-	url = git://github.com/hsitz/VimOrganizer.git
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
