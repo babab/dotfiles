@@ -29,7 +29,7 @@ export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export LANG=en_US.UTF-8
 export LESS="iFXRS"
-export PATH="$PATH:$HOME/bin:$HOME/usr/bin:/srv/http/mrWatson/build/node_modules/bower/bin"
+export PATH="$HOME/bin:$PATH:$HOME/usr/bin:$HOME/.gem/ruby/2.2.0/bin"
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
