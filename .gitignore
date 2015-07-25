@@ -1,2 +1,7 @@
-*
-.*
+/*
+/.*
+!/bin
+/bin/composer
+/bin/hypo
+/bin/sti
+/bin/tagfile
