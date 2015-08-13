@@ -16,15 +16,6 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule ".vim/bundle/calendar-vim"]
-	path = .vim/bundle/calendar-vim
-	url = git://github.com/mattn/calendar-vim.git
-[submodule ".vim/bundle/NrrwRgn"]
-	path = .vim/bundle/NrrwRgn
-	url = git://github.com/chrisbra/NrrwRgn.git
-[submodule ".vim/bundle/utl"]
-	path = .vim/bundle/utl
-	url = git://github.com/vim-scripts/utl.vim.git
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
