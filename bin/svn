@@ -1,4 +1,0 @@
-#!/bin/sh
-
-echo "Do you mean git svn?"
-exit 1
