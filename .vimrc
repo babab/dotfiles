@@ -219,13 +219,20 @@ iabbrev sspan       <span id=""></span>
 " pathogen.vim
 call pathogen#infect()
 
-" Tagbar
-nnoremap <F8> :TagbarToggle<CR>
+" Tagbar - keybinding
+nnoremap <F8> :TagbarToggle<CR>
 
-" " VimOrganizer settings and loading
-" let g:ft_ignore_pat = '\.org'
-" au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-" au BufEnter *.org call org#SetOrgFileType()
+" Tagbar - Hide PHP Variables
+let g:tagbar_type_php  = {
+      \ 'ctagstype' : 'php',
+      \ 'kinds'     : [
+      \ 'i:interfaces',
+      \ 'c:classes',
+      \ 'd:constant definitions',
+      \ 'f:functions',
+      \ 'j:javascript functions:1'
+      \ ]
+      \ }
 
 "+----------------------------------------------------------------------------
 "++ Plugin remappings --------------------------------------------------------
@@ -243,14 +250,11 @@ smap <C-J> <Plug>snipMateNextOrTrigger
 set statusline=%<                           " Truncate at the start
 set statusline+=%f                          " Relative path to file in buffer
 set statusline+=\                           " Whitespace divider
-set statusline+=%{fugitive#statusline()}    " :h fugitive-statusline
-set statusline+=%=                          " Switch to right aligned items
-set statusline+=[%n                         " Buffer no
-set statusline+=%M                          " ,+ modified flag
-set statusline+=%R]                         " ,RO flag
 set statusline+=%y                          " [Type of file]
+set statusline+=\                           " Whitespace divider
+set statusline+=%{tagbar#currenttag('%s()','NOT-IN-TAG')}    " :h tagbar-statusline
+set statusline+=\                           " Whitespace divider
 set statusline+=[%l/%L]                     " Lineno and total lines
 set statusline+=[%c%V]                      " Colno, Virtual colno
-set statusline+=[%p%%]                      " Percentage
 
 "+- vim: fdm=marker fmr="++,"+-:
