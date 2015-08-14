@@ -101,6 +101,9 @@ nnoremap <silent> <Leader>ve :sp $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>
 nnoremap <silent> <Leader>i :setl noai nocin nosi inde=<CR>
 
+" Open TODO file in vimoutliner mode
+nnoremap <silent> <Leader>t :sp ~/TODO.otl<CR>
+
 " Debugging
 nnoremap <silent> <Leader>pd ^dwx$x
 augroup DebuggingMappings
@@ -157,7 +160,7 @@ function! Settabbing(tabbing)
     let &l:shiftwidth = l:tabbing
     let &l:softtabstop = l:tabbing
 endfunction
-nnoremap <silent> <Leader>t :call Settabbing('input')<CR>
+nnoremap <silent> <Leader>T :call Settabbing('input')<CR>
 
 " Use 4 spaces for tabs by default
 " Use 2 spaces when editing html and django template files
