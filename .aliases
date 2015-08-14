@@ -82,7 +82,18 @@ svim() {
 # Quickly edit scripts whatever their location may be
 viwhich() {
     if [[ $1 ]]; then
-        vim $(which $1)
+        vi $(which $1)
+    else
+        echo "What a shame, that's no argument"
+    fi
+}
+
+# Quickly edit files found by ack
+vack() {
+    if [[ $1 ]]; then
+        vi $(ack -l $*)
+    else
+        echo "What a shame, that's no argument"
     fi
 }
 
