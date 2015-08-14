@@ -28,8 +28,11 @@ alias .....='cd ../../../..'
 # Projectpad aliases, see: http://github.com/babab/projectpad
 alias g='cd `projectpad get`'
 alias s='projectpad set && cd `projectpad get`'
-export PROJECTPAD_SYMLINK=~/p
-alias gg="cd ${PROJECTPAD_SYMLINK}"
+
+if [[ "${HOST}" != "vml" ]]; then
+    export PROJECTPAD_SYMLINK=~/p
+    alias gg="cd ${PROJECTPAD_SYMLINK}"
+fi
 
 
 ### Superfast git-status and git-diff aliases ################################
