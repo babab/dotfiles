@@ -162,6 +162,9 @@ nnoremap <Leader>o :CtrlP<CR>
 nmap <Leader>,, <C-y>,
 nmap <Leader>' ysW'
 
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 " snipmate - https://github.com/garbas/vim-snipmate
 imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
