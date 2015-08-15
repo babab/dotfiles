@@ -177,9 +177,8 @@ endfunction
 nnoremap <silent> <Leader>s :call SessionSave()<CR>
 
 "+----------------------------------------------------------------------------
-"++ Tabbing/indents function, mapping and filetype settings ------------------
+"++ Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go ---
 
-" Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go
 function! Settabbing(tabbing)
     if a:tabbing == 'input'
         let tabbing = input("Set number of spaces [current = "
@@ -197,26 +196,6 @@ function! Settabbing(tabbing)
     let &l:softtabstop = l:tabbing
 endfunction
 nnoremap <silent> <Leader>T :call Settabbing('input')<CR>
-
-" Use 4 spaces for tabs by default
-" Use 2 spaces when editing html and django template files
-" Use 3 spaces when editing reStructuredText files
-" Use tabs (tabbing with 4 spaces) when programming in Go
-" Use tabs (tabbing with 8 spaces) when editing Makefiles
-set expandtab
-call Settabbing(4)
-augroup Tabbing
-    autocmd!
-    autocmd Filetype html call Settabbing(2)
-    autocmd Filetype htmldjango call Settabbing(2)
-    autocmd Filetype jinja call Settabbing(2)
-    autocmd Filetype twig call Settabbing(2)
-    autocmd FileType rst call Settabbing(3)
-    autocmd FileType php call Settabbing(4)
-    autocmd BufEnter *.html call Settabbing(2)
-    autocmd BufEnter *.tpl call Settabbing(2)
-    autocmd FileType make set noexpandtab | call Settabbing(8)
-augroup END
 
 "+----------------------------------------------------------------------------
 "++ Go Programming -----------------------------------------------------------
