@@ -73,3 +73,6 @@
 [submodule ".vim/bundle/vim-expand-region"]
 	path = .vim/bundle/vim-expand-region
 	url = git://github.com/terryma/vim-expand-region.git
+[submodule ".vim/bundle/gitignore"]
+	path = .vim/bundle/gitignore
+	url = git://github.com/vim-scripts/gitignore.git
