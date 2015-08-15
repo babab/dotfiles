@@ -73,6 +73,19 @@ let g:tagbar_type_php  = {
       \ ]
       \ }
 
+" Use the_silver_searcher or .gitignore for Ctrl-P
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
+
 "+----------------------------------------------------------------------------
 "++ Keymapping ---------------------------------------------------------------
 
@@ -97,10 +110,12 @@ nnoremap <silent> <Leader>q :confirm q<CR>
 
 " Fold and unfold with <Leader>f
 nnoremap <silent> <Leader>f @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
+"vnoremap <Space> zf
 
 " Normal mode mappings
 nnoremap <silent> M @q
+nnoremap <silent> gV `[v`]
+nnoremap <silent> <BS> gg
 nnoremap <silent> <F5> :!./%<CR>
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <silent> <Leader>S (V}k:sort<CR>
@@ -122,6 +137,17 @@ augroup END
 " Use <Return> in VISUAL mode to format text with par
 vnoremap <silent> <Return> :!par<CR>
 
+" Yank / paste to system clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+
+" Enter visual line mode by tapping Space twice
+nmap <Leader><Leader> V
+
 " Mappings for Go programming
 nnoremap <silent> <Leader>gb :!go build %<CR>
 nnoremap <silent> <Leader>gr :!go run %<CR>
@@ -132,6 +158,7 @@ nnoremap <silent> <Leader>gd :Godoc<CR>
 "+----------------------------------------------------------------------------
 "++ Plugin mappings ----------------------------------------------------------
 
+nnoremap <Leader>o :CtrlP<CR>
 nmap <Leader>,, <C-y>,
 nmap <Leader>' ysW'
 
@@ -220,6 +247,19 @@ iabbrev hhtml       html>head>meta[charset=UTF-8]+link+style+title
 iabbrev bbody       body>div#container
 iabbrev ddiv        <div id=""></div>
 iabbrev sspan       <span id=""></span>
+
+"+----------------------------------------------------------------------------
+"++ Prevent replacing paste buffer on paste ----------------------------------
+
+function! RestoreRegister()
+    let @" = s:restore_reg
+    return ''
+endfunction
+function! s:Repl()
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
 
 "+----------------------------------------------------------------------------
 "++ Statusline ---------------------------------------------------------------
