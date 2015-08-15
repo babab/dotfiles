@@ -53,6 +53,27 @@ set guioptions-=l  "remove left-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar on split screen
 
 "+----------------------------------------------------------------------------
+"++ Plugins ------------------------------------------------------------------
+
+" pathogen.vim
+call pathogen#infect()
+
+" Tagbar - keybinding
+nnoremap <F8> :TagbarToggle<CR>
+
+" Tagbar - Hide PHP Variables
+let g:tagbar_type_php  = {
+      \ 'ctagstype' : 'php',
+      \ 'kinds'     : [
+      \ 'i:interfaces',
+      \ 'c:classes',
+      \ 'd:constant definitions',
+      \ 'f:functions',
+      \ 'j:javascript functions:1'
+      \ ]
+      \ }
+
+"+----------------------------------------------------------------------------
 "++ Keymapping ---------------------------------------------------------------
 
 " Keep things centered
@@ -101,13 +122,28 @@ augroup END
 " Use <Return> in VISUAL mode to format text with par
 vnoremap <silent> <Return> :!par<CR>
 
+" Mappings for Go programming
+nnoremap <silent> <Leader>gb :!go build %<CR>
+nnoremap <silent> <Leader>gr :!go run %<CR>
+nnoremap <silent> <Leader>gf :!go fmt %<CR>
+nnoremap <silent> <Leader>gd :Godoc<CR>
+
+
+"+----------------------------------------------------------------------------
+"++ Plugin mappings ----------------------------------------------------------
+
+nmap <Leader>,, <C-y>,
+nmap <Leader>' ysW'
+
+" snipmate - https://github.com/garbas/vim-snipmate
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
 
 "+----------------------------------------------------------------------------
 "++ Better handling of Vim Sessions ------------------------------------------
 
 function! SessionSave()
     mksession! .session.vim
-    confirm wall
     echo "Session saved"
 endfunction
 
@@ -161,12 +197,6 @@ augroup END
 " Add $GOROOT to runtimepath
 set rtp+=$GOROOT/misc/vim
 
-" Mappings for Go programming
-nnoremap <silent> <Leader>gb :!go build %<CR>
-nnoremap <silent> <Leader>gr :!go run %<CR>
-nnoremap <silent> <Leader>gf :!go fmt %<CR>
-nnoremap <silent> <Leader>gd :Godoc<CR>
-
 "+----------------------------------------------------------------------------
 "++ PHP Programming ----------------------------------------------------------
 
@@ -190,37 +220,6 @@ iabbrev hhtml       html>head>meta[charset=UTF-8]+link+style+title
 iabbrev bbody       body>div#container
 iabbrev ddiv        <div id=""></div>
 iabbrev sspan       <span id=""></span>
-
-"+----------------------------------------------------------------------------
-"++ Plugins ------------------------------------------------------------------
-
-" pathogen.vim
-call pathogen#infect()
-
-" Tagbar - keybinding
-nnoremap <F8> :TagbarToggle<CR>
-
-" Tagbar - Hide PHP Variables
-let g:tagbar_type_php  = {
-      \ 'ctagstype' : 'php',
-      \ 'kinds'     : [
-      \ 'i:interfaces',
-      \ 'c:classes',
-      \ 'd:constant definitions',
-      \ 'f:functions',
-      \ 'j:javascript functions:1'
-      \ ]
-      \ }
-
-"+----------------------------------------------------------------------------
-"++ Plugin remappings --------------------------------------------------------
-
-nmap <Leader>,, <C-y>,
-nmap <Leader>' ysW'
-
-" snipmate - https://github.com/garbas/vim-snipmate
-imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
 
 "+----------------------------------------------------------------------------
 "++ Statusline ---------------------------------------------------------------
