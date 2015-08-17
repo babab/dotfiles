@@ -148,6 +148,10 @@ nmap <Leader>P "+P
 " Enter visual line mode by tapping Space twice
 nmap <Leader><Leader> V
 
+" Browse tabs with Ctrl+H and Ctrl+L
+nmap <C-H> gT
+nmap <C-L> gt
+
 " Mappings for Go programming
 nnoremap <silent> <Leader>gb :!go build %<CR>
 nnoremap <silent> <Leader>gr :!go run %<CR>
@@ -159,7 +163,7 @@ nnoremap <silent> <Leader>gd :Godoc<CR>
 "++ Plugin mappings ----------------------------------------------------------
 
 nnoremap <Leader>o :CtrlP<CR>
-nmap <Leader>,, <C-y>,
+nmap <Leader>,, <C-y>,h
 nmap <Leader>' ysW'
 
 vmap v <Plug>(expand_region_expand)
@@ -173,11 +177,12 @@ smap <C-J> <Plug>snipMateNextOrTrigger
 "++ Better handling of Vim Sessions ------------------------------------------
 
 function! SessionSave()
-    mksession! .session.vim
+    mksession! /tmp/$USER.session.vim
     echo "Session saved"
 endfunction
 
-nnoremap <silent> <Leader>s :call SessionSave()<CR>
+nnoremap <silent> <Leader>ss :call SessionSave()<CR>
+nnoremap <silent> <Leader>sq :call SessionSave()<CR>:confirm qall<CR>
 
 "+----------------------------------------------------------------------------
 "++ Quickly set tabstop, shiftwidth and softtabstop for a buffer in one go ---
@@ -226,9 +231,7 @@ command! PhpGetter      call PhpGetter()
 
 iabbrev ddoctype    <!doctype html>
 iabbrev hhtml       html>head>meta[charset=UTF-8]+link+style+title
-iabbrev bbody       body>div#container
-iabbrev ddiv        <div id=""></div>
-iabbrev sspan       <span id=""></span>
+iabbrev pphp        <?php
 
 "+----------------------------------------------------------------------------
 "++ Prevent replacing paste buffer on paste ----------------------------------
