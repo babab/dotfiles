@@ -124,7 +124,7 @@ nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>
 nnoremap <silent> <Leader>i :setl noai nocin nosi inde=<CR>
 
 " Open TODO file in vimoutliner mode
-nnoremap <silent> <Leader>t :sp ~/TODO.otl<CR>
+nnoremap <silent> <Leader>T :sp ~/TODO.otl<CR>
 
 " Wrap line contents in a function
 nnoremap <silent> <Leader>pd ^dwx$x
@@ -203,7 +203,7 @@ function! Settabbing(tabbing)
     let &l:shiftwidth = l:tabbing
     let &l:softtabstop = l:tabbing
 endfunction
-nnoremap <silent> <Leader>T :call Settabbing('input')<CR>
+nnoremap <silent> <Leader>t :call Settabbing('input')<CR>
 
 "+----------------------------------------------------------------------------
 "++ Go Programming -----------------------------------------------------------
