@@ -67,9 +67,6 @@
 [submodule ".vim/bundle/vimoutliner"]
 	path = .vim/bundle/vimoutliner
 	url = git://github.com/vimoutliner/vimoutliner.git
-[submodule ".vim/bundle/vim-sleuth"]
-	path = .vim/bundle/vim-sleuth
-	url = git://github.com/tpope/vim-sleuth.git
 [submodule ".vim/bundle/vim-expand-region"]
 	path = .vim/bundle/vim-expand-region
 	url = git://github.com/terryma/vim-expand-region.git
