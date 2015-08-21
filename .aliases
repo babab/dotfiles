@@ -97,6 +97,8 @@ vack() {
     fi
 }
 
+alias todo='vi ~/TODO.otl'
+
 alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
 
 
@@ -111,7 +113,7 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias runphpserver='php -S 127.0.0.1:8080'
 alias sshagent='eval `ssh-agent` >/dev/null'
-alias view='~/bin/vi -R'
+alias view='/usr/bin/vim -R'
 
 hypo-upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
