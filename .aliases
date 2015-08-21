@@ -64,15 +64,15 @@ vi() {
     fi
 }
 
-# Wrapper for sourcing (and protecting) a vim session
+# Wrapper for opening (and protecting) your last vim session
 svim() {
-    if [ -f "$PWD/.session.vim" ]; then
-        if [ -f "/tmp/$USER.vimsession" ]; then
+    if [ -f "/tmp/${USER}.session.vim" ]; then
+        if [ -f "/tmp/${USER}.svim.lock" ]; then
             echo Vim session already started
         else
-            touch /tmp/$USER.vimsession
-            vim -S .session.vim
-            rm /tmp/$USER.vimsession
+            touch /tmp/${USER}.svim.lock
+            vim -S /tmp/${USER}.session.vim
+            rm /tmp/${USER}.svim.lock
         fi
     else
         echo No .session.vim file found
