@@ -1,9 +1,17 @@
-#xrandr --output HDMI1 --pos 1920x0 --left-of VGA1
-#xrandr --output LVDS1 --mode 1920x1080
+vga=0
+xrandr | grep VGA1 | grep disconnected
+if [ $? -ne 0 ]; then
+    vga=1
+    xrandr --output VGA1 --mode 1280x1024 --above eDP1
+fi
 
 xrandr | grep HDMI1 | grep disconnected
 if [ $? -ne 0 ]; then
-    xrandr --output HDMI1 --mode 1280x1024 --above eDP1
+    if [ $vga -eq 1 ]; then
+        xrandr --output HDMI1 --mode 1280x1024 --right-of VGA1
+    else
+        xrandr --output HDMI1 --mode 1280x1024 --above eDP1
+    fi
 fi
 
 setxkbmap -layout us -option ctrl:nocaps
@@ -14,6 +22,7 @@ pulseaudio --start
 random-wallpaper
 
 wm=spectrwm
+#wm=openbox
 
 ssh-add -l
 if [ $? -lt 2 ]; then
