@@ -52,6 +52,10 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=l  "remove left-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar on split screen
 
+" Use the_silver_searcher for :grep
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
+
 "+----------------------------------------------------------------------------
 "++ Plugins ------------------------------------------------------------------
 
