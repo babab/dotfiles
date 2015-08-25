@@ -75,4 +75,4 @@
 	url = git://github.com/ryuslash/baps1.git
 [submodule "dotfiles/depends/zsh-syntax-highlighting"]
 	path = dotfiles/depends/zsh-syntax-highlighting
-	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
