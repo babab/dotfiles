@@ -70,3 +70,9 @@
 [submodule ".vim/bundle/vim-expand-region"]
 	path = .vim/bundle/vim-expand-region
 	url = git://github.com/terryma/vim-expand-region.git
+[submodule "dotfiles/depends/baps1"]
+	path = dotfiles/depends/baps1
+	url = git://github.com/ryuslash/baps1.git
+[submodule "dotfiles/depends/zsh-syntax-highlighting"]
+	path = dotfiles/depends/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
