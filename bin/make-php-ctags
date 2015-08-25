@@ -5,15 +5,7 @@
 # Found and adapated from
 # https://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
 
-# Load in Vim with:
-# :set tags=~/.ctags/<name>
-
-if [[ ! $1 ]]; then
-    echo 'usage: make-php-ctags <name>'
-    exit 1
-fi
-
-ctags -f ~/.ctags/$1 \
+ctags -f ./tags \
 -h \".php\" -R \
 --exclude=\"\.svn\" \
 --exclude=\"\.git\" \
