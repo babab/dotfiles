@@ -106,13 +106,13 @@ sshkey_ps1()
     ssh-add -l >/dev/null 2>&1
     case "$?" in
         0)
-            echo ★
+            echo y
             ;;
         1)
-            echo ☆
+            echo n
             ;;
         2)
-            echo "n/a"
+            echo n/a
             ;;
     esac
 }
@@ -123,10 +123,10 @@ pscheck_ps1()
     pgrep "$1" >/dev/null 2>&1
     case $? in
         0)
-            echo ★
+            echo y
             ;;
         *)
-            echo ☆
+            echo n
             ;;
     esac
 }
@@ -135,9 +135,9 @@ pscheck_ps1()
 venv_ps1()
 {
     if [ -z "$VIRTUAL_ENV" ]; then
-        echo ☆
+        echo n
     else
-        echo ★
+        echo y
     fi
 }
 
@@ -145,11 +145,11 @@ venv_ps1()
 # Machine dependent settings
 if [[ $(uname) == "OpenBSD" ]]; then
     PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[yellow]%}$(pscheck_ps1 owncloud)%{$fg_bold[cyan]%}$(pscheck_ps1 dropbox)%{$fg_bold[magenta]%}$(venv_ps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1){$fg_bold[magenta]%}$(venv_ps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 else
     PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[yellow]%}$(pscheck_ps1 owncloud)%{$fg_bold[cyan]%}$(pscheck_ps1 dropbox)%{$fg_bold[magenta]%}$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[magenta]%}$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
     source ~/dotfiles/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
