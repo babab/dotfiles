@@ -77,6 +77,13 @@ let g:tagbar_type_php  = {
       \ ]
       \ }
 
+" Easytags - Supress reports on tag updates
+let g:easytags_suppress_report = 1
+
+" Easytags - Speed things up
+let g:easytags_async = 1
+let g:easytags_auto_update = 0
+
 " Use the_silver_searcher or .gitignore for Ctrl-P
 let g:ctrlp_use_caching = 0
 if executable('ag')
