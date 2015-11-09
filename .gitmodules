@@ -61,9 +61,6 @@
 [submodule ".vim/bundle/vim-misc"]
 	path = .vim/bundle/vim-misc
 	url = git://github.com/xolox/vim-misc.git
-[submodule ".vim/bundle/vim-easytags"]
-	path = .vim/bundle/vim-easytags
-	url = git://github.com/xolox/vim-easytags.git
 [submodule ".vim/bundle/vimoutliner"]
 	path = .vim/bundle/vimoutliner
 	url = git://github.com/vimoutliner/vimoutliner.git
