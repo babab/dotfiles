@@ -2,6 +2,7 @@
 
 cd ~
 ln -s dotfiles/.Xdefaults
+ln -s dotfiles/.agignore
 ln -s dotfiles/.aliases
 ln -s dotfiles/.bashrc
 ln -s dotfiles/.config
