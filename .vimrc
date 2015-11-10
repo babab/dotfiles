@@ -56,6 +56,9 @@ set guioptions-=L  "remove left-hand scroll bar on split screen
 set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
+" Traverse tree upwards for 'tags' file
+set tags=./tags;/
+
 "+----------------------------------------------------------------------------
 "++ Plugins ------------------------------------------------------------------
 
