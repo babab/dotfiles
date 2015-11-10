@@ -172,6 +172,11 @@ nnoremap <silent> <Leader>gr :!go run %<CR>
 nnoremap <silent> <Leader>gf :!go fmt %<CR>
 nnoremap <silent> <Leader>gd :Godoc<CR>
 
+" Open tag definition in a new tab
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Open tag definition in a vertical split window
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 "+----------------------------------------------------------------------------
 "++ Plugin mappings ----------------------------------------------------------
