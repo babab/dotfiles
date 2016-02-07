@@ -15,6 +15,7 @@
 *.tar
 *.tar.gz
 *.zip
+/.idea/
 /virt-env/
 /.virtualenv/
 devdb.sqlite-bak
