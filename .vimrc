@@ -269,9 +269,16 @@ command! PhpGetter      call PhpGetter()
 "+----------------------------------------------------------------------------
 "++ Abbreviations ------------------------------------------------------------
 
-iabbrev ddoctype    <!doctype html>
-iabbrev hhtml       html>head>meta[charset=UTF-8]+link+style+title
+iabbrev ddoctype    <!doctype html>html>head>meta[charset=UTF-8]+link+style+title
 iabbrev pphp        <?php
+iabbrev pif         if () {}
+iabbrev pelse       else {}
+iabbrev pelseif     elseif () {}
+iabbrev pswitch     switch () {case '':    break;default:}
+iabbrev pfor        foreach ($var as $key => $value) {}
+iabbrev ppublic     public function func($args) {}
+iabbrev pprotected  protected function Func($args) {}
+iabbrev pprivate    private function _func($args) {}
 
 "+----------------------------------------------------------------------------
 "++ Prevent replacing paste buffer on paste ----------------------------------
