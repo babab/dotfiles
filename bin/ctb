@@ -5,5 +5,5 @@
 if [ ! "$1" ]; then
     echo supply a file or directory
 fi
-bakname="/tmp/$1$(date +_%Y-%m-%d-%s)"
-cp -ra "$1" "$bakname" && echo Saved as "$bakname"
+bakname="bak__$1$(date +__%Y-%m-%d-%s)"
+tar -zcvf "${bakname}.tar.gz" "$1" && echo Saved as "${bakname}.tar.gz"
