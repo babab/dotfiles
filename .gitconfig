@@ -2,7 +2,7 @@
 	excludesfile = ~/.gitignore_global
 [user]
 	name = Benjamin Althues
-	email = benjamin@babab.nl
+	email = benjamin@althu.es
 [alias]
 	st = status
 	ci = commit
