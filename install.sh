@@ -1,30 +1,55 @@
 #!/bin/sh
 
-cd ~
-mkdir -p .vim-bak-swp
-ln -s dotfiles/.Xdefaults
-ln -s dotfiles/.agignore
-ln -s dotfiles/.aliases
-ln -s dotfiles/.bashrc
-ln -s dotfiles/.config
-ln -s dotfiles/.emacs
-ln -s dotfiles/.gitconfig
-ln -s dotfiles/.gitignore
-ln -s dotfiles/.gitignore_global
-ln -s dotfiles/.muttrc
-ln -s dotfiles/.ps1_basic
-ln -s dotfiles/.ps1_ext
-ln -s dotfiles/.pythonrc
-ln -s dotfiles/.sig
-ln -s dotfiles/.spectrwm.conf
-ln -s dotfiles/.tmux.conf
-ln -s dotfiles/.vim
-ln -s dotfiles/.vimrc
-ln -s dotfiles/.xbindkeysrc
-ln -s dotfiles/.xinitrc
-ln -s dotfiles/.zsh
-ln -s dotfiles/.zshrc
-ln -s dotfiles/bin
+# The relative path to the dotfiles repository from within $HOME
+# can be overridden by setting RELATIVE_DOTFILES_PATH when installing
+#
+#     RELATIVE_DOTFILES_PATH='/my/alternative/path' ./install.sh
+#
+if [ -z ${RELATIVE_DOTFILES_PATH} ]; then
+    RELATIVE_DOTFILES_PATH="dotfiles"
+fi
 
-cd dotfiles
+# Symbolic linker function (does not overwrite files if they exist)
+makelink()
+{
+    file="${RELATIVE_DOTFILES_PATH}dotfiles/dotfiles/$1"
+    ln -s "$file"
+    if [ $? -ne 0 ]; then
+        echo "FAILED\tLinking ${file}"
+    else
+        echo "DONE\tLinking ${file}"
+    fi
+}
+
+# cd to home
+cd ~
+
+# create folder for vim bak and swp files, defined in .vimrc
+mkdir -p .vim-bak-swp
+
+# try to create symlinks for the files and directories below
+makelink .Xdefaults
+makelink .agignore
+makelink .aliases
+makelink .bashrc
+makelink .config
+makelink .emacs
+makelink .gitconfig
+makelink .gitignore
+makelink .gitignore_global
+makelink .ps1_basic
+makelink .ps1_ext
+makelink .pythonrc
+makelink .spectrwm.conf
+makelink .tmux.conf
+makelink .vim
+makelink .vimrc
+makelink .xbindkeysrc
+makelink .xinitrc
+makelink .zsh
+makelink .zshrc
+makelink bin
+
+# init/update git submodules
+cd ${RELATIVE_DOTFILES_PATH}
 git submodule update --init
