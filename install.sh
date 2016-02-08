@@ -12,12 +12,12 @@ fi
 # Symbolic linker function (does not overwrite files if they exist)
 makelink()
 {
-    file="${RELATIVE_DOTFILES_PATH}dotfiles/dotfiles/$1"
-    ln -s "$file"
+    file="${RELATIVE_DOTFILES_PATH}/dotfiles/dotfiles/$1"
+    ln -s "$file" 2>/dev/null
     if [ $? -ne 0 ]; then
-        echo "FAILED\tLinking ${file}"
+        echo -e "FAILED\tLinking ${file}, the file or link already exists"
     else
-        echo "DONE\tLinking ${file}"
+        echo -e "DONE\tLinking ${file}"
     fi
 }
 
