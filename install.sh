@@ -57,8 +57,39 @@ usage()
     echo 'Use --remove to remove all files / symbolic links (before install)'
 }
 
-update()
-{
+if [[ ! "$1" ]]; then
+    usage
+    exit 1
+fi
+
+# cd to home
+cd "$HOME"
+
+case $1 in
+'--remove')
+    rm -f .Xdefaults
+    rm -f .agignore
+    rm -f .aliases
+    rm -f .bashrc
+    rm -f .config
+    rm -f .emacs
+    rm -f .gitconfig
+    rm -f .gitignore
+    rm -f .gitignore_global
+    rm -f .ps1_basic
+    rm -f .ps1_ext
+    rm -f .pythonrc
+    rm -f .spectrwm.conf
+    rm -f .tmux.conf
+    rm -f .vim
+    rm -f .vimrc
+    rm -f .xbindkeysrc
+    rm -f .xinitrc
+    rm -f .zsh
+    rm -f .zshrc
+    rm -f bin
+    ;;
+'--confirm')
     # create folder for vim bak and swp files, defined in .vimrc
     mkdir -p .vim-bak-swp
 
@@ -88,42 +119,6 @@ update()
     makelink .zsh
     makelink .zshrc
     makelink bin
-}
-
-if [[ ! "$1" ]]; then
-    usage
-    exit 1
-fi
-
-# cd to home
-cd ~
-
-case $1 in
-'--remove')
-    rm -f .Xdefaults
-    rm -f .agignore
-    rm -f .aliases
-    rm -f .bashrc
-    rm -f .config
-    rm -f .emacs
-    rm -f .gitconfig
-    rm -f .gitignore
-    rm -f .gitignore_global
-    rm -f .ps1_basic
-    rm -f .ps1_ext
-    rm -f .pythonrc
-    rm -f .spectrwm.conf
-    rm -f .tmux.conf
-    rm -f .vim
-    rm -f .vimrc
-    rm -f .xbindkeysrc
-    rm -f .xinitrc
-    rm -f .zsh
-    rm -f .zshrc
-    rm -f bin
-    ;;
-'--confirm')
-    update
     ;;
 *)
     usage
