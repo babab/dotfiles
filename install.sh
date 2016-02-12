@@ -22,6 +22,7 @@ fi
 makelink()
 {
     file="${RELATIVE_DOTFILES_PATH}/dotfiles/$1"
+    cd "$HOME"
     ln -s "$file" 2>/dev/null
     if [[ $? -ne 0 ]]; then
         echo -e "FAILED\tLinking ${file}, the file or link already exists"
@@ -33,6 +34,7 @@ makelink()
 removelink()
 {
     file="${RELATIVE_DOTFILES_PATH}/dotfiles/dotfiles/$1"
+    cd "$HOME"
     ln -s "$file" 2>/dev/null
     if [ $? -ne 0 ]; then
         echo -e "FAILED\tLinking ${file}, the file or link already exists"
