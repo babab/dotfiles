@@ -14,8 +14,15 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+# check if we are in the right directory
+grep -q dotfiles .git/config 2>/dev/null
+if [[ $? -ne 0 ]]; then
+    echo Error: cd to repository root first before running ./install.sh
+    exit 1
+fi
+
 if [[ -z ${RELATIVE_DOTFILES_PATH} ]]; then
-    RELATIVE_DOTFILES_PATH="dotfiles"
+    RELATIVE_DOTFILES_PATH=$(pwd | sed -e "s|$HOME/||")
 fi
 
 # Symbolic linker function (does not overwrite files if they exist)
@@ -31,18 +38,6 @@ makelink()
     fi
 }
 
-removelink()
-{
-    file="${RELATIVE_DOTFILES_PATH}/dotfiles/dotfiles/$1"
-    cd "$HOME"
-    ln -s "$file" 2>/dev/null
-    if [ $? -ne 0 ]; then
-        echo -e "FAILED\tLinking ${file}, the file or link already exists"
-    else
-        echo -e "DONE\tLinking ${file}"
-    fi
-}
-
 usage()
 {
     echo "Usage: ./install.sh [--confirm]"
@@ -50,11 +45,6 @@ usage()
     echo
     echo Dotfiles installer by Benjamin Althues
     echo --------------------------------------
-    echo The relative path to the dotfiles repository from within $HOME
-    echo can be overridden by setting RELATIVE_DOTFILES_PATH when installing
-    echo
-    echo "    RELATIVE_DOTFILES_PATH=/my/alternative/path ./install.sh"
-    echo
     echo Use --confirm to installing in a safe way without removing files
     echo 'Use --remove to remove all files / symbolic links (before install)'
 }
