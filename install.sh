@@ -21,7 +21,7 @@ fi
 # Symbolic linker function (does not overwrite files if they exist)
 makelink()
 {
-    file="${RELATIVE_DOTFILES_PATH}/dotfiles/dotfiles/$1"
+    file="${RELATIVE_DOTFILES_PATH}/dotfiles/$1"
     ln -s "$file" 2>/dev/null
     if [[ $? -ne 0 ]]; then
         echo -e "FAILED\tLinking ${file}, the file or link already exists"
