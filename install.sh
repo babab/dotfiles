@@ -54,32 +54,17 @@ if [[ ! "$1" ]]; then
     exit 1
 fi
 
+LFS="
+"
+
 # cd to home
 cd "$HOME"
 
 case $1 in
 '--remove')
-    rm -f .Xdefaults
-    rm -f .agignore
-    rm -f .aliases
-    rm -f .bashrc
-    rm -f .config
-    rm -f .emacs
-    rm -f .gitconfig
-    rm -f .gitignore
-    rm -f .gitignore_global
-    rm -f .ps1_basic
-    rm -f .ps1_ext
-    rm -f .pythonrc
-    rm -f .spectrwm.conf
-    rm -f .tmux.conf
-    rm -f .vim
-    rm -f .vimrc
-    rm -f .xbindkeysrc
-    rm -f .xinitrc
-    rm -f .zsh
-    rm -f .zshrc
-    rm -f bin
+    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
+        rm -f "$line"
+    done
     ;;
 '--confirm')
     # create folder for vim bak and swp files, defined in .vimrc
@@ -89,28 +74,10 @@ case $1 in
     cd ${RELATIVE_DOTFILES_PATH}
     git submodule update --init
 
-    # try to create symlinks for the files and directories below
-    makelink .Xdefaults
-    makelink .agignore
-    makelink .aliases
-    makelink .bashrc
-    makelink .config
-    makelink .emacs
-    makelink .gitconfig
-    makelink .gitignore
-    makelink .gitignore_global
-    makelink .ps1_basic
-    makelink .ps1_ext
-    makelink .pythonrc
-    makelink .spectrwm.conf
-    makelink .tmux.conf
-    makelink .vim
-    makelink .vimrc
-    makelink .xbindkeysrc
-    makelink .xinitrc
-    makelink .zsh
-    makelink .zshrc
-    makelink bin
+    # try to create symlinks for the defined files and directories
+    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
+        makelink "$line"
+    done
     ;;
 *)
     usage
