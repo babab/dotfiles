@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copyright (c) 2016 Benjamin Althues <benjamin@althu.es>
 #
@@ -54,44 +54,17 @@ usage()
     echo "    RELATIVE_DOTFILES_PATH=/my/alternative/path ./install.sh"
     echo
     echo Use --confirm to installing in a safe way without removing files
-    echo Use --force to remove all files / symbolic links before installing
+    echo 'Use --remove to remove all files / symbolic links (before install)'
 }
 
-if [[ ! "$1" ]]; then
-    usage
-    exit 1
-fi
-
-# cd to home
-cd ~
-
-if [[ "$1" == "--force" ]]; then
-    rm -f .Xdefaults
-    rm -f .agignore
-    rm -f .aliases
-    rm -f .bashrc
-    rm -f .config
-    rm -f .emacs
-    rm -f .gitconfig
-    rm -f .gitignore
-    rm -f .gitignore_global
-    rm -f .ps1_basic
-    rm -f .ps1_ext
-    rm -f .pythonrc
-    rm -f .spectrwm.conf
-    rm -f .tmux.conf
-    rm -f .vim
-    rm -f .vimrc
-    rm -f .xbindkeysrc
-    rm -f .xinitrc
-    rm -f .zsh
-    rm -f .zshrc
-    rm -f bin
-fi
-
-if [[ "$1" == "--confirm" || "$1" == "--force" ]]; then
+update()
+{
     # create folder for vim bak and swp files, defined in .vimrc
     mkdir -p .vim-bak-swp
+
+    # init/update git submodules
+    cd ${RELATIVE_DOTFILES_PATH}
+    git submodule update --init
 
     # try to create symlinks for the files and directories below
     makelink .Xdefaults
@@ -115,11 +88,45 @@ if [[ "$1" == "--confirm" || "$1" == "--force" ]]; then
     makelink .zsh
     makelink .zshrc
     makelink bin
+}
 
-    # init/update git submodules
-    cd ${RELATIVE_DOTFILES_PATH}
-    git submodule update --init
-else
+if [[ ! "$1" ]]; then
     usage
     exit 1
 fi
+
+# cd to home
+cd ~
+
+case $1 in
+'--remove')
+    rm -f .Xdefaults
+    rm -f .agignore
+    rm -f .aliases
+    rm -f .bashrc
+    rm -f .config
+    rm -f .emacs
+    rm -f .gitconfig
+    rm -f .gitignore
+    rm -f .gitignore_global
+    rm -f .ps1_basic
+    rm -f .ps1_ext
+    rm -f .pythonrc
+    rm -f .spectrwm.conf
+    rm -f .tmux.conf
+    rm -f .vim
+    rm -f .vimrc
+    rm -f .xbindkeysrc
+    rm -f .xinitrc
+    rm -f .zsh
+    rm -f .zshrc
+    rm -f bin
+    ;;
+'--confirm')
+    update
+    ;;
+*)
+    usage
+    exit 1
+    ;;
+esac
