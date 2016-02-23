@@ -25,19 +25,17 @@ values."
      ;; ----------------------------------------------------------------
      ;; auto-completion
      ;; better-defaults
+     dockerfile
      emacs-lisp
      evil-commentary
-     ;; git
      html
-     ;; markdown
-     ;; org
      php
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
+     python
+     (shell :variables
+            shell-default-shell 'ansi-term
+            shell-default-height 30
+            shell-default-position 'bottom)
+     vimscript
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -94,23 +92,23 @@ values."
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'text-mode
+   dotspacemacs-scratch-mode 'rst-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(monokai
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
                          leuven
-                         monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -223,7 +221,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
