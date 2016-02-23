@@ -65,6 +65,9 @@ case $1 in
     for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
         rm -f "$line"
     done
+
+    # unlink bin directory separately
+    rm -f bin 2>/dev/null
     ;;
 '--confirm')
     # create folder for vim bak and swp files, defined in .vimrc
@@ -78,6 +81,9 @@ case $1 in
     for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
         makelink "$line"
     done
+
+    # link bin directory separately
+    ln -s ${RELATIVE_DOTFILES_PATH}/bin 2>/dev/null
     ;;
 *)
     usage
