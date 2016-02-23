@@ -44,25 +44,28 @@ alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
 
 
-### Vim / Text editing #######################################################
+### Vim / Emacs / Spacemacs / Text editing ###################################
 
-# Open files in tabs or vertical/horizontal splits depending on number
-# of files and number of columns available in terminal
-vi() {
-    if [ $# -eq 1 ]; then
-        vim $@
-    elif [ $# -eq 2 ]; then
-        if [ $(tput cols) -lt 80 ]; then
-            vim -p $@
-        elif [ $(tput cols) -lt 191 ]; then
-            vim -o $@
-        else
-            vim -O $@
-        fi
-    elif [ $# -ge 3 ]; then
-        vim -p $@
-    fi
-}
+# # Open files in tabs or vertical/horizontal splits depending on number
+# # of files and number of columns available in terminal
+# vi() {
+#     if [ $# -eq 1 ]; then
+#         vim $@
+#     elif [ $# -eq 2 ]; then
+#         if [ $(tput cols) -lt 80 ]; then
+#             vim -p $@
+#         elif [ $(tput cols) -lt 191 ]; then
+#             vim -o $@
+#         else
+#             vim -O $@
+#         fi
+#     elif [ $# -ge 3 ]; then
+#         vim -p $@
+#     fi
+# }
+
+# Open in Emacs if server is running, else use Vim
+alias vi='emacsclient -n -a vim'
 
 # Wrapper for opening (and protecting) your last vim session
 svim() {
