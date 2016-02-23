@@ -58,11 +58,12 @@ vi() {
         return
     fi
 
+    has_emacs=0
     for file in $*; do
-        emacsclient -q -n -c $file 2>/dev/null
+        emacsclient -q -n -c $file 2>/dev/null || (has_emacs=0; break)
     done
 
-    if [ $? -ne 0 ]; then
+    if [ $has_emacs -ne 1 ]; then
         # Open files in tabs or vertical/horizontal splits depending on
         # number of files and number of columns available in terminal
         if [ $# -eq 1 ]; then
