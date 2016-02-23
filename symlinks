@@ -3,7 +3,6 @@
 .aliases
 .bashrc
 .config
-.emacs
 .gitconfig
 .gitignore
 .gitignore_global
