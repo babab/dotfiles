@@ -10,6 +10,7 @@
 .ps1_basic
 .ps1_ext
 .pythonrc
+.spacemacs
 .spectrwm.conf
 .tmux.conf
 .vim
