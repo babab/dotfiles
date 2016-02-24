@@ -28,6 +28,8 @@ values."
      dockerfile
      emacs-lisp
      evil-commentary
+     ;; eyebrowse
+     gtags
      html
      php
      python
@@ -37,6 +39,7 @@ values."
             shell-default-position 'bottom)
      version-control
      vimscript
+     vinegar
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
