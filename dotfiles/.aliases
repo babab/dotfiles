@@ -58,7 +58,7 @@ vi() {
         return
     fi
 
-    has_emacs=0
+    has_emacs=1
     for file in $*; do
         emacsclient -q -n -c $file 2>/dev/null || (has_emacs=0; break)
     done
