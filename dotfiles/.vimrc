@@ -119,8 +119,8 @@ nnoremap Y y$
 " Map ; to <Leader> / <Space>
 nmap ; <Space>
 
-nnoremap <silent> <Leader>w :confirm w<CR>
-nnoremap <silent> <Leader>q :confirm q<CR>
+" nnoremap <silent> <Leader>w :confirm w<CR>
+" nnoremap <silent> <Leader>q :confirm q<CR>
 
 " Fold and unfold with <Leader>f
 nnoremap <silent> <Leader>f @=(foldlevel('.')?'za':"\<Space>")<CR>
