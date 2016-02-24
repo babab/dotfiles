@@ -35,6 +35,7 @@ values."
             shell-default-shell 'ansi-term
             shell-default-height 30
             shell-default-position 'bottom)
+     version-control
      vimscript
      )
    ;; List of additional packages that will be installed without being
