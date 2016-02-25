@@ -41,11 +41,11 @@ makelink()
 usage()
 {
     echo "Usage: ./install.sh [--confirm]"
-    echo "       ./install.sh [--force]"
+    echo "       ./install.sh [--remove]"
     echo
     echo Dotfiles installer by Benjamin Althues
     echo --------------------------------------
-    echo Use --confirm to installing in a safe way without removing files
+    echo 'Use --confirm to installing in a safe way without removing files'
     echo 'Use --remove to remove all files / symbolic links (before install)'
 }
 
@@ -57,7 +57,7 @@ fi
 LFS="
 "
 
-# cd to home
+# cd to home; all further actions are relative to $HOME
 cd "$HOME"
 
 case $1 in
