@@ -62,7 +62,7 @@ cd "$HOME"
 
 case $1 in
 '--remove')
-    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
+    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
         rm -f "$line"
     done
 
@@ -78,7 +78,7 @@ case $1 in
     git submodule update --init
 
     # try to create symlinks for the defined files and directories
-    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/symlinks"); do
+    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
         makelink "$line"
     done
 
