@@ -1,5 +1,5 @@
-My dotfiles (\*nix configurations and scripts)
-==============================================
+My dotfiles and scripts
+=======================
 
 These configurations are ultimately optimized for Zsh on Archlinux
 and support combinations of Bash or Zsh with Archlinux and Debian
