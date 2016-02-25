@@ -4,7 +4,6 @@
 .bashrc
 .config
 .gitconfig
-.gitignore
 .gitignore_global
 .ps1_basic
 .ps1_ext
