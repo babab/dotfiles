@@ -13,8 +13,8 @@ autoload -U colors && colors
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
 
-### Aliases ##################################################################
-source ${HOME}/.aliases
+source ${HOME}/.aliases # aliases and (wrapper) functions
+source ${HOME}/.profile # environment variables
 
 if [ -x /usr/bin/scrot ]; then
     if [ ! -d "$HOME/Pictures/scrot" ]; then
@@ -22,15 +22,6 @@ if [ -x /usr/bin/scrot ]; then
     fi
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
-
-### Environment variables ####################################################
-export BROWSER="/usr/bin/firefox"
-export EDITOR="/usr/bin/vim"
-export EXEC_FOR_PYTHON="python2"
-export LANG=en_US.UTF-8
-export LESS="iFXRS"
-export PATH="$HOME/bin:$PATH:$HOME/usr/bin:$HOME/.gem/ruby/2.2.0/bin"
-export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 
 ### Custom functions #########################################################
 

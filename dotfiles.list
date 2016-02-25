@@ -5,6 +5,7 @@
 .config
 .gitconfig
 .gitignore_global
+.profile
 .ps1_basic
 .ps1_ext
 .pythonrc
