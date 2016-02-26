@@ -29,7 +29,6 @@ fi
 makelink()
 {
     file="${RELATIVE_DOTFILES_PATH}/dotfiles/$1"
-    cd "$HOME"
     ln -s "$file" 2>/dev/null
     if [[ $? -ne 0 ]]; then
         echo -e "FAILED\tLinking ${file}, the file or link already exists"
@@ -74,16 +73,26 @@ case $1 in
     mkdir -p .vim-bak-swp
 
     # init/update git submodules
+    echo -- updating git submodules
     cd ${RELATIVE_DOTFILES_PATH}
     git submodule update --init
+    cd "$HOME"
 
     # try to create symlinks for the defined files and directories
+    echo -- creating symlinks to dotfiles
     for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
         makelink "$line"
     done
 
     # link bin directory separately
+    echo -- creating ~/bin symlink
     ln -s ${RELATIVE_DOTFILES_PATH}/bin 2>/dev/null
+
+    # install baps1
+    echo -- installing baps1
+    INST_PATH="${HOME}/${RELATIVE_DOTFILES_PATH}/bin" make -e \
+        -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" install
+    make -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" clean
     ;;
 *)
     usage
