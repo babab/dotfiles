@@ -238,15 +238,26 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
-in `dotspacemacs/user-config'."
-  )
+in `dotspacemacs/user-config'.")
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq vc-follow-symlinks t)
-  )
+
+  (defun babab-text-mode-hook ()
+    "Minor mode settings for editing text in text-mode, also my first el defun.
+    Always enable auto-fill-mode for text-mode derivatives (ReST and Markdown)"
+    (auto-fill-mode 1))
+  (add-hook 'text-mode-hook 'babab-text-mode-hook)
+
+  (defun babab-prog-mode-hook ()
+    "Minor mode settings for editing code in prog-mode.
+    Always enable emmet-mode for prog-mode derivatives"
+    (emmet-mode 1))
+  (add-hook 'prog-mode-hook 'babab-prog-mode-hook))
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
