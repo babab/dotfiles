@@ -1,6 +1,5 @@
 # Environment vars
 export BROWSER="/usr/bin/firefox"
-export DISPASS_LABELFILE=~/.dispass
 export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export GPG_TTY="$(tty)"
