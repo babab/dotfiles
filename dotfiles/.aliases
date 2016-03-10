@@ -35,13 +35,22 @@ if [[ "${HOST}" != "vml" ]]; then
 fi
 
 
-### Superfast git-status and git-diff aliases ################################
+### Git aliases ##############################################################
 
+# Superfast git-status and git-diff aliases
 kk() {
     git status | head -2 | tail -1; git status --short
 }
 alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
+
+# git-svn aliases with 'auto' stashing
+gsvnup() {
+    git stash && git svn rebase && git stash pop
+}
+gsvndcommit() {
+    git stash && git svn dcommit && git stash pop
+}
 
 
 ### Vim / Emacs / Spacemacs / Text editing ###################################
