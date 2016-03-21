@@ -2,6 +2,7 @@
 .agignore
 .aliases
 .bashrc
+.composer
 .config
 .gitconfig
 .gitignore_global
