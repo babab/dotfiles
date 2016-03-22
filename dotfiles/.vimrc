@@ -119,9 +119,6 @@ nnoremap Y y$
 " Map ; to <Leader> / <Space>
 nmap ; <Space>
 
-" nnoremap <silent> <Leader>w :confirm w<CR>
-" nnoremap <silent> <Leader>q :confirm q<CR>
-
 " Fold and unfold with <Leader>f
 nnoremap <silent> <Leader>f @=(foldlevel('.')?'za':"\<Space>")<CR>
 "vnoremap <Space> zf
@@ -177,6 +174,10 @@ map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Open tag definition in a vertical split window
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" Mapping compatibility for commonly used commands in spacemacs
+" <Space> is my <Leader>
+nnoremap <silent> <Leader>w <C-W>
 
 "+----------------------------------------------------------------------------
 "++ Plugin mappings ----------------------------------------------------------
