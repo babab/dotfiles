@@ -144,6 +144,7 @@ else
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
     source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
+    source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
 
     # zsh-history-substring-search
     zmodload zsh/terminfo
