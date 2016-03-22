@@ -76,3 +76,6 @@
 [submodule "depends/zsh-history-substring-search"]
 	path = depends/zsh-history-substring-search
 	url = git://github.com/zsh-users/zsh-history-substring-search
+[submodule "depends/zsh-autosuggestions"]
+	path = depends/zsh-autosuggestions
+	url = git://github.com/zsh-users/zsh-autosuggestions
