@@ -100,6 +100,12 @@ else
     \ }
 endif
 
+" Config php checkers to adhere to a minimal ruleset which boils down to
+" simple linting and finding unused variables/members and commented code
+let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
+let g:syntastic_php_phpcs_args = '--standard=' . $HOME . '/dotfiles/standards/minimal-phpcs/ruleset.xml'
+let g:syntastic_php_phpmd_post_args = $HOME . '/dotfiles/standards/minimal-phpmd/ruleset.xml'
+
 "+----------------------------------------------------------------------------
 "++ Keymapping ---------------------------------------------------------------
 
