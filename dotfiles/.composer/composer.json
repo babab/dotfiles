@@ -1,6 +1,7 @@
 {
     "require": {
         "squizlabs/php_codesniffer": "*",
-        "sebastian/phpcpd": "*"
+        "sebastian/phpcpd": "*",
+        "phpmd/phpmd": "*"
     }
 }
