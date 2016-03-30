@@ -46,10 +46,32 @@ alias lk='echo git diff --cached && git diff --cached'
 
 # git-svn aliases with 'auto' stashing
 gsvnup() {
-    git stash && git svn rebase && git stash pop
+    if [[ $(git stash) == "No local changes to save" ]]; then
+        stash=0
+    else
+        stash=1
+    fi
+
+    git svn rebase
+
+    if [ ${stash} -eq 1 ]; then
+        stash=0
+        git stash pop
+    fi
 }
 gsvndcommit() {
-    git stash && git svn dcommit && git stash pop
+    if [[ $(git stash) == "No local changes to save" ]]; then
+        stash=0
+    else
+        stash=1
+    fi
+
+    git svn dcommit
+
+    if [ ${stash} -eq 1 ]; then
+        stash=0
+        git stash pop
+    fi
 }
 
 
