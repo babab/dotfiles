@@ -39,36 +39,34 @@ makelink()
 
 usage()
 {
-    echo "Usage: ./install.sh [--confirm]"
+    echo "Usage: ./install.sh [--force]"
     echo "       ./install.sh [--remove]"
+    echo "       ./install.sh [--confirm]"
     echo
     echo Dotfiles installer by Benjamin Althues
     echo --------------------------------------
+    echo 'Use --force to remove all existing files and install in one step'
     echo 'Use --confirm to installing in a safe way without removing files'
-    echo 'Use --remove to remove all files / symbolic links (before install)'
+    echo 'Use --remove to remove all (pre-existing) files / symbolic links'
+    echo '    (before install)'
 }
-
-if [[ ! "$1" ]]; then
-    usage
-    exit 1
-fi
 
 LFS="
 "
 
-# cd to home; all further actions are relative to $HOME
-cd "$HOME"
-
-case $1 in
-'--remove')
+remove()
+{
+    echo ':: Removing files'
     for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
-        rm -f "$line"
+        rm -vf "$line"
     done
 
     # unlink bin directory separately
     rm -f bin 2>/dev/null
-    ;;
-'--confirm')
+}
+
+confirm()
+{
     # create folder for vim bak and swp files, defined in .vimrc
     mkdir -p .vim-bak-swp
 
@@ -93,6 +91,28 @@ case $1 in
     INST_PATH="${HOME}/${RELATIVE_DOTFILES_PATH}/bin" make -e \
         -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" install
     make -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" clean
+}
+
+
+if [[ ! "$1" ]]; then
+    usage
+    exit 1
+fi
+
+
+# cd to home; all further actions are relative to $HOME
+cd "$HOME"
+
+case $1 in
+'--remove')
+    _remove
+    ;;
+'--confirm')
+    _confirm
+    ;;
+'--force')
+    _remove
+    _confirm
     ;;
 *)
     usage
