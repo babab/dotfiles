@@ -54,7 +54,7 @@ usage()
 LFS="
 "
 
-remove()
+_remove()
 {
     echo ':: Removing files'
     for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
@@ -65,7 +65,7 @@ remove()
     rm -f bin 2>/dev/null
 }
 
-confirm()
+_confirm()
 {
     # create folder for vim bak and swp files, defined in .vimrc
     mkdir -p .vim-bak-swp
