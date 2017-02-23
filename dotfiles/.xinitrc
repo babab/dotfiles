@@ -1,6 +1,6 @@
 # monitors / screens
 xrandr --output eDP-0 --mode 1366x768
-xrandr --output HDMI-0 --mode 1280x1024 --above eDP-0
+#xrandr --output HDMI-0 --mode 1280x1024 --above eDP-0
 
 # startup daemons
 setxkbmap -layout us -option ctrl:nocaps
