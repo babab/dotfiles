@@ -8,6 +8,7 @@ xbindkeys
 pulseaudio --start
 /usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
+redshift &
 
 # init user settings
 random-wallpaper
