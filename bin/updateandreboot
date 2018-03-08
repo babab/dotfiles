@@ -1,0 +1,18 @@
+#!/bin/sh
+sudo pacman -Syu --noconfirm || exit $?
+
+echo
+echo
+echo -ne "\rrebooting in 5 secs"
+sleep 1
+echo -ne "\rrebooting in 4 secs"
+sleep 1
+echo -ne "\rrebooting in 3 secs"
+sleep 1
+echo -ne "\rrebooting in 2 secs"
+sleep 1
+echo -ne "\rrebooting in 1 secs"
+sleep 1
+echo -e "\rrebooting now      "
+
+sudo reboot || exit $?
