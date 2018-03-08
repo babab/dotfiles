@@ -79,3 +79,6 @@
 [submodule "depends/zsh-autosuggestions"]
 	path = depends/zsh-autosuggestions
 	url = git://github.com/zsh-users/zsh-autosuggestions
+[submodule "dotfiles/.vim/bundle/vim-gdscript"]
+	path = dotfiles/.vim/bundle/vim-gdscript
+	url = git://github.com/quabug/vim-gdscript.git
