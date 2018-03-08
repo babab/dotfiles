@@ -6,7 +6,7 @@ xrandr --output eDP-0 --mode 1366x768
 setxkbmap -layout us -option ctrl:nocaps
 xbindkeys
 pulseaudio --start
-/usr/bin/xscreensaver -no-splash &
+# /usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
 redshift &
 
@@ -15,8 +15,11 @@ random-wallpaper
 synclient TouchpadOff=1
 
 # window manager w/ ssh-agent
-wm=spectrwm
-#wm=openbox
+if [ -f "$HOME/.config/currentwm" ]; then
+    wm=$(cat $HOME/.config/currentwm)
+else
+    wm=spectrwm
+fi
 
 ssh-add -l
 if [ $? -lt 2 ]; then

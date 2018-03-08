@@ -1,0 +1,13 @@
+#!/bin/sh
+
+test -f "$HOME/.config/currentwm" || echo spectrwm > "$HOME/.config/currentwm"
+
+wm=$(cat "$HOME/.config/currentwm")
+
+if [[ "$wm" == "spectrwm" ]]; then
+    echo 'spectrwm -> openbox'
+    echo openbox > "$HOME/.config/currentwm"
+else
+    echo 'openbox -> spectrwm'
+    echo spectrwm > "$HOME/.config/currentwm"
+fi
