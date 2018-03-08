@@ -97,13 +97,16 @@ sshkey_ps1()
     ssh-add -l >/dev/null 2>&1
     case "$?" in
         0)
-            echo y
+            echo ssh-key is loaded
+            # echo y
             ;;
         1)
-            echo n
+            echo ssh-key is NOT loaded
+            # echo n
             ;;
         2)
-            echo n/a
+            echo ssh-agent is NOT running
+            # echo n/a
             ;;
     esac
 }
@@ -128,7 +131,7 @@ venv_ps1()
     if [ -z "$VIRTUAL_ENV" ]; then
         echo n
     else
-        echo y
+        echo venv
     fi
 }
 
@@ -140,7 +143,7 @@ if [[ $(uname) == "OpenBSD" ]]; then
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 else
     PROMPT='
-%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(sshkey_ps1)%{$fg_bold[magenta]%}$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
+%{$fg_bold[red]%}%n%{$reset_color%} %Bat%b %{$fg_bold[yellow]%}%m %(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[magenta]%}$(venv_ps1) %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color%}
 %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
     source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -153,3 +156,14 @@ else
     bindkey -M vicmd 'k' history-substring-search-up
     bindkey -M vicmd 'j' history-substring-search-down
 fi
+
+# Check num-lock settings
+if [[ "$(xset q | grep 'Num Lock' | awk '{print $8}' 2>/dev/null)" == "off" ]]
+then
+    echo "\n   !!! Num Lock is off !!!\n"
+fi
+
+# Status info
+echo "IP Address   : $(ip addr show wlp2s0 | grep 'inet ' | awk '{ print $2 }')"
+echo "Battery level: $(acpi | cut -d, -f 2,3 | sed 's/^ //')"
+echo "SSH-Key      : $(sshkey_ps1)"
