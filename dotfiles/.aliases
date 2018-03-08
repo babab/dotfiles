@@ -179,6 +179,8 @@ alias rm_docker_ps='docker rm $(docker ps -qa)'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sshagent='eval `ssh-agent` >/dev/null'
+alias sshsockstunnel='ssh -C2qTnN -D 8080 sunrise'
+alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 
 hypo-upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
@@ -191,3 +193,4 @@ codecept-alias-init() {
 if [ -f $HOME/.aliases_local ]; then
     source $HOME/.aliases_local
 fi
+
