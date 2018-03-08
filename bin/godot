@@ -1,0 +1,2 @@
+#!/bin/sh
+~/godot/Godot_v3.0.2-stable_x11.64 $@ >/dev/null 2>&1 &
