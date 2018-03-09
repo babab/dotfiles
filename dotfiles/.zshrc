@@ -3,7 +3,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
 
-setopt autocd completealiases autopushd pushdignoredups
+setopt completealiases autopushd pushdignoredups
 setopt PROMPT_SUBST
 
 autoload -U compinit && compinit
