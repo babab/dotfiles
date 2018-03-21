@@ -1,5 +1,5 @@
 # Environment vars
-export BROWSER="/usr/bin/firefox"
+export BROWSER="/usr/bin/brave"
 export EDITOR="/usr/bin/vim"
 export EXEC_FOR_PYTHON="python2"
 export GPG_TTY="$(tty)"
