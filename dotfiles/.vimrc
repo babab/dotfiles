@@ -250,6 +250,7 @@ augroup Tabbing
     autocmd BufEnter *.html call Settabbing(2)
     autocmd BufEnter *.tpl call Settabbing(2)
     autocmd FileType make set noexpandtab | call Settabbing(8)
+    autocmd FileType godot set noexpandtab | call Settabbing(4)
 augroup END
 
 "+----------------------------------------------------------------------------
