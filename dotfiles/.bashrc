@@ -66,7 +66,8 @@ runserver()
         echo "runserver: changed directory to $PWD"
         startdjangoserver "$1" "$2"
     else
-        echo "Error: not in a Django project folder"
+        echo "Not in a Django project folder, using python -m http.server"
+        python3 -m http.server
     fi
 }
 
