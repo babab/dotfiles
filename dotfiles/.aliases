@@ -42,6 +42,9 @@ fi
 kk() {
     git status | head -2 | tail -1; git status --short
 }
+kk-() {
+    git status | head -2 | tail -1; git status --short | grep -v '??'
+}
 alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
 
