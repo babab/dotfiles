@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo pacman -Syu --noconfirm || exit $?
+sudo pacman -Syu --noconfirm --ignore firefox || exit $?
 
 echo
 echo
