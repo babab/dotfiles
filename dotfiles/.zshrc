@@ -156,14 +156,3 @@ else
     bindkey -M vicmd 'k' history-substring-search-up
     bindkey -M vicmd 'j' history-substring-search-down
 fi
-
-# Check num-lock settings
-if [[ "$(xset q | grep 'Num Lock' | awk '{print $8}' 2>/dev/null)" == "off" ]]
-then
-    echo "\n   !!! Num Lock is off !!!\n"
-fi
-
-# Status info
-echo "IP Address   : $(ip addr show wlp2s0 | grep 'inet ' | awk '{ print $2 }')"
-echo "Battery level: $(acpi | cut -d, -f 2,3 | sed 's/^ //')"
-echo "SSH-Key      : $(sshkey_ps1)"
