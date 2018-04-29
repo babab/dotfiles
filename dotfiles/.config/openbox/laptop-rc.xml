@@ -328,9 +328,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>Firefox</name>
+          <name>Brave</name>
         </startupnotify>
-        <command>firefox</command>
+        <command>brave</command>
       </action>
     </keybind>
     <keybind key="W-c">
