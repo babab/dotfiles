@@ -738,10 +738,6 @@
       <decor>no</decor>
       <maximized>Vertical</maximized>
     </application>
-    <application name="urxvt" class="URxvt">
-      <decor>no</decor>
-      <maximized>yes</maximized>
-    </application>
     <application name="gvim" class="Gvim">
       <decor>no</decor>
       <maximized>yes</maximized>
