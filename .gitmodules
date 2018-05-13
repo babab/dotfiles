@@ -55,9 +55,6 @@
 [submodule ".vim/bundle/vim-snipmate"]
 	path = dotfiles/.vim/bundle/vim-snipmate
 	url = git://github.com/garbas/vim-snipmate.git
-[submodule ".vim/bundle/vdebug"]
-	path = dotfiles/.vim/bundle/vdebug
-	url = git://github.com/joonty/vdebug.git
 [submodule ".vim/bundle/vim-misc"]
 	path = dotfiles/.vim/bundle/vim-misc
 	url = git://github.com/xolox/vim-misc.git
