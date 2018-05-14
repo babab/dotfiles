@@ -175,7 +175,8 @@ phpmd() {
 
 alias b='xs thunar .' # open file browser in current directory
 alias envinit='source .virtualenv/bin/activate'
-alias envmake='python -m venv .virtualenv'
+alias envmake3.8='python3.8 -m venv .virtualenv'
+alias envmake3.6='python3.6 -m venv .virtualenv'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias rm_docker_images='docker rmi $(docker images -q)'
