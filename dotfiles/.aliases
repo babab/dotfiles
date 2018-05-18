@@ -169,6 +169,16 @@ alias envinit='source .virtualenv/bin/activate'
 alias envmake3.8='python3.8 -m venv .virtualenv'
 alias envmake3.6='python3.6 -m venv .virtualenv'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
+pi() {
+    # start an interactive python session with bpython
+    filename="$1"
+    if [[ -z "$filename" ]]; then
+        bpython
+    else
+        shift
+        bpython -i $filename $*
+    fi
+}
 
 
 ### PHP aliases ##############################################################
