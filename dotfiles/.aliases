@@ -40,10 +40,12 @@ fi
 
 # Superfast git-status and git-diff aliases
 kk() {
-    git status | head -2 | tail -1; git status --short
-}
-kk-() {
-    git status | head -2 | tail -1; git status --short | grep -v '??'
+    git status 2>&1 | head -2 | tail -1
+    if [[ "$PWD" == "$HOME/dotfiles" ]]; then
+        git status --short --untracked-files=no
+    else
+        git status --short $*
+    fi
 }
 alias kl='echo git diff && git diff'
 alias lk='echo git diff --cached && git diff --cached'
