@@ -135,23 +135,24 @@ nnoremap <silent> <Leader>f @=(foldlevel('.')?'za':"\<Space>")<CR>
 nnoremap <silent> M @q
 nnoremap <silent> gV `[v`]
 nnoremap <silent> <BS> gg
-nnoremap <silent> <F5> :!./%<CR>
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 nnoremap <silent> <Leader>S (V}k:sort<CR>
 nnoremap <silent> <Leader>ve :sp $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :source $MYVIMRC<CR>
 nnoremap <silent> <Leader>i :setl noai nocin nosi inde=<CR>
 
+" Quickly run (selected) (python) code
+nnoremap <silent> <Leader>pr :!python %<CR>
+nnoremap <silent> <Leader>pi :!bpython -i %<CR>
+vnoremap <silent> <Leader>pr :w !python<CR>
+
+" Wrap line contents in a print function
+nnoremap <silent> <Leader>pp Iprint(<ESC>A)<ESC>
+" Delete outer function
+nnoremap <silent> <Leader>pd ^dwx$x
+
 " Open TODO file in vimoutliner mode
 nnoremap <silent> <Leader>T :sp ~/TODO.otl<CR>
-
-" Wrap line contents in a function
-nnoremap <silent> <Leader>pd ^dwx$x
-augroup DebuggingMappings
-    autocmd!
-    autocmd Filetype python nnoremap <silent> <Leader>pp Iprint(<ESC>A)<ESC>
-    autocmd Filetype php nnoremap <silent> <Leader>pp Iprint_r(<ESC>A)<ESC>
-augroup END
 
 " Use <Return> in VISUAL mode to format text with par
 vnoremap <silent> <Return> :!par<CR>
