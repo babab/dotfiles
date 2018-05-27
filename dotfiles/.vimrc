@@ -168,6 +168,11 @@ nmap <Leader>P "+P
 " Enter visual line mode by tapping Space twice
 nmap <Leader><Leader> V
 
+" For the times I'm too slow at releasing the SHIFT key
+command W :w
+command Wq :wq
+command WQ :wq
+
 " Browse tabs with Ctrl+H and Ctrl+L
 nmap <C-H> gT
 nmap <C-L> gt
