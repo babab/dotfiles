@@ -23,63 +23,6 @@ if [ -x /usr/bin/scrot ]; then
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
 
-### Custom functions #########################################################
-
-# Wrapper for starting the Django development server on varying
-# addresses and port numbers. Allowing to also run if manage.py is in
-# the (parent directory of a) parent directory of $PWD. It automatically
-# uses runserver_plus with the Werkzeug debugger when django_extensions
-# is installed.
-#
-# Usage: runserver [port number=8000] [listening address=127.0.0.1]
-#
-# Make sure that an environment var 'EXEC_FOR_PYTHON' is set before loading
-# and/or using this function
-runserver()
-{
-    # Use the python exec from within the virtualenv if it is loaded
-    if [ ! -z "$VIRTUAL_ENV" ]; then
-        EXEC_FOR_PYTHON="python"
-    fi
-
-    startdjangoserver()
-    {
-        find . -name "*.pyc" | xargs /bin/rm -f
-        if [ ! "$1" ]; then
-            portn="8000"
-        else
-            portn="$1"
-        fi
-        if [ ! "$2" ]; then
-            addr="127.0.0.1"
-        else
-            addr="$2"
-        fi
-
-        ${EXEC_FOR_PYTHON} manage.py | grep runserver_plus >/dev/null
-        if [ $? -eq 0 ]; then
-            ${EXEC_FOR_PYTHON} manage.py runserver_plus ${addr}:${portn}
-        else
-            ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
-        fi
-    }
-
-    if [ -f "$PWD/manage.py" ]; then
-        startdjangoserver "$1" "$2"
-    elif [ -f "$PWD/../manage.py" ]; then
-        cd ..
-        echo "runserver: changed directory to $PWD"
-        startdjangoserver "$1" "$2"
-    elif [ -f "$PWD/../../manage.py" ]; then
-        cd ../..
-        echo "runserver: changed directory to $PWD"
-        startdjangoserver "$1" "$2"
-    else
-        echo "Not in a Django project folder, using python -m http.server"
-        python3 -m http.server
-    fi
-}
-
 ### Prompt ###################################################################
 
 # Enable auto-execution of functions.

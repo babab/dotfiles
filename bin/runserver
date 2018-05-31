@@ -1,0 +1,71 @@
+#!/bin/sh
+
+# Copyright (c) 2018  Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+##############################################################################
+
+# Wrapper for starting the Django development server on varying
+# addresses and port numbers. Allowing to also run if manage.py is in
+# the (parent directory of a) parent directory of $PWD. It automatically
+# uses runserver_plus with the Werkzeug debugger when django_extensions
+# is installed.
+#
+# Usage: runserver [port (default=8000)] [address (default=127.0.0.1)]
+runserver()
+{
+    # Optionally override python interpreter (version) with env
+    if [ -z "$EXEC_FOR_PYTHON" ]; then
+        EXEC_FOR_PYTHON="python"
+    fi
+
+    startdjangoserver()
+    {
+        find . -name "*.pyc" | xargs /bin/rm -f
+        if [ ! "$1" ]; then
+            portn="8000"
+        else
+            portn="$1"
+        fi
+        if [ ! "$2" ]; then
+            addr="127.0.0.1"
+        else
+            addr="$2"
+        fi
+
+        ${EXEC_FOR_PYTHON} manage.py | grep runserver_plus >/dev/null
+        if [ $? -eq 0 ]; then
+            ${EXEC_FOR_PYTHON} manage.py runserver_plus ${addr}:${portn}
+        else
+            ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
+        fi
+    }
+
+    if [ -f "$PWD/manage.py" ]; then
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../manage.py" ]; then
+        cd ..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
+    elif [ -f "$PWD/../../manage.py" ]; then
+        cd ../..
+        echo "runserver: changed directory to $PWD"
+        startdjangoserver "$1" "$2"
+    else
+        echo "Not in a Django project folder, using python -m http.server"
+        python3 -m http.server
+    fi
+}
+
+runserver $*

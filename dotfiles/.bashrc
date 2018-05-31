@@ -33,44 +33,6 @@ fi
 # Source environment variables
 . $HOME/.profile
 
-# Wrapper for starting the Django development server on varying
-# addresses and port numbers. Allowing to also run if manage.py is in
-# the (parent directory of a) parent directory of $PWD.
-# Usage: runserver [port number=8000] [listening address=127.0.0.1]
-runserver()
-{
-    startdjangoserver()
-    {
-        find . -name "*.pyc" | xargs /bin/rm -f
-        if [ ! "$1" ]; then
-            portn="8000"
-        else
-            portn="$1"
-        fi
-        if [ ! "$2" ]; then
-            addr="127.0.0.1"
-        else
-            addr="$2"
-        fi
-        ${EXEC_FOR_PYTHON} manage.py runserver ${addr}:${portn}
-    }
-
-    if [ -f "$PWD/manage.py" ]; then
-        startdjangoserver "$1" "$2"
-    elif [ -f "$PWD/../manage.py" ]; then
-        cd ..
-        echo "runserver: changed directory to $PWD"
-        startdjangoserver "$1" "$2"
-    elif [ -f "$PWD/../../manage.py" ]; then
-        cd ../..
-        echo "runserver: changed directory to $PWD"
-        startdjangoserver "$1" "$2"
-    else
-        echo "Not in a Django project folder, using python -m http.server"
-        python3 -m http.server
-    fi
-}
-
 # Wrapper for sourcing and protecting vim session
 svim()
 {
