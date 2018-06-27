@@ -107,6 +107,7 @@ let g:syntastic_php_phpcs_args = '--standard=' . $HOME . '/dotfiles/standards/mi
 let g:syntastic_php_phpmd_post_args = $HOME . '/dotfiles/standards/minimal-phpmd/ruleset.xml'
 
 let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "+----------------------------------------------------------------------------
 "++ Keymapping ---------------------------------------------------------------
@@ -147,7 +148,10 @@ nnoremap <silent> <Leader>pi :!bpython -i %<CR>
 vnoremap <silent> <Leader>pr :w !python<CR>
 
 " Wrap line contents in a print function
+" for Python
 nnoremap <silent> <Leader>pp Iprint(<ESC>A)<ESC>
+" for Go
+nnoremap <silent> <Leader>pg Ifmt.Println(<ESC>A)<ESC>
 " Delete outer function
 nnoremap <silent> <Leader>pd ^dwx$x
 
@@ -179,7 +183,7 @@ nmap <C-L> gt
 
 " Mappings for Go programming
 nnoremap <silent> <Leader>gb :!go build %<CR>
-nnoremap <silent> <Leader>gr :!go run %<CR>
+nnoremap <silent> <Leader>gr :!go run *.go<CR>
 nnoremap <silent> <Leader>gf :!go fmt %<CR>
 nnoremap <silent> <Leader>gd :Godoc<CR>
 
@@ -255,10 +259,12 @@ augroup Tabbing
     autocmd Filetype twig call Settabbing(2)
     autocmd FileType rst call Settabbing(3)
     autocmd FileType php call Settabbing(4)
+    autocmd Filetype yaml call Settabbing(2)
     autocmd BufEnter *.html call Settabbing(2)
     autocmd BufEnter *.tpl call Settabbing(2)
     autocmd FileType make set noexpandtab | call Settabbing(8)
     autocmd FileType godot set noexpandtab | call Settabbing(4)
+    autocmd FileType go set noexpandtab | call Settabbing(4)
 augroup END
 
 "+----------------------------------------------------------------------------
@@ -285,6 +291,10 @@ command! PhpGetter      call PhpGetter()
 "+----------------------------------------------------------------------------
 "++ Abbreviations ------------------------------------------------------------
 
+" Python
+iabbrev def def name(self):'''documentation'''pass
+
+" PHP
 iabbrev ddoctype    <!doctype html>html>head>meta[charset=UTF-8]+link+style+title
 iabbrev pphp        <?php
 iabbrev pif         if () {}
@@ -295,6 +305,9 @@ iabbrev pfor        foreach ($var as $key => $value) {}
 iabbrev ppublic     public function func($args) {}
 iabbrev pprotected  protected function Func($args) {}
 iabbrev pprivate    private function _func($args) {}
+
+" Go
+iabbrev iferr      if err != nil {http.Error(w, err.Error(), http.StatusInternalServerError)}
 
 "+----------------------------------------------------------------------------
 "++ Prevent replacing paste buffer on paste ----------------------------------
