@@ -28,7 +28,7 @@ alias .....='cd ../../../..'
 
 # Projectpad aliases, see: http://github.com/babab/projectpad
 alias g='cd `projectpad get`'
-alias s='projectpad set && cd `projectpad get`'
+alias s='projectpad set && cd `projectpad get` && projectpad add'
 
 if [[ "${HOST}" != "vml" ]]; then
     export PROJECTPAD_SYMLINK=~/p
