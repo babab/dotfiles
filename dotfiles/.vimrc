@@ -106,7 +106,7 @@ let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
 let g:syntastic_php_phpcs_args = '--standard=' . $HOME . '/dotfiles/standards/minimal-phpcs/ruleset.xml'
 let g:syntastic_php_phpmd_post_args = $HOME . '/dotfiles/standards/minimal-phpmd/ruleset.xml'
 
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 "+----------------------------------------------------------------------------
@@ -260,6 +260,7 @@ augroup Tabbing
     autocmd FileType rst call Settabbing(3)
     autocmd FileType php call Settabbing(4)
     autocmd Filetype yaml call Settabbing(2)
+    autocmd Filetype typescript call Settabbing(2)
     autocmd BufEnter *.html call Settabbing(2)
     autocmd BufEnter *.tpl call Settabbing(2)
     autocmd FileType make set noexpandtab | call Settabbing(8)
