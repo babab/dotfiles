@@ -6,7 +6,6 @@
 *.gz
 *.geany
 *.iso
-*.jar
 *.o
 *.pyc
 *.rar
@@ -14,7 +13,6 @@
 *.sqlite
 *.swp
 *.tar
-*.tar.gz
 *.zip
 
 Session*.vim
