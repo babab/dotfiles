@@ -15,21 +15,21 @@ case "$1" in
 "gh")
     git remote add ${REMOTE} git://github.com/$GH/${2}.git
     git remote set-url --push ${REMOTE} git@github.com:$GH/${2}.git
-    git remote set-url --add --push ${REMOTE} git.babab.nl:${2}.git
+    git remote set-url --add --push ${REMOTE} pgit.babab.nl:${2}.git
     ;;
 "ghbb")
     git remote add ${REMOTE} git://github.com/$GH/${2}.git
     git remote set-url --push ${REMOTE} git@github.com:$GH/${2}.git
     git remote set-url --add --push ${REMOTE} git@bitbucket.org:$BB/${2}.git
-    git remote set-url --add --push ${REMOTE} git.babab.nl:${2}.git
+    git remote set-url --add --push ${REMOTE} pgit.babab.nl:${2}.git
     ;;
 "bb")
     git remote add ${REMOTE} git@bitbucket.org:$BB/${2}.git
     git remote set-url --push ${REMOTE} git@bitbucket.org:$BB/${2}.git
-    git remote set-url --add --push ${REMOTE} git.babab.nl:${2}.git
+    git remote set-url --add --push ${REMOTE} pgit.babab.nl:${2}.git
     ;;
 "babab")
-    git remote add ${REMOTE} git.babab.nl:${2}.git
+    git remote add ${REMOTE} pgit.babab.nl:${2}.git
     ;;
 esac
 
