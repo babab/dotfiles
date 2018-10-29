@@ -85,3 +85,9 @@
 [submodule "dotfiles/.vim/bundle/typescript-vim"]
 	path = dotfiles/.vim/bundle/typescript-vim
 	url = git://github.com/leafgarland/typescript-vim.git
+[submodule "dotfiles/.vim/bundle/viproc"]
+	path = dotfiles/.vim/bundle/viproc
+	url = git://github.com/Shougo/vimproc.vim.git
+[submodule "dotfiles/.vim/bundle/tsuquyomi"]
+	path = dotfiles/.vim/bundle/tsuquyomi
+	url = git://github.com/Quramy/tsuquyomi.git
