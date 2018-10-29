@@ -261,6 +261,7 @@ augroup Tabbing
     autocmd FileType php call Settabbing(4)
     autocmd Filetype yaml call Settabbing(2)
     autocmd Filetype typescript call Settabbing(2)
+    autocmd Filetype lua call Settabbing(2)
     autocmd BufEnter *.html call Settabbing(2)
     autocmd BufEnter *.tpl call Settabbing(2)
     autocmd FileType make set noexpandtab | call Settabbing(8)
