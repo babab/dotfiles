@@ -12,6 +12,7 @@
 .pythonrc
 .spacemacs
 .spectrwm.conf
+.tern-config
 .tmux.conf
 .vim
 .vimrc
