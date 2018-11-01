@@ -32,6 +32,7 @@ set incsearch           " Incremental search
 set autowrite           " Automatically save before commands like :next and :make
 set hidden              " Hide buffers when they are abandoned
 set modeline            " Use modelines if found
+set mouse=a             " Support mouse in all modes
 set ttymouse=xterm      " So vim doesn't hang inside tmux
 set showtabline=1       " Show only if there are at least two tab pages
 set scrolloff=10        " Minimal number of lines above and below the cursor.
@@ -108,6 +109,7 @@ let g:syntastic_php_phpmd_post_args = $HOME . '/dotfiles/standards/minimal-phpmd
 
 let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
 
 "+----------------------------------------------------------------------------
 "++ Keymapping ---------------------------------------------------------------
@@ -200,7 +202,6 @@ nnoremap <silent> <Leader>w <C-W>
 "+----------------------------------------------------------------------------
 "++ Plugin mappings ----------------------------------------------------------
 
-nnoremap <Leader>o :CtrlP<CR>
 nmap <Leader>,, <C-y>,h
 nmap <Leader>' ysW'
 
@@ -210,6 +211,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " snipmate - https://github.com/garbas/vim-snipmate
 imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
+
+nnoremap <Leader>o :NERDTreeToggle<CR>
 
 "+----------------------------------------------------------------------------
 "++ Better handling of Vim Sessions ------------------------------------------
