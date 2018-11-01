@@ -91,3 +91,6 @@
 [submodule "dotfiles/.vim/bundle/tsuquyomi"]
 	path = dotfiles/.vim/bundle/tsuquyomi
 	url = git://github.com/Quramy/tsuquyomi.git
+[submodule "dotfiles/.vim/bundle/nerdtree"]
+	path = dotfiles/.vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
