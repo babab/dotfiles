@@ -1,7 +1,7 @@
 HISTFILE=~/.histfile_zsh
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
+bindkey -v
 
 setopt completealiases autopushd pushdignoredups
 setopt PROMPT_SUBST
