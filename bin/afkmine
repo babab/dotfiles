@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# AFK mining in Minecraft
+
+sleep 2
+xdotool mousedown 1
