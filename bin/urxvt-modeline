@@ -2,10 +2,37 @@
 # script for urxvt-modeline, see:
 # http://code.ryuslash.org/urxvt-modeline/about/
 
-echo -n "`hostname`   "
-echo -n "`date +%H:%M`   "
-echo -n "$(uname -r)   "
+is_sshkey_loaded()
+{
+    ssh-add -l >/dev/null 2>&1
+    case $? in
+        0)
+            echo "sshkey"
+            ;;
+        1)
+            echo "nosshkey"
+            ;;
+        2)
+            echo "nosshagent"
+            ;;
+    esac
+}
+
+is_venv()
+{
+    if [ -z "$VIRTUAL_ENV" ]; then
+        echo novenv
+    else
+        echo venv
+    fi
+}
+
+
+echo -n "`whoami`@`hostname`   "
+echo -n "$(is_sshkey_loaded)   "
+echo -n "$(is_venv)   "
 echo -n "$(cat /proc/loadavg | awk '{ print $1" "$2" "$3 }')  "
-echo -n "$(sensors | grep temp1 | awk '{ print $2 }') "
-echo -n "$(sensors | grep 'Core 0' | awk '{ print $3 }') "
-echo -n "$(sensors | grep 'Core 1' | awk '{ print $3 }') "
+# echo -n "$(sensors | grep temp1 | awk '{ print $2 }') "
+# echo -n "$(sensors | grep 'Core 0' | awk '{ print $3 }') "
+# echo -n "$(sensors | grep 'Core 1' | awk '{ print $3 }') "
+echo -n "`date +%H:%M`   "

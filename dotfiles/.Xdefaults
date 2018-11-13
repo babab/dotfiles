@@ -44,8 +44,8 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
 
 URxvt.perl-ext-common: default,url-select,keyboard-select,modeline
-URxvt.modeline.fg: 15
-URxvt.modeline.bg: 12
+URxvt.modeline.fg: 12
+/* URxvt.modeline.bg: 18 */
 URxvt.modeline.command: urxvt-modeline
 
 XTerm*loginShell:true
