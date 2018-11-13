@@ -217,11 +217,12 @@ nmap <Leader>' ysW'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" snipmate - https://github.com/garbas/vim-snipmate
-imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-
 nnoremap <Leader>o :NERDTreeToggle<CR>
+
+" Configuration for UltiSnips
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 "+----------------------------------------------------------------------------
 "++ Better handling of Vim Sessions ------------------------------------------
