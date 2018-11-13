@@ -1,14 +1,17 @@
 # monitors / screens
-xrandr --output eDP-0 --mode 1366x768
 #xrandr --output HDMI-0 --mode 1280x1024 --above eDP-0
+# xrandr --output eDP-1 --mode 1366x768
+# xrandr --output VGA-1 --mode 1280x1024 --left-of eDP-1
 
 # startup daemons
-setxkbmap -layout us -option ctrl:nocaps
+# swap caps-lock and escape key
+setxkbmap -layout us -option "caps:escape"
 xbindkeys
-pulseaudio --start
-# /usr/bin/xscreensaver -no-splash &
+/usr/bin/xscreensaver -no-splash &
 /usr/bin/dunst &
-redshift &
+pgrep redshift &> /dev/null || redshift -l 52.09083:5.12222 &> /dev/null &
+# pulseaudio --start
+
 
 # init user settings
 random-wallpaper
