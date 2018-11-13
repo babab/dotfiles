@@ -43,11 +43,10 @@ URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
 
-#URxvt.perl-ext-common: default,url-select,keyboard-select,modeline
-URxvt.perl-ext-common: default,url-select,keyboard-select
-#URxvt.modeline.fg: 15
-#URxvt.modeline.bg: 12
-#URxvt.modeline.command: urxvt-modeline
+URxvt.perl-ext-common: default,url-select,keyboard-select,modeline
+URxvt.modeline.fg: 15
+URxvt.modeline.bg: 12
+URxvt.modeline.command: urxvt-modeline
 
 XTerm*loginShell:true
 XTerm*scrollBar: off
