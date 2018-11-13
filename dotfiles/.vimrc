@@ -174,6 +174,12 @@ nmap <Leader>P "+P
 " Enter visual line mode by tapping Space twice
 nmap <Leader><Leader> V
 
+" Make current pane 64 chars wide
+nmap <Leader>rr 64<C-W>|
+
+" Make current pane 80 chars wide
+nmap <Leader>rw 80<C-W>|
+
 " For the times I'm too slow at releasing the SHIFT key
 command W :w
 command Wq :wq
