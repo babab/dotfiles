@@ -321,7 +321,14 @@ iabbrev pprotected  protected function Func($args) {}
 iabbrev pprivate    private function _func($args) {}
 
 " Go
-iabbrev iferr      if err != nil {http.Error(w, err.Error(), http.StatusInternalServerError)}
+iabbrev iferr       if err != nil {return err}
+iabbrev ifhttperr   if err != nil {http.Error(w, err.Error(), http.StatusInternalServerError)}
+
+" Typescript
+
+iabbrev tsimport    import { } from '';
+iabbrev tscimport    import { Observable } from '@angular/core';
+iabbrev tsfimport    import { NgForm } from '@angular/forms';
 
 "+----------------------------------------------------------------------------
 "++ Prevent replacing paste buffer on paste ----------------------------------
