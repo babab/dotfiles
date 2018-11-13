@@ -1,8 +1,15 @@
+import sys
+from pprint import pprint  # noqa: F401
+import datetime
+
 try:
     from django.core.management import setup_environ
     import settings
     setup_environ(settings)
-except:
+    print('Django environment found and set up.')
+except:  # noqa: E722
     pass
+
+print('imported sys, pprint, datetime')
 
 # vim: set ft=python:
