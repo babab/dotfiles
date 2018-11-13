@@ -1,0 +1,36 @@
+#!/bin/sh
+
+_countdown()
+{
+    text="$1"
+    echo
+    for i in 10 9 8 7 6 5 4 3 2 1; do
+        echo -ne "\r$1 in $i secs   "
+        sleep 1
+    done
+    echo -e "\r$1 now          "
+}
+
+if [ "$(whoami)" != "root" ]; then
+    echo error: you cannot perform this operation unless you are root.
+    echo Try running the command with sudo or login as root.
+    exit 1
+fi
+
+case $1 in
+halt)
+    pacman -Syu --noconfirm || exit $?
+    _countdown "power off"
+    halt -p || exit $?
+    ;;
+reboot)
+    pacman -Syu --noconfirm || exit $?
+    _countdown "rebooting"
+    reboot || exit $?
+    ;;
+*)
+    echo "usage: updateand halt   - do a full system upgrade and power off"
+    echo "       updateand reboot - do a full system upgrade and reboot"
+    exit 1
+    ;;
+esac
