@@ -52,9 +52,6 @@
 [submodule ".vim/bundle/vim-addon-mw-utils"]
 	path = dotfiles/.vim/bundle/vim-addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule ".vim/bundle/vim-snipmate"]
-	path = dotfiles/.vim/bundle/vim-snipmate
-	url = git://github.com/garbas/vim-snipmate.git
 [submodule ".vim/bundle/vim-misc"]
 	path = dotfiles/.vim/bundle/vim-misc
 	url = git://github.com/xolox/vim-misc.git
