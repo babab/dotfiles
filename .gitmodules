@@ -94,3 +94,6 @@
 [submodule "dotfiles/.vim/bundle/nerdtree"]
 	path = dotfiles/.vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+[submodule "dotfiles/.vim/bundle/ultisnips"]
+	path = dotfiles/.vim/bundle/ultisnips
+	url = git://github.com/SirVer/ultisnips
