@@ -181,9 +181,12 @@ nmap <Leader>rr 64<C-W>|
 nmap <Leader>rw 80<C-W>|
 
 " For the times I'm too slow at releasing the SHIFT key
-command W :w
-command Wq :wq
-command WQ :wq
+command! W :w
+command! Wq :wq
+command! WQ :wq
+command! Wall :wall
+command! Wqall :wqall
+command! Qall :qall
 
 " Browse tabs with Ctrl+H and Ctrl+L
 nmap <C-H> gT
