@@ -41,8 +41,10 @@ fi
 # Superfast git-status and git-diff aliases
 kk() {
     git status 2>&1 | head -2 | tail -1
-    if [[ "$PWD" == "$HOME/dotfiles" ]]; then
+    if [[ "$PWD" == "$HOME/dotfiles/dotfiles" ]]; then
         git status --short --untracked-files=no
+    elif [[ "$PWD" == "$HOME/dotfiles/bin" ]]; then
+        git status --short | grep -v .config
     else
         git status --short $*
     fi
