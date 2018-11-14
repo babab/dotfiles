@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+
+import math
+
+import pycommand
+
+
+class Command(pycommand.CommandBase):
+    '''Show load averages as percentage'''
+    usagestr = (
+        'usage: loadavg <number-of-cores>\n'
+        '       loadavg --help'
+    )
+    description = __doc__
+    optionList = (
+        ('help', ('h', False, 'show this help information')),
+    )
+
+    ncores = 1
+
+    def d2p(self, decimal_number):
+        return math.ceil(float(decimal_number) / self.ncores * 100)
+
+    def run(self):
+        if self.flags.help:
+            print(self.usage)
+            return 0
+        if not self.args:
+            print('error: Please specify the number of cores this system has.')
+            print(self.usage)
+            return 1
+
+        self.ncores = int(self.args[0])
+        with open('/proc/loadavg') as f:
+            ctx = f.read().strip().split(' ')
+        print(f'{self.d2p(ctx[0])}% {self.d2p(ctx[1])}% {self.d2p(ctx[2])}%')
+
+
+if __name__ == '__main__':
+    pycommand.run_and_exit(Command)
