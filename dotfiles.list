@@ -15,7 +15,6 @@
 .tern-config
 .tmux.conf
 .vim
-.vimrc
 .xbindkeysrc
 .xinitrc
 .zsh
