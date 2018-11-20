@@ -54,51 +54,51 @@ Contents
 Small programs and utility scripts
 ##################################
 
-`afkfish <blob/master/bin/afkfish>`_
+`afkfish <bin/afkfish>`_
  AFK fishing clicker script for Minecraft using xdotool.
-`afkmine <blob/master/bin/afkmine>`_
+`afkmine <bin/afkmine>`_
  AFK mining clicker script for Minecraft using xdotool.
-`baraction.sh <blob/master/bin/baraction.sh>`_
+`baraction.sh <bin/baraction.sh>`_
  Statusbar script for spectrwm (my favorite WM).
-`ctb <blob/master/bin/ctb>`_
+`ctb <bin/ctb>`_
  Create temporary backup (create timestamped tar/gz archives of files/directories.
-`duh <blob/master/bin/duh>`_
+`duh <bin/duh>`_
  A fancy alias for ``du -h | sort -h`` that tees output before showing a sorted version at the end, paged with less.
-`git-set-remote <blob/master/bin/git-set-remote>`_
+`git-set-remote <bin/git-set-remote>`_
  Configure a single git remote with multiple --push urls and a read-only fetch url.
-`htmlcount <blob/master/bin/htmlcount>`_
+`htmlcount <bin/htmlcount>`_
  Count html elements in a html files or stdin.
-`loadavg <blob/master/bin/loadavg>`_
+`loadavg <bin/loadavg>`_
  Show loadavg as a percentage of cores available.
-`loop <blob/master/bin/loop>`_
+`loop <bin/loop>`_
  Run a command every second.
-`make-php-ctags <blob/master/bin/make-php-ctags>`_
+`make-php-ctags <bin/make-php-ctags>`_
  Create ctags for a PHP project.
-`metainfo <blob/master/bin/metainfo>`_
+`metainfo <bin/metainfo>`_
  Show information like mimetype and SHA1/MD5 checksums of a file.
-`php-lintr <blob/master/bin/php-lintr>`_
+`php-lintr <bin/php-lintr>`_
  search recursively for scripts and only show output when there are errors.
-`random-wallpaper <blob/master/bin/random-wallpaper>`_
+`random-wallpaper <bin/random-wallpaper>`_
  Select a random wallpaper from ~/Pictures/wallpapers and set it using feh.
-`runserver <blob/master/bin/runserver>`_
+`runserver <bin/runserver>`_
  Run a http.server, Django or Werkzeug development server depending on project context.
-`screen-off <blob/master/bin/screen-off>`_
+`screen-off <bin/screen-off>`_
  Blank the screen using xset.
-`screenshot.sh <blob/master/bin/screenshot.sh>`_
+`screenshot.sh <bin/screenshot.sh>`_
  Save a screenshot of a window or full screen in a timestamped file using scrot.
-`slowcate <blob/master/bin/slowcate>`_
+`slowcate <bin/slowcate>`_
  Wrapper for ``sudo find / | grep "searchtext"``
-`touchpad-toggle <blob/master/bin/touchpad-toggle>`_
+`touchpad-toggle <bin/touchpad-toggle>`_
  Toggle touchpad depending on current status using synclient.
-`updateand <blob/master/bin/updateand>`_
+`updateand <bin/updateand>`_
  Update system and reboot or halt computer after a countdown if there are no errors.
-`urxvt-modeline <blob/master/bin/urxvt-modeline>`_
+`urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
-`wmtoggle <blob/master/bin/wmtoggle>`_
+`wmtoggle <bin/wmtoggle>`_
  Switch between using spectrwm or openbox when startx is executed.
-`wschemaspy <blob/master/bin/wschemaspy>`_
+`wschemaspy <bin/wschemaspy>`_
  Wrapper for wschemaspy MySQL db graphviz dumps
-`xs <blob/master/bin/xs>`_
+`xs <bin/xs>`_
  Alias for ``$@ > /dev/null 2>&1 &`` to start programs in X from the terminal.
-`youtube-dl-clipboard <blob/master/bin/youtube-dl-clipboard>`_
+`youtube-dl-clipboard <bin/youtube-dl-clipboard>`_
  Send URL in clipboard to youtube-dl (using xclip).
