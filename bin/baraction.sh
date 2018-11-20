@@ -11,8 +11,11 @@ battinfo()
         echo "$out" | sed 's/^.*Discharging | //'
         ;;
     Charging*)
-        echo -n "ONLINE | "
+        echo -n "CHARGING | "
         echo "$out" | sed 's/^.*Charging | //'
+        ;;
+    Unknown*)
+        echo "$out" | sed 's/^.*Unknown | //'
         ;;
     *)
         echo "$out"
@@ -20,13 +23,16 @@ battinfo()
     esac
 }
 
-SLEEP_SEC=10
+ipaddress()
+{
+    echo $(ip addr | grep 'inet ' | tail -1 | sed -e 's/inet //' -e 's/\/24.*//')
+}
+
+SLEEP_SEC=30
 COUNT=0
 while :; do
     let COUNT=$COUNT+1
-    let MINUTES="$COUNT/6"
-    echo -n "$(uname -r)   "
-    echo "${MINUTES}m   "
-    echo "$(battinfo)   "
+    let MINUTES="$COUNT/2"
+    echo "${MINUTES}m | $(battinfo) | $(ipaddress)"
     sleep $SLEEP_SEC
 done
