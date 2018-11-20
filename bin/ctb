@@ -1,9 +1,19 @@
 #!/bin/sh
 
-# ctb - create temporary backup(s)
+# ctb - create temporary backup(s) with tar/gz
 
 if [ ! "$1" ]; then
-    echo supply a file or directory
+    echo 'usage: ctb <folder> [--flat]'
+    exit 1
 fi
-bakname="bak__$1$(date +__%Y-%m-%d-%s)"
-tar -zcvf "${bakname}.tar.gz" "$1" && echo Saved as "${bakname}.tar.gz"
+if [ "$2" ]; then
+    if [ "$2" == '--flat' ]; then
+        bakname="$1"
+    else
+        echo "Invalid argument '$2'"
+        exit 2
+    fi
+else
+    bakname="bak__""$1""$(date +__%Y-%m-%d-%s)"
+fi
+tar -zcvf "${bakname}.tgz" "$1" && echo Saved as "${bakname}.tgz"
