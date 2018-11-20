@@ -1,6 +1,6 @@
 HISTFILE=~/.histfile_zsh
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=8000
+SAVEHIST=8000
 bindkey -v
 
 setopt completealiases autopushd pushdignoredups
