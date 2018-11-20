@@ -1,7 +1,7 @@
 # Environment vars
 export BROWSER="/usr/bin/chromium"
 export EDITOR="/usr/bin/vim"
-export EXEC_FOR_PYTHON="python2"
+export EXEC_FOR_PYTHON="python"
 export GPG_TTY="$(tty)"
 export LANG=en_US.UTF-8
 export LESS="iFXRS"
