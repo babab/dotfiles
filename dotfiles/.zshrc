@@ -51,7 +51,7 @@ chpwd_functions+='chpwd_update_git_vars'
 # with baps1
 # PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 # without baps1
-PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! $(prompt_git_info)%{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! $(prompt_git_info)%{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
 source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
