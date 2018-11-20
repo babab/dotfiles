@@ -39,16 +39,16 @@ makelink()
 
 usage()
 {
+    echo Dotfiles installer by Benjamin Althues
+    echo --------------------------------------
     echo "Usage: ./install.sh [--force]"
     echo "       ./install.sh [--remove]"
     echo "       ./install.sh [--confirm]"
     echo
-    echo Dotfiles installer by Benjamin Althues
-    echo --------------------------------------
-    echo 'Use --force to remove all existing files and install in one step'
     echo 'Use --confirm to installing in a safe way without removing files'
     echo 'Use --remove to remove all (pre-existing) files / symbolic links'
     echo '    (before install)'
+    echo 'Use --force to remove all existing files and install in one step'
 }
 
 LFS="
