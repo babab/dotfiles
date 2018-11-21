@@ -1,0 +1,26 @@
+snippet class-component "Component class"
+import { Component } from '@angular/core';
+export class ${1:App}Component implements {
+		$2
+}
+endsnippet
+snippet class-component-oninit "Component class with NgOnInit hook"
+import { Component, OnInit } from '@angular/core';
+export class ${1:App}Component implements OnInit {
+	ngOnInit() {
+		$2
+	}
+}
+endsnippet
+snippet import "import project file"
+import { $1 } from '$2';
+endsnippet
+snippet importNgForm "import NgForm"
+import { NgForm } from '@angular/forms';
+endsnippet
+snippet route "Angular routing rules"
+{path: '', component: IndexComponent},
+{path: '**', redirectTo: '', pathMatch: 'full' },
+endsnippet
+
+
