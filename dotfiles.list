@@ -14,7 +14,6 @@
 .spectrwm.conf
 .tern-config
 .tmux.conf
-.vim
 .xbindkeysrc
 .xinitrc
 .zsh
