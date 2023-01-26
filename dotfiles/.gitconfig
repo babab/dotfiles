@@ -10,6 +10,7 @@
 	co = checkout
 	di = diff
 	br = branch
+	ls = log --stat
 [color]
 	branch = auto
 	diff = auto
@@ -17,3 +18,5 @@
 	status = auto
 [push]
 	default = simple
+[init]
+	defaultBranch = main
