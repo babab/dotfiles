@@ -147,7 +147,7 @@ viwhich() {
 # Quickly edit files found by ack
 viack() {
     if [ $1 ]; then
-        vim $(ack -l $*)
+        vim -p -- $(ack -l $*)
     else
         echo "What a shame, that's no argument"
     fi
@@ -155,7 +155,7 @@ viack() {
 # Quickly edit files found by ag
 viag() {
     if [ $1 ]; then
-        vim $(ag -l $*)
+        vim -p -- $(ag -l $*)
     else
         echo "What a shame, that's no argument"
     fi
