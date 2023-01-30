@@ -64,6 +64,8 @@ Small programs and utility scripts
  Create temporary backup (create timestamped tar/gz archives of files/directories.
 `duh <bin/duh>`_
  A fancy alias for ``du -h | sort -h`` that tees output before showing a sorted version at the end, paged with less.
+`envtest <bin/envtest>`_
+ Check paths of python, pip and virtual environment
 `git-set-remote <bin/git-set-remote>`_
  Configure a single git remote with multiple --push urls and a read-only fetch url.
 `htmlcount <bin/htmlcount>`_
