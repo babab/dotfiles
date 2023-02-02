@@ -17,7 +17,7 @@ Clone the git repository in ``~/dotfiles``:
 .. code-block:: shell
 
    cd ~
-   git clone git://github.com/babab/dotfiles.git
+   git clone https://github.com/babab/dotfiles.git
 
 Default install - preserving existing configuration
 ###################################################
