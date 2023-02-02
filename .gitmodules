@@ -1,12 +1,12 @@
-[submodule "dotfiles/depends/baps1"]
+[submodule "depends/baps1"]
 	path = depends/baps1
-	url = git://github.com/ryuslash/baps1.git
-[submodule "dotfiles/depends/zsh-syntax-highlighting"]
+	url = https://github.com/ryuslash/baps1.git
+[submodule "depends/zsh-syntax-highlighting"]
 	path = depends/zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "depends/zsh-history-substring-search"]
 	path = depends/zsh-history-substring-search
-	url = git://github.com/zsh-users/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
 [submodule "depends/zsh-autosuggestions"]
 	path = depends/zsh-autosuggestions
-	url = git://github.com/zsh-users/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
