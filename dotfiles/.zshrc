@@ -48,18 +48,24 @@ preexec_functions+='preexec_update_git_vars'
 precmd_functions+='precmd_update_git_vars'
 chpwd_functions+='chpwd_update_git_vars'
 
-# with baps1
-# PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+## with baps1
+#PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+
 # without baps1
 PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! $(prompt_git_info)%{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
-source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
+## utf-8 fix
+#PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
-# zsh-history-substring-search
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+### Other ####################################################################
+
+#source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+## zsh-history-substring-search
+#zmodload zsh/terminfo
+#bindkey "$terminfo[kcuu1]" history-substring-search-up
+#bindkey "$terminfo[kcud1]" history-substring-search-down
+#bindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down
