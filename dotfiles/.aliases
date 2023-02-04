@@ -157,6 +157,14 @@ viwhich() {
     fi
 }
 
+# Quickly edit files found by grep
+vigrep() {
+    if [ $1 ]; then
+        vim -p -- $(grep -l -R "$*" .)
+    else
+        echo "What a shame, that's no argument"
+    fi
+}
 # Quickly edit files found by ack
 viack() {
     if [ $1 ]; then
