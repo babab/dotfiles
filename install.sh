@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (c) 2016 Benjamin Althues <benjamin@althu.es>
+# Copyright (c) 2016-2023 Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -31,9 +31,9 @@ makelink()
     file="${RELATIVE_DOTFILES_PATH}/dotfiles/$1"
     ln -s "$file" 2>/dev/null
     if [[ $? -ne 0 ]]; then
-        echo -e "FAILED\tLinking ${file}, the file or link already exists"
+        echo -e "SKIPPED\t${file}, the file or link already exists"
     else
-        echo -e "DONE\tLinking ${file}"
+        echo -e "LINKED\t${file}"
     fi
 }
 
@@ -45,7 +45,7 @@ usage()
     echo "       ./install.sh [--remove]"
     echo "       ./install.sh [--confirm]"
     echo
-    echo 'Use --confirm to installing in a safe way without removing files'
+    echo 'Use --confirm to install in a safe way without removing files'
     echo 'Use --remove to remove all (pre-existing) files / symbolic links'
     echo '    (before install)'
     echo 'Use --force to remove all existing files and install in one step'
@@ -67,7 +67,7 @@ _remove()
 
 _confirm()
 {
-    # create folder for vim bak and swp files, defined in .vimrc
+    # create folder for vim bak and swp files
     mkdir -p .vim-bak-swp
 
     # init/update git submodules
