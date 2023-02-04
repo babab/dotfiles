@@ -231,9 +231,11 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias sshsockstunnel='ssh -C2qTnN -D 8080 sunrise'
+alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
 alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 alias tsc-all='tsc *.ts'
 alias tsc-auto='tsc *.ts --watch'
+alias tmuxa='tmux new -s main -A'
 
 hypo-upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
