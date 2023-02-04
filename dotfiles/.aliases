@@ -233,15 +233,15 @@ alias sshagent='eval `ssh-agent` >/dev/null'
 alias sshsockstunnel='ssh -C2qTnN -D 8080 sunrise'
 alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
 alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
-alias tsc-all='tsc *.ts'
-alias tsc-auto='tsc *.ts --watch'
+alias tsc_all='tsc *.ts'
+alias tsc_auto='tsc *.ts --watch'
 alias tmuxa='tmux new -s main -A'
 
-hypo-upload() {
+hypo_upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
 }
 
-codecept-alias-init() {
+codecept_alias_init() {
     alias codecept="$PWD/vendor/bin/codecept"
 }
 
