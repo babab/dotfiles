@@ -104,7 +104,7 @@ gsvndcommit() {
 # if a server is running. When emacsclient is not an executable or
 # no server is running, revert to using Vim with a pane/tab layout
 # adapted to the current terminal console.
-vi() {
+vii() {
     if [ ! $1 ]; then
         echo "error: missing arguments"
         return
@@ -131,7 +131,7 @@ vi() {
     fi
 }
 
-alias view='/usr/bin/vim -R'
+alias view='vim -R'
 
 # Wrapper for opening (and protecting) your last vim session
 svim() {
@@ -174,8 +174,7 @@ viag() {
     fi
 }
 
-alias todo='vi ~/TODO.otl'
-
+alias todo='vim ~/TODO.otl'
 alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
 
 
