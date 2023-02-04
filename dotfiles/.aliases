@@ -2,7 +2,7 @@
 
 ## Listing directories #######################################################
 
-if [[ "$(uname)" == "OpenBSD" ]]; then
+if [ "$(uname)" = 'OpenBSD' ]; then
     alias la='colorls -FAG'
     alias ll='colorls -FlhG'
     alias lla='colorls -FlhAG'
@@ -30,7 +30,7 @@ alias .....='cd ../../../..'
 alias g='cd `projectpad get`'
 alias s='projectpad set && cd `projectpad get` && projectpad add'
 
-if [[ "${HOST}" != "vml" ]]; then
+if [ "${HOST}" != "vml" ]; then
     export PROJECTPAD_SYMLINK=~/p
     alias gg="cd ${PROJECTPAD_SYMLINK}"
 fi
@@ -46,16 +46,16 @@ kk() {
     # get first 2 lines of git status output to see branch and upstream
     # branch names
     GITSTATUS=$(git status)
-    if [[ $? -eq 128 ]]; then
+    if [ $? -eq 128 ]; then
         echo $GITSTATUS
         return 128
     fi
     echo $GITSTATUS | head -2
 
-    if [[ "$PWD" = "$HOME/dotfiles/dotfiles" ]]; then
+    if [ "$PWD" = "$HOME/dotfiles/dotfiles" ]; then
         echo "untracked files are filtered when PWD is $PWD"
         git status --short --untracked-files=no
-    elif [[ "$PWD" = "$HOME/dotfiles/bin" ]]; then
+    elif [ "$PWD" = "$HOME/dotfiles/bin" ]; then
         echo "filtered all files that are outside of $PWD"
         git status --short | grep -v '../'
     else
@@ -67,7 +67,7 @@ alias lk='echo git diff --cached && git diff --cached'
 
 # git-svn aliases with 'auto' stashing
 gsvnup() {
-    if [[ $(git stash) == "No local changes to save" ]]; then
+    if [ $(git stash) = "No local changes to save" ]; then
         stash=0
     else
         stash=1
@@ -81,7 +81,7 @@ gsvnup() {
     fi
 }
 gsvndcommit() {
-    if [[ $(git stash) == "No local changes to save" ]]; then
+    if [ $(git stash) = "No local changes to save" ]; then
         stash=0
     else
         stash=1
@@ -194,7 +194,7 @@ alias envmake2='virtualenv2 --no-site-packages .virtualenv'
 pi() {
     # start an interactive python session with bpython
     filename="$1"
-    if [[ -z "$filename" ]]; then
+    if [ -z "$filename" ]; then
         bpython
     else
         shift
@@ -246,7 +246,7 @@ codecept-alias-init() {
 }
 
 if [ -f $HOME/.aliases_local ]; then
-    source $HOME/.aliases_local
+    . $HOME/.aliases_local
 fi
 
 alias ytd='yt-dlp --no-playlist --no-check-certificates'
