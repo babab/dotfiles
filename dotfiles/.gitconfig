@@ -11,6 +11,8 @@
 	di = diff
 	br = branch
 	ls = log --stat
+	mrg = merge --ff-only
+	gh = remote-gh
 [color]
 	branch = auto
 	diff = auto
@@ -20,3 +22,5 @@
 	default = simple
 [init]
 	defaultBranch = main
+
+; vim: set noet ts=4 sw=4 sts=3 ai:
