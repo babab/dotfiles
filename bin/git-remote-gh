@@ -1,0 +1,127 @@
+#!/bin/sh
+
+# Copyright (c) 2023 Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+_usage() {
+    echo 'usage: git-remote-gh <user/repo> [<remote>] [<branch>]'
+    echo '       git-remote-gh [options]'
+    echo
+    echo 'Options:'
+    echo '-h, --help       show this help information'
+    echo '-v               show configured remotes'
+    echo
+    echo 'Configure remote urls for a public Github repository'
+    echo '(using https for fetch / ssh for push)'
+    echo
+    echo "If <remote> is not specified, it will default to 'origin.'"
+    echo "If <branch> is not specified, it will default to the name of"
+    echo "the current local branch (git branch --show-current)."
+    echo
+    echo This configuration makes it possible to fetch and pull changes
+    echo without the need for an ssh-agent with an ssh-key loaded and/or
+    echo having to type a password. It also sets the upstream remote
+    echo tracking branch without pushing any data.
+    echo
+    echo 'Fetch urls use the https scheme "https://github.com/<user/repo>".'
+    echo 'Pull urls use the ssh scheme "git@github.com:<user/repo>".'
+    echo The repository should be public and you should have push rights.
+    echo
+    echo Scripts in PATH that start with 'git-' will be made available
+    echo as git subcommands. It is therefore possible to run this script
+    echo as "'git remote-gh'". Be aware however that invoking
+    echo "'git remote-gh --help'" will try to find a manpage instead
+    echo and fail instead of showing this help.
+}
+
+case $1 in
+    -h*) _usage ; exit 0 ;;
+    --h*) _usage ; exit 0 ;;
+    -v) git remote --verbose ; exit 0 ;;
+    '') _usage ; exit 0 ;;
+    *'/'*) ;;
+    *)
+        echo error: invalid argument "$1"
+        echo argument must contain a "'/'", to denote user/project
+        echo for help information see git-remote-gh -h
+        exit 1
+        ;;
+esac
+
+arg_ident="$1"
+
+# Use remote name as argumented or use default
+arg_remote="$2"
+test -z "$2" && arg_remote=origin
+
+# Use remote branch name as argumented or use same as local
+arg_branch="$3"
+test -z "$3" && arg_branch="$(git branch --show-current)"
+err=$?
+if [ $err -ne 0 ]; then
+    echo error: git branch exited with error number $err
+    exit 1
+fi
+
+# Handle error when no valid repository can be found.
+remotesfound="$(git remote 2>&1)"
+if [ $? -ne 0 ]; then
+    echo '$ git remote'
+    echo "${remotesfound}"
+    exit 2
+fi
+
+case ${remotesfound} in
+    *"${arg_remote}"*)
+        while true; do
+            echo '$ git remote --verbose'
+            git remote --verbose
+            echo
+            echo "Remote ${arg_remote} already exists."
+            echo -n "Do you wish to overwrite it? [yes/no] "
+            read yn
+            case $yn in
+                [Yy]*)
+                    echo '$ 'git remote remove "${arg_remote}"
+                    git remote remove "${arg_remote}"
+                    break
+                    ;;
+                [Nn]*)
+                    echo User cancelled. Remote was not configured.
+                    exit 0
+                    ;;
+                *)
+                    echo Please answer yes or no.
+                    ;;
+            esac
+        done
+        ;;
+    *)
+        ;;
+esac
+
+
+# Add remote and set push url
+echo '$ git remote add' "${arg_remote}" "https://github.com/${arg_ident}.git"
+git remote add "${arg_remote}" "https://github.com/${arg_ident}.git"
+echo '$ git remote set-url --push' "${arg_remote} git@github.com:${arg_ident}.git"
+git remote set-url --push "${arg_remote}" "git@github.com:${arg_ident}.git"
+
+# Fetch from remote; set tracking branch; show verbose remote info
+echo '$ git fetch' "${arg_remote}"
+git fetch "${arg_remote}"
+echo '$ git branch -u' "${arg_remote}/${arg_branch}"
+git branch -u "${arg_remote}/${arg_branch}"
+echo '$ git remote --verbose'
+git remote --verbose

@@ -66,6 +66,8 @@ Small programs and utility scripts
  A fancy alias for ``du -h | sort -h`` that tees output before showing a sorted version at the end, paged with less.
 `envtest <bin/envtest>`_
  Check paths of python, pip and virtual environment
+`git-remote-gh <bin/git-remote-gh>`_
+ Configure remote urls for a public Github repository (using https for fetch / ssh for push)
 `htmlcount <bin/htmlcount>`_
  Count html elements in a html files or stdin.
 `loadavg <bin/loadavg>`_
