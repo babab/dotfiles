@@ -35,6 +35,11 @@ if [ "${HOST}" != "vml" ]; then
     alias gg="cd ${PROJECTPAD_SYMLINK}"
 fi
 
+# Open thunar or explorer file browser in current directory
+case "$(uname -s)" in
+    CYGWIN*|MINGW32*|MSYS*|MINGW*) alias b='explorer.exe .' ;;
+    *) alias b='thunar .' ;;
+esac
 
 ### Git aliases ##############################################################
 
@@ -98,6 +103,10 @@ gsvndcommit() {
 
 ### Vim / Emacs / Spacemacs / Text editing ###################################
 
+alias todo='vim ~/TODO.otl'
+alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
+alias view='vim -R'
+
 # My most evil shell alias/function
 #
 # Use emacsclient to try to open the files in a new Emacs window
@@ -131,8 +140,6 @@ vii() {
     fi
 }
 
-alias view='vim -R'
-
 # Wrapper for opening (and protecting) your last vim session
 svim() {
     if [ -f "/tmp/${USER}.session.vim" ]; then
@@ -148,49 +155,39 @@ svim() {
     fi
 }
 
-# Quickly edit scripts whatever their location may be
-viwhich() {
-    if [ $1 ]; then
-        vim $(which $1)
-    else
-        echo "What a shame, that's no argument"
-    fi
-}
-
-# Quickly edit files found by grep
-vigrep() {
-    if [ $1 ]; then
-        vim -p -- $(grep -l -R "$*" .)
-    else
-        echo "What a shame, that's no argument"
-    fi
-}
 # Quickly edit files found by ack
 viack() {
     if [ $1 ]; then
         vim -p -- $(ack -l $*)
-    else
-        echo "What a shame, that's no argument"
     fi
 }
 # Quickly edit files found by ag
 viag() {
     if [ $1 ]; then
         vim -p -- $(ag -l $*)
-    else
-        echo "What a shame, that's no argument"
+    fi
+}
+# Quickly edit files found by grep
+vigrep() {
+    if [ $1 ]; then
+        vim -p -- $(grep -l -R "$*" .)
     fi
 }
 
-alias todo='vim ~/TODO.otl'
-alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
+# Quickly edit scripts whatever their location may be
+viwhich() {
+    if [ $1 ]; then
+        vim $(which $1)
+    fi
+}
 
 
 ### Python aliases ###########################################################
 alias envinit='source .virtualenv/bin/activate'
-alias envmake3.8='python3.8 -m venv .virtualenv'
-alias envmake3.7='python3.7 -m venv .virtualenv'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
+alias envmake3.7='python3.7 -m venv .virtualenv'
+alias envmake3.8='python3.8 -m venv .virtualenv'
+
 pi() {
     # start an interactive python session with bpython
     filename="$1"
@@ -203,50 +200,39 @@ pi() {
 }
 
 
-### PHP aliases ##############################################################
+### PHP / General webdevelopment #############################################
 alias runphpserver='php -S 127.0.0.1:8080'
 alias phpcs="phpcs --standard=$HOME/dotfiles/standards/babab-phpcs/ruleset.xml"
 phpmd() {
     phpmd "$1" "text" "$HOME/dotfiles/standards/babab-phpmd/ruleset.xml"
 }
 
+codecept_alias_init() {
+    alias codecept="$PWD/vendor/bin/codecept"
+}
+
+# TypeScript
+alias tsc_all='tsc *.ts'
+alias tsc_auto='tsc *.ts --watch'
 
 ### Misc aliases #############################################################
-
-# open file browser in current directory
-case "$(uname -s)" in
-CYGWIN*|MINGW32*|MSYS*|MINGW*)
-    alias b='explorer.exe .'
-    ;;
-
-*)
-    alias b='thunar .'
-    ;;
-esac
 
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias rm_docker_images='docker rmi $(docker images -q)'
 alias rm_docker_ps='docker rm $(docker ps -qa)'
+alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
+alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sshagent='eval `ssh-agent` >/dev/null'
 alias sshsockstunnel='ssh -C2qTnN -D 8080 sunrise'
-alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
-alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
-alias tsc_all='tsc *.ts'
-alias tsc_auto='tsc *.ts --watch'
 alias tmuxa='tmux new -s main -A'
+alias ytd='yt-dlp --no-playlist --no-check-certificates'
 
 hypo_upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
 }
 
-codecept_alias_init() {
-    alias codecept="$PWD/vendor/bin/codecept"
-}
-
 if [ -f $HOME/.aliases_local ]; then
     . $HOME/.aliases_local
 fi
-
-alias ytd='yt-dlp --no-playlist --no-check-certificates'
