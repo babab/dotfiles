@@ -59,13 +59,13 @@ PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! $(prompt_git_info)
 
 ### Other ####################################################################
 
-#source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
-#source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-## zsh-history-substring-search
-#zmodload zsh/terminfo
-#bindkey "$terminfo[kcuu1]" history-substring-search-up
-#bindkey "$terminfo[kcud1]" history-substring-search-down
-#bindkey -M vicmd 'k' history-substring-search-up
-#bindkey -M vicmd 'j' history-substring-search-down
+# zsh-history-substring-search
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
