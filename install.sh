@@ -51,6 +51,34 @@ usage()
     echo 'Use --force to remove all existing files and install in one step'
 }
 
+pull_or_clone_github()
+{
+    # This should always be executed from the parent of a (soon to be)
+    # checked out git workdirectory.
+    _user="$1"
+    _repo="$2"
+    echo "* $2 - https://github.com/$_user/$_repo"
+    if [ -d "$_repo" ]; then
+        cd "$_repo"
+        git pull
+        cd ..
+    else
+        git clone https://github.com/"$_user/$_repo".git
+    fi
+}
+
+_getdepends()
+{
+    echo -- cloning / updating dependencies
+    mkdir -p "${RELATIVE_DOTFILES_PATH}/depends"
+    cd "${RELATIVE_DOTFILES_PATH}/depends"
+    pull_or_clone_github ryuslash baps1
+    pull_or_clone_github zsh-users zsh-autosuggestions
+    pull_or_clone_github zsh-users zsh-history-substring-search
+    pull_or_clone_github zsh-users zsh-syntax-highlighting
+    cd "$HOME"
+}
+
 LFS="
 "
 
@@ -80,6 +108,7 @@ _confirm()
     echo -- creating ~/bin symlink
     ln -s ${RELATIVE_DOTFILES_PATH}/bin 2>/dev/null
 
+
 #    # install baps1
 #    echo -- installing baps1
 #    INST_PATH="${HOME}/${RELATIVE_DOTFILES_PATH}/bin" make -e \
@@ -103,10 +132,12 @@ case $1 in
     ;;
 '--confirm')
     _confirm
+    _getdepends
     ;;
 '--force')
     _remove
     _confirm
+    _getdepends
     ;;
 *)
     usage

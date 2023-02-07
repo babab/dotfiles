@@ -6,4 +6,5 @@
 /bin/tagfile
 
 /.config/
+/depends/
 /dotfiles/.composer/
