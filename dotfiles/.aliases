@@ -217,11 +217,11 @@ alias tsc_auto='tsc *.ts --watch'
 
 ### Misc aliases #############################################################
 
+alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
+alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias rm_docker_images='docker rmi $(docker images -q)'
 alias rm_docker_ps='docker rm $(docker ps -qa)'
-alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
-alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sshagent='eval `ssh-agent` >/dev/null'
