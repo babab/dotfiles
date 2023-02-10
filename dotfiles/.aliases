@@ -39,7 +39,49 @@ fi
 case "$(uname -s)" in
     CYGWIN*|MINGW32*|MSYS*|MINGW*) alias b='explorer.exe .' ;;
     *) alias b='thunar .' ;;
+    # TODO: use xdg-open
 esac
+
+
+### Inspect commands, functions and aliases ##################################
+
+what() {
+    test "$1" || return 1
+    _cmdres=$(command -V "$1")
+    _cmderr=$?
+    case $_cmdres in
+        *'is a shell function from'*)
+            _fileloc="$(echo $_cmdres | sed 's/^.*is a shell function from //')"
+            echo $_cmdres
+            echo
+            echo "FUNCTION DEFINITION:"
+            which "$1"
+            echo
+            echo "Use 'viwhat $1' to edit the function definition or use:"
+            echo "${EDITOR-vi} '$_fileloc'"
+            ;;
+        *'not found')
+            echo $_cmdres
+            ;;
+        *' is a shell builtin')
+            echo $_cmdres
+            echo Cannot quickly edit this type, returning status code 1
+            return 1
+            ;;
+        *' is an alias for '*)
+            echo $_cmdres
+            echo Cannot quickly edit this type, returning status code 1
+            return 1
+            ;;
+        *)
+            echo $_cmdres
+            echo "Use 'viwhat $1' to edit the file or use:"
+            echo "${EDITOR-vi} '$(command -v "$1")'"
+            ;;
+    esac
+    return $_cmderr
+}
+# alias which="echo use 'what' instead of 'which'"
 
 ### Git aliases ##############################################################
 
@@ -179,6 +221,22 @@ viwhich() {
     if [ $1 ]; then
         vim $(which $1)
     fi
+}
+
+# Quickly edit scripts, functions or aliases whatever their location may be
+# EXPERIMENTAL
+viwhat() {
+    _whatres="$(what "$1")"
+    _err=$?
+
+    if [ $_err -eq 0 ]; then
+        editcmd=$(echo "$_whatres" | tail -1)
+        echo $editcmd
+        eval $editcmd
+    else
+        echo $_whatres
+    fi
+    return $_err
 }
 
 
