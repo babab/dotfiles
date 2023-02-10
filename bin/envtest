@@ -16,17 +16,56 @@
 
 #  Check paths of python, pip and virtual environment
 
-echo "Python environment"
-echo "=================="
-echo -n 'python      '
-command -v python || echo No python executable found
+_chkcmd() {
+    output="$(command -V $1 2>/dev/null)"
+    if [ $? -eq 0 ]; then
+        echo "- ${output}"
+    else
+        echo "* [!] $1 is not available"
+    fi
+}
 
-echo -n 'pip         '
-command -v pip || echo No pip executable found
-
-echo -n 'virtualenv  '
+echo "VIRTUAL ENVIRONMENT"
+echo "==================="
 if [[ -z "${VIRTUAL_ENV}" ]]; then
     echo No virtual environment loaded
 else
-    echo "${VIRTUAL_ENV}"
+    echo '$VIRTUAL_ENV='"${VIRTUAL_ENV}"
 fi
+
+echo
+echo "FIRST IN PATH"
+echo "============="
+_chkcmd python
+_chkcmd python2
+_chkcmd python3
+_chkcmd pip
+_chkcmd 2to3
+_chkcmd rst2html
+
+echo
+echo "VERSIONS"
+echo "--------"
+echo -n "python         "; python --version
+echo -n "python         "; pip --version
+echo -n "python -m pip  "; python -m pip --version
+
+echo
+echo "VERSIONS"
+echo "========"
+_chkcmd pyenv
+_chkcmd python2.7
+_chkcmd python3.7
+_chkcmd python3.8
+_chkcmd python3.9
+_chkcmd python3.10
+_chkcmd python3.11
+_chkcmd python3.12
+
+echo
+echo "PIP LIST"
+echo "========"
+echo 'List is created with ``python -m pip list``::'
+echo
+python -m pip list | sed 's/^/    /'
+echo
