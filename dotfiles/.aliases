@@ -46,13 +46,15 @@ esac
 ### Inspect commands, functions and aliases ##################################
 
 what() {
+    # Try to standardize usage of `command` and `which` shell builtins
+    # in different shells, especially when inspecting functions
     test "$1" || return 1
-    _cmdres=$(command -V "$1")
+    _cmdres="$(command -V "$1")"
     _cmderr=$?
     case $_cmdres in
         *'is a shell function from'*)
             _fileloc="$(echo $_cmdres | sed 's/^.*is a shell function from //')"
-            echo $_cmdres
+            echo "$_cmdres"
             echo
             echo "FUNCTION DEFINITION:"
             which "$1"
@@ -61,20 +63,20 @@ what() {
             echo "${EDITOR-vi} '$_fileloc'"
             ;;
         *'not found')
-            echo $_cmdres
+            echo "$_cmdres"
             ;;
         *' is a shell builtin')
-            echo $_cmdres
+            echo "$_cmdres"
             echo Cannot quickly edit this type, returning status code 1
             return 1
             ;;
         *' is an alias for '*)
-            echo $_cmdres
+            echo "$_cmdres"
             echo Cannot quickly edit this type, returning status code 1
             return 1
             ;;
         *)
-            echo $_cmdres
+            echo "$_cmdres"
             echo "Use 'viwhat $1' to edit the file or use:"
             echo "${EDITOR-vi} '$(command -v "$1")'"
             ;;
