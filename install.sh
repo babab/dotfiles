@@ -14,6 +14,28 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+usage()
+{
+    echo Dotfiles installer by Benjamin Althues
+    echo --------------------------------------
+    echo "Usage: ./install.sh [--force]"
+    echo "       ./install.sh [--remove]"
+    echo "       ./install.sh [--confirm]"
+    echo "       ./install.sh [--version]"
+    echo
+    echo 'Use --confirm to install in a safe way without removing files'
+    echo 'Use --remove to remove all (pre-existing) files / symbolic links'
+    echo '    (before install)'
+    echo 'Use --force to remove all existing files and install in one step'
+}
+
+# Installer script version number, this gets bumped:
+# - on any change to the install/update procedure
+# - when a symlink is added or removed that is handled by this script
+#   (in dotfiles.list)
+export BABABDOT_VERSION=1
+
+
 # check if we are in the right directory
 grep -q dotfiles .git/config 2>/dev/null
 if [[ $? -ne 0 ]]; then
@@ -35,20 +57,6 @@ makelink()
     else
         echo -e "LINKED\t${file}"
     fi
-}
-
-usage()
-{
-    echo Dotfiles installer by Benjamin Althues
-    echo --------------------------------------
-    echo "Usage: ./install.sh [--force]"
-    echo "       ./install.sh [--remove]"
-    echo "       ./install.sh [--confirm]"
-    echo
-    echo 'Use --confirm to install in a safe way without removing files'
-    echo 'Use --remove to remove all (pre-existing) files / symbolic links'
-    echo '    (before install)'
-    echo 'Use --force to remove all existing files and install in one step'
 }
 
 pull_or_clone_github()
@@ -138,6 +146,9 @@ case $1 in
     _remove
     _confirm
     _getdepends
+    ;;
+'--version')
+    echo "install.sh v$BABABDOT_VERSION"
     ;;
 *)
     usage
