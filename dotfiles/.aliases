@@ -92,12 +92,12 @@ kk() {
     # Handle error when no valid repository can be found. If in a repo,
     # get first 2 lines of git status output to see branch and upstream
     # branch names
-    GITSTATUS=$(git status)
+    _gitstatus="$(git status)"
     if [ $? -eq 128 ]; then
-        echo $GITSTATUS
+        echo "$_gitstatus"
         return 128
     fi
-    echo $GITSTATUS | head -2
+    echo "$_gitstatus" | head -2
 
     if [ "$PWD" = "$HOME/dotfiles/dotfiles" ]; then
         echo "untracked files are filtered when PWD is $PWD"
