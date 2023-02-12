@@ -241,10 +241,17 @@ viwhat() {
 
 
 ### Python aliases ###########################################################
+#
+# WORKFLOW:
+# envmake    - create a venv in a new dir .virtualenv with current `python`
+# envinit    - activate/enter the virtual environment
+# envtest    - show information about which python, venv and pkgs are used
+# ...        - work on project
+# deactivate - deactivate/leave the virtual environment
+
 alias envinit='source .virtualenv/bin/activate'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
-alias envmake3.7='python3.7 -m venv .virtualenv'
-alias envmake3.8='python3.8 -m venv .virtualenv'
+alias envmake='python -m venv .virtualenv'
 
 pi() {
     # start an interactive python session with bpython
