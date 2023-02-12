@@ -10,10 +10,10 @@ if [ "$(uname)" = 'OpenBSD' ]; then
 else
     alias la='ls -FA --color=auto'
     ll() {
-        ls -Flh  --color=always "$@" | less
+        ls -Flh  --color=always "$@" | less -iFXRS
     }
     lla() {
-        ls -FlhA --color=always "$@" | less
+        ls -FlhA --color=always "$@" | less -iFXRS
     }
     alias ls='ls -F  --color=auto'
 fi
