@@ -14,14 +14,36 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-#  Check paths of python, pip and virtual environment
+
+# envtest: Check paths and versions of python, pip and virtual environment
+#
+# DESCRIPTION
+# There are numerous ways in which the python interpreter and
+# its version and helper scripts are used. Combined with virtual
+# environments the possibilities are endless. This script helps identify
+# the following real world issues that I've come across over the years:
+#
+# - The `python` executable that is found first in PATH is not the
+#   version you expected it to be.
+# - The `pip` executable that is found first in PATH is not pointing to the
+#   `python` you expected it to be.
+# - The `pip` executable differs from `python -m pip` (e.g. on Cygwin).
+# - You expect `python` or `pip` to be pointing to your virtual
+#   environment and it isn't.
+#
+# The output of this script is formatted in reStructuredText which
+# is the de facto documentation markup language used in Python. You
+# can therefore convert the report it makes to info, man, pdf etc.
+# Creating HTML is as easy as piping to rst2html:
+#
+#    envtest | rst2html > # report.html
 
 _chkcmd() {
     output="$(command -V $1 2>/dev/null)"
     if [ $? -eq 0 ]; then
         echo "- ${output}"
     else
-        echo "* [!] $1 is not available"
+        echo "- [!] $1 is not available"
     fi
 }
 
@@ -44,15 +66,15 @@ _chkcmd 2to3
 _chkcmd rst2html
 
 echo
-echo "VERSIONS"
-echo "--------"
+echo "VERSIONS OF FIRST IN PATH PYTHON/PIP"
+echo "------------------------------------"
 echo -n "python         "; python --version
-echo -n "python         "; pip --version
+echo -n "pip            "; pip --version
 echo -n "python -m pip  "; python -m pip --version
 
 echo
-echo "VERSIONS"
-echo "========"
+echo "OTHER INSTALLED VERSIONS"
+echo "========================"
 _chkcmd pyenv
 _chkcmd python2.7
 _chkcmd python3.7
