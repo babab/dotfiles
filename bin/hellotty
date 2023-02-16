@@ -1,0 +1,9 @@
+#!/bin/sh
+
+motd="$(uname -sn) - $(whoami)"
+ssh-add -l >/dev/null 2>&1
+case $? in
+    0) echo "${motd} - key loaded" ;;
+    1) echo "${motd} - no key loaded";;
+    2) echo "${motd} - agent n/a";;
+esac
