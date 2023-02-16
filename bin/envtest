@@ -30,13 +30,28 @@
 # - The `pip` executable differs from `python -m pip` (e.g. on Cygwin).
 # - You expect `python` or `pip` to be pointing to your virtual
 #   environment and it isn't.
-#
-# The output of this script is formatted in reStructuredText which
-# is the de facto documentation markup language used in Python. You
-# can therefore convert the report it makes to info, man, pdf etc.
-# Creating HTML is as easy as piping to rst2html:
-#
-#    envtest | rst2html > # report.html
+
+_usage() {
+    echo 'usage: envtest [option]'
+    echo
+    echo 'By default, envtest shows all information except for sections'
+    echo 'PACKAGES and ALL VERSIONS. Use the options below to show more'
+    echo 'or less.'
+    echo
+    echo Options:
+    echo '-s, --short      show only python and pip paths'
+    echo '-p, --pkg        show only python, pip paths and packages'
+    echo '-v, -a, --all    show all information available'
+    echo '-h, -?, --help   show this usage information'
+    echo
+    echo The output of this script is formatted in reStructuredText which
+    echo is the de facto documentation markup language used in Python. You
+    echo can therefore convert the report it makes to info, man, pdf etc.
+    echo Creating HTML is as easy as piping to rst2html:
+    echo
+    echo '    envtest | rst2html > report.html'
+    echo
+}
 
 _chkcmd() {
     output="$(command -V $1 2>/dev/null)"
@@ -47,47 +62,96 @@ _chkcmd() {
     fi
 }
 
-echo "VIRTUAL ENVIRONMENT"
-echo "==================="
-if [[ -z "${VIRTUAL_ENV}" ]]; then
-    echo No virtual environment loaded
-else
-    echo '$VIRTUAL_ENV='"${VIRTUAL_ENV}"
-fi
+_section_venv() {
+    echo "VIRTUAL ENVIRONMENT"
+    echo "==================="
+    if [[ -z "${VIRTUAL_ENV}" ]]; then
+        echo No virtual environment loaded
+    else
+        echo 'VIRTUAL_ENV='"${VIRTUAL_ENV}"
+    fi
+}
 
-echo
-echo "FIRST IN PATH"
-echo "============="
-_chkcmd python
-_chkcmd python2
-_chkcmd python3
-_chkcmd pip
-_chkcmd 2to3
-_chkcmd rst2html
+_section_fip() {
+    if [ "$1" != '-s' ]; then
+        echo "FIRST IN PATH"
+        echo "============="
+    fi
+    _chkcmd python
+    _chkcmd pip
+    if [ "$1" != '-s' ]; then
+        _chkcmd python2
+        _chkcmd python3
+        _chkcmd 2to3
+        _chkcmd rst2html
+    fi
+}
 
-echo
-echo "VERSIONS OF FIRST IN PATH PYTHON/PIP"
-echo "------------------------------------"
-echo -n "python         "; python --version
-echo -n "pip            "; pip --version
-echo -n "python -m pip  "; python -m pip --version
+_section_vofip() {
+    echo "VERSIONS OF FIRST IN PATH PYTHON/PIP"
+    echo "------------------------------------"
+    echo -n "- python         "; python --version
+    echo -n "- pip            "; pip --version
+    echo -n "- python -m pip  "; python -m pip --version
+}
 
-echo
-echo "OTHER INSTALLED VERSIONS"
-echo "========================"
-_chkcmd pyenv
-_chkcmd python2.7
-_chkcmd python3.7
-_chkcmd python3.8
-_chkcmd python3.9
-_chkcmd python3.10
-_chkcmd python3.11
-_chkcmd python3.12
+_section_all_versions() {
+    echo "ALL VERSIONS"
+    echo "============"
+    _chkcmd pyenv
+    _chkcmd python2.7
+    _chkcmd python3.7
+    _chkcmd python3.8
+    _chkcmd python3.9
+    _chkcmd python3.10
+    _chkcmd python3.11
+    _chkcmd python3.12
+}
 
-echo
-echo "PIP LIST"
-echo "========"
-echo 'List is created with ``python -m pip list``::'
-echo
-python -m pip list | sed 's/^/    /'
-echo
+_section_packages() {
+    if [ "$1" != '-s' ]; then
+        echo "PIP LIST"
+        echo "========"
+        echo 'List is created with ``python -m pip list``::'
+        echo
+        python -m pip list | sed 's/^/    /'
+        echo
+    else
+        python -m pip list
+    fi
+}
+
+_main() {
+    case $1 in
+        -s | --s*)
+            _section_fip -s
+            ;;
+        -p | --p*)
+            _section_fip -s; echo
+            _section_packages -s ;;
+        -v | -a | --a*)
+            _section_venv; echo
+            _section_fip; echo
+            _section_vofip; echo
+            _section_all_versions; echo
+            _section_packages
+            ;;
+        -h | -? | --h*)
+            _usage
+            ;;
+        '')
+            _section_venv; echo
+            _section_fip; echo
+            _section_vofip; echo
+            echo "use 'envtest --all' to see all available information"
+            echo "use 'envtest -h' or 'envtest --help' to see all other options"
+            ;;
+        *)
+            echo error: unknown option "$1"
+            echo
+            echo "use 'envtest -h' or 'envtest --help' to see usage information"
+            ;;
+    esac
+}
+
+_main "$@"
