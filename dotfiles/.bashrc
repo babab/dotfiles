@@ -59,3 +59,6 @@ complete -ac loop
 if [ -f "$HOME/.bashrc.local" ]; then
     . ${HOME}/.bashrc.local
 fi
+
+# print kernel, hostname, username and ssh-key/ssh-agent status
+~/bin/hellotty

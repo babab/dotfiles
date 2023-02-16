@@ -77,4 +77,7 @@ if command -v pyenv; then
     eval "$(pyenv init -)"
 fi
 
+# print kernel, hostname, username and ssh-key/ssh-agent status
+~/bin/hellotty
+
 # vim: set ft=sh:
