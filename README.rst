@@ -96,6 +96,8 @@ Small programs and utility scripts
  Update system and reboot or halt computer after a countdown if there are no errors.
 `urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
+`vii <bin/vii>`_
+Wrapper for editing files in the most fitting way possible, depending on: terminal size, environment and number of files.
 `wmtoggle <bin/wmtoggle>`_
  Switch between using spectrwm or openbox when startx is executed.
 `wschemaspy <bin/wschemaspy>`_
