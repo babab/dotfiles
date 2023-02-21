@@ -97,7 +97,7 @@ Small programs and utility scripts
 `urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
 `vii <bin/vii>`_
-Wrapper for editing files in the most fitting way possible, depending on: terminal size, environment and number of files.
+ Wrapper for editing files in the most fitting way possible, depending on: terminal size, environment and number of files.
 `wmtoggle <bin/wmtoggle>`_
  Switch between using spectrwm or openbox when startx is executed.
 `wschemaspy <bin/wschemaspy>`_
