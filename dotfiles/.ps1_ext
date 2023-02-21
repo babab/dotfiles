@@ -36,9 +36,6 @@ pscheck_ps1()
     esac
 }
 
-# Source __git_ps1
-. ~/bin/git-prompt.sh
-
 # For baps1, see https://github.com/ryuslash/baps1
 
 PS1="\[$(tput bold; tput setaf 1)\]\n\u\
@@ -49,6 +46,5 @@ PS1="\[$(tput bold; tput setaf 1)\]\n\u\
 \[$(tput setaf 6)\] \$(sshkey_ps1)\
 \$(pscheck_ps1 dropbox)\
 \[$(tput setaf 2)\] \$(baps1)\
-\[$(tput setaf 1)\]\$(__git_ps1 ' %s')\
 \[$(tput setaf 2)\]\n\w\
 \[$(tput setaf 3)\]\$\[$(tput op; tput sgr0)\] "

@@ -10,9 +10,9 @@ setopt PROMPT_SUBST
 autoload -U compinit && compinit
 autoload -U colors && colors
 
-# Autoload zsh functions.
-fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
+# # Autoload zsh functions.
+# fpath=(~/.zsh/functions $fpath)
+# autoload -U ~/.zsh/functions/*(:t)
 
 source ${HOME}/.aliases # aliases and (wrapper) functions
 source ${HOME}/.profile # environment variables
@@ -38,24 +38,12 @@ fi
 # PROMPT='$(shellprompt -m zsh -p babab)'
 # PROMPT='%{$(shellprompt -p babab)%}'
 
-# # Enable auto-execution of functions.
-typeset -ga preexec_functions
-typeset -ga precmd_functions
-typeset -ga chpwd_functions
-
-# # Append git functions needed for prompt.
-preexec_functions+='preexec_update_git_vars'
-precmd_functions+='precmd_update_git_vars'
-chpwd_functions+='chpwd_update_git_vars'
-
 ## with baps1
-#PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(baps1) $(prompt_git_info)%{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+#PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$fg_bold[green]%}$(baps1) %{$reset_color% %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
 # without baps1
-PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! $(prompt_git_info)%{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
+PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
-## utf-8 fix
-#PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$reset_color%} %{$fg_bold[green]%}%~%{$fg_bold[yellow]%}%#%{$reset_color%} '
 
 ### Other ####################################################################
 
