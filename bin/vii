@@ -1,0 +1,34 @@
+# My most evil shell alias/function
+#
+# Use emacsclient to try to open the files in a new Emacs window
+# if a server is running. When emacsclient is not an executable or
+# no server is running, revert to using Vim with a pane/tab layout
+# adapted to the current terminal console.
+vii() {
+    if [ ! $1 ]; then
+        echo "error: missing arguments"
+        return
+    fi
+
+    emacsclient -q -n $* 2>/dev/null && return 0
+
+    if [ $? -ne 0 ]; then
+        # Open files in tabs or vertical/horizontal splits depending on
+        # number of files and number of columns available in terminal
+        if [ $# -eq 1 ]; then
+            vim $@
+        elif [ $# -eq 2 ]; then
+            if [ $(tput cols) -lt 80 ]; then
+                vim -p $@
+            elif [ $(tput cols) -lt 191 ]; then
+                vim -o $@
+            else
+                vim -O $@
+            fi
+        elif [ $# -ge 3 ]; then
+            vim -p $@
+        fi
+    fi
+}
+
+vii "$@"
