@@ -1,0 +1,118 @@
+#!/bin/sh
+# check-programs: Check to see what programs are installed on the system
+
+# Copyright (c) 2023  Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# SPDX-License-Identifier: ISC
+
+
+_missing_exe=''
+_print_only_missing=''
+
+if [ "$1" = '-m' ]; then
+    _print_only_missing=yes
+fi
+
+_print() {
+    test -z "$_print_only_missing" && echo "$@"
+}
+_header() {
+    test -z "$_print_only_missing" && printf '\n%s\n' "$@"
+}
+
+_chkcmd() {
+    if output="$(command -V "$1" 2>/dev/null)"; then
+        _print "- ${output}"
+    else
+        _print "* $1 is N/A"
+        _missing_exe="${_missing_exe}$1\n"
+    fi
+}
+
+_print 'SHELLS'
+_chkcmd bash
+_chkcmd dash
+_chkcmd fish
+_chkcmd ksh
+_chkcmd oksh
+_chkcmd sh
+_chkcmd zsh
+
+_header 'ESSENTIALS'
+_chkcmd 7z
+_chkcmd ag
+_chkcmd curl
+_chkcmd dialog
+_chkcmd git
+_chkcmd htop
+_chkcmd man
+_chkcmd par
+_chkcmd ssh
+_chkcmd sudo
+_chkcmd tmux
+_chkcmd vi
+_chkcmd vim
+_chkcmd wget
+
+_header 'BUILD ENVIRONMENT'
+_chkcmd cc
+_chkcmd diff
+_chkcmd make
+_chkcmd patch
+
+_header 'INTERPRETERS / COMPILERS / LANGUAGES'
+_chkcmd java
+_chkcmd lua
+_chkcmd node
+_chkcmd perl
+_chkcmd php
+_chkcmd python
+_chkcmd ruby
+_chkcmd tsc
+
+_header 'CHECKERS / LINTERS'
+_chkcmd checkbashisms
+_chkcmd shellcheck
+_chkcmd flake8
+
+_header 'ARCHLINUX SPECIFIC'
+_chkcmd paccache
+_chkcmd reflector
+
+_header 'FRIENDS'
+_chkcmd baps1
+_chkcmd gitto
+_chkcmd hypo-cli
+_chkcmd sti
+
+_header 'DOGFOODING'
+_chkcmd colemaktutor
+_chkcmd dispass
+_chkcmd dofyon
+_chkcmd gim
+_chkcmd magicle
+_chkcmd projectpad
+_chkcmd tagfile
+_chkcmd tuh
+_chkcmd wdocker
+
+_header 'MISC'
+_chkcmd gptfdisk
+_chkcmd locate
+
+_print "Use 'check-programs -m' to only show executables that are missing"
+
+test -n "$_print_only_missing" && printf '%b' "$_missing_exe"
+exit 0

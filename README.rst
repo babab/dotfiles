@@ -60,6 +60,8 @@ Small programs and utility scripts
  AFK mining clicker script for Minecraft using xdotool.
 `baraction.sh <bin/baraction.sh>`_
  Statusbar script for spectrwm (my favorite WM).
+`check-programs <bin/check-programs>`_
+ Check to see what programs are installed on the system
 `ctb <bin/ctb>`_
  Create temporary backup (create timestamped tar/gz archives of files/directories.
 `duh <bin/duh>`_
