@@ -67,7 +67,7 @@ Small programs and utility scripts
 `envtest <bin/envtest>`_
  Check paths of python, pip and virtual environment
 `git-remote-gh <bin/git-remote-gh>`_
- Configure remote urls for a public Github repository (using https for fetch / ssh for push)
+ Clone or configure remotes (of) a Github repo with favourable urls (using https for fetch / ssh for push by default).
 `htmlcount <bin/htmlcount>`_
  Count html elements in a html files or stdin.
 `loadavg <bin/loadavg>`_

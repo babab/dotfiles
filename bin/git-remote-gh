@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2023 Benjamin Althues <benjamin@babab.nl>
+# Copyright (c) 2023  Benjamin Althues <benjamin@babab.nl>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,43 +14,77 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+# SPDX-License-Identifier: ISC
+
 _usage() {
-    echo 'usage: git-remote-gh <user/repo> [<remote>] [<branch>]'
-    echo '       git-remote-gh [options]'
+    echo 'usage: git-remote-gh [-r] <user/repo> [<remote>] [<branch>]'
+    echo '       git-remote-gh -[r]c <user/repo>'
+    echo '       git-remote-gh -v'
+    echo '       git-remote-gh -h | --help'
     echo
     echo 'Options:'
+    echo '-r               do not use a different push url (readonly)'
+    echo '-c               clone repo; before configuring push url '
     echo '-h, --help       show this help information'
     echo '-v               show configured remotes'
     echo
-    echo 'Configure remote urls for a public Github repository'
-    echo '(using https for fetch / ssh for push)'
+    echo 'Clone or configure remotes (of) a Github repo with favourable urls'
+    echo '(using https for fetch / ssh for push by default)'
+    echo
+    echo This configuration makes it possible to always fetch and pull
+    echo changes from public repositories without an ssh-agent or typing
+    echo passwords. It also sets the upstream remote tracking branch
+    echo without pushing any data. This is well suited for public repos.
     echo
     echo "If <remote> is not specified, it will default to 'origin.'"
     echo "If <branch> is not specified, it will default to the name of"
     echo "the current local branch (git branch --show-current)."
     echo
-    echo This configuration makes it possible to fetch and pull changes
-    echo without the need for an ssh-agent with an ssh-key loaded and/or
-    echo having to type a password. It also sets the upstream remote
-    echo tracking branch without pushing any data.
-    echo
-    echo 'Fetch urls use the https scheme "https://github.com/<user/repo>".'
-    echo 'Pull urls use the ssh scheme "git@github.com:<user/repo>".'
-    echo The repository should be public and you should have push rights.
-    echo
-    echo Scripts in PATH that start with 'git-' will be made available
-    echo as git subcommands. It is therefore possible to run this script
-    echo as "'git remote-gh'". Be aware however that invoking
-    echo "'git remote-gh --help'" will try to find a manpage instead
-    echo and fail instead of showing this help.
+    echo "Tip: add a git alias 'gh' if you use this often:"
+    echo '    git config --global alias.gh remote-gh'
 }
 
+_set_push_url() {
+    echo '$ git remote set-url --push' "${2} git@github.com:${1}.git"
+    git remote set-url --push "${2}" "git@github.com:${1}.git"
+}
+
+# states
+_sshpushurl=yes
+_clone=no
+_hasflags=no
+
+# check for -r and -c flags and shift arguments accordingly
 case $1 in
-    -h*) _usage ; exit 0 ;;
-    --h*) _usage ; exit 0 ;;
-    -v) git remote --verbose ; exit 0 ;;
+    -*) _hasflags=yes ;;
+esac
+while [ "$_hasflags" = 'yes' ]; do
+    case $1 in
+        # loop through these behaviour modifiers
+        -r) _sshpushurl=no ; shift ;;
+        -c) _clone=yes ; shift ;;
+        -rc) _sshpushurl=no _clone=yes; shift ;;
+        -cr) _sshpushurl=no _clone=yes; shift ;;
+
+        # stops script prematurely if found
+        -h*) _usage ; exit 0 ;;
+        --h*) _usage ; exit 0 ;;
+        -v) git remote --verbose ; exit 0 ;;
+        -*)
+            echo error: invalid option "$1"
+            echo for help information see git-remote-gh -h
+            exit 1
+            ;;
+
+        # break out of while loop
+        *) _hasflags=no ;;
+    esac
+done
+
+# check positonal arguments
+case $1 in
     '') _usage ; exit 0 ;;
-    *'/'*) ;;
+    *'/'*) ;; # valid, proceed
     *)
         echo error: invalid argument "$1"
         echo argument must contain a "'/'", to denote user/project
@@ -59,7 +93,33 @@ case $1 in
         ;;
 esac
 
+# we now know that $1 must be user/repo
 arg_ident="$1"
+
+
+# clone behaviour ############################################################
+if [ $_clone = 'yes' ]; then
+    _folder="$(echo "$arg_ident" | sed 's|^.*/||')"
+    echo "t=$_folder"
+    if test -d "$_folder"; then
+        echo error: "'$_folder'" already exists
+        exit 3
+    fi
+    echo '$ 'git clone "'https://github.com/${arg_ident}.git'"
+    git clone "https://github.com/${arg_ident}.git"
+
+    echo cd "$_folder"
+    cd "$_folder"
+
+    # Configure push url
+    if [ $_sshpushurl = 'yes' ]; then
+        _set_push_url "$_arg_ident" origin
+    fi
+    exit 0
+fi
+
+
+# regular behaviour ##########################################################
 
 # Use remote name as argumented or use default
 arg_remote="$2"
@@ -112,11 +172,14 @@ case ${remotesfound} in
 esac
 
 
-# Add remote and set push url
+# Add remote
 echo '$ git remote add' "${arg_remote}" "https://github.com/${arg_ident}.git"
 git remote add "${arg_remote}" "https://github.com/${arg_ident}.git"
-echo '$ git remote set-url --push' "${arg_remote} git@github.com:${arg_ident}.git"
-git remote set-url --push "${arg_remote}" "git@github.com:${arg_ident}.git"
+
+# Configure push url
+if [ $_sshpushurl = 'yes' ]; then
+    _set_push_url "$_arg_ident" "$_arg_remote"
+fi
 
 # Fetch from remote; set tracking branch; show verbose remote info
 echo '$ git fetch' "${arg_remote}"
