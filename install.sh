@@ -33,7 +33,7 @@ usage()
 # - on any change to the install/update procedure
 # - when a symlink is added or removed that is handled by this script
 #   (in dotfiles.list)
-export BABABDOT_VERSION=1
+export BABABDOT_VERSION=2
 
 
 # check if we are in the right directory
@@ -101,8 +101,7 @@ _remove()
     rm -f bin 2>/dev/null
 }
 
-_confirm()
-{
+function _confirm {
     # create folder for vim bak and swp files
     mkdir -p .vim-bak-swp
 
@@ -116,12 +115,22 @@ _confirm()
     echo -- creating ~/bin symlink
     ln -s ${RELATIVE_DOTFILES_PATH}/bin 2>/dev/null
 
+    # skip baps1 section below if it's already installed
+    echo -- checking baps1
+    command -v baps1 && return
 
-#    # install baps1
-#    echo -- installing baps1
-#    INST_PATH="${HOME}/${RELATIVE_DOTFILES_PATH}/bin" make -e \
-#        -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" install
-#    make -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" clean
+    # install or download baps1
+    if (command -v cc && command -v make); then
+        echo ++ building/installing baps1
+        INST_PATH="${HOME}/${RELATIVE_DOTFILES_PATH}/bin" make -e \
+           -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" install
+        make -C "${HOME}/${RELATIVE_DOTFILES_PATH}/depends/baps1/src" clean
+    else
+        echo ++ downloading/installing baps1
+        curl -o "${HOME}/${RELATIVE_DOTFILES_PATH}/bin/baps1" \
+            http://files.babab.nl/programs/x86_64/baps1/linux/baps1
+        chmod +x "${HOME}/${RELATIVE_DOTFILES_PATH}/bin/baps1"
+    fi
 }
 
 
