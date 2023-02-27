@@ -36,7 +36,7 @@
 # 2 - file not owned by root or $USER
 # 3 - vim, vi and /bin/vi are not found
 
-if [ ! $1 ]; then
+if test -z "$1"; then
     echo "error: missing arguments"
     echo
     echo 'usage: vii <file1> [<file2>] [<file3>] [...] '
@@ -46,7 +46,7 @@ fi
 # check to see if file is owned by root and set $_sudo if so
 # N.B. only the first file in $@ is checked
 _sudo=''
-_file_owner=$(stat -c %U "$1") # TODO: update for pdksh
+_file_owner="$(stat -c %U "$1")" # TODO: update for pdksh
 if [ "$_file_owner" = 'root' ]; then
     echo file is owned by root, using sudo
     sleep 1
@@ -60,10 +60,10 @@ fi
 ${_sudo} emacsclient -q -n "$@" 2>/dev/null && exit 0
 
 # Check to see if vim is available, else try to fall back on vi
-if [ ! command -v vim >/dev/null ]; then
-    if [ command -v vi >/dev/null ]; then
+if ! command -v vim >/dev/null; then
+    if command -v vi >/dev/null; then
         ${_sudo} vi "$@"
-    elif [ command -v /bin/vi >/dev/null ]; then
+    elif command -v /bin/vi >/dev/null; then
         ${_sudo} /bin/vi "$@"
     else
         echo error: vim, vi and /bin/vi are not found.
@@ -73,18 +73,16 @@ fi
 
 # Open files in tabs or vertical/horizontal splits depending on
 # number of files and number of columns available in terminal
-if [ $? -ne 0 ]; then
-    if [ $# -eq 1 ]; then
-        ${_sudo} vim "$@"
-    elif [ $# -eq 2 ]; then
-        if [ $(tput cols) -lt 80 ]; then
-            ${_sudo} vim -p "$@"
-        elif [ $(tput cols) -lt 191 ]; then
-            ${_sudo} vim -o "$@"
-        else
-            ${_sudo} vim -O "$@"
-        fi
-    elif [ $# -ge 3 ]; then
+if [ $# -eq 1 ]; then
+    ${_sudo} vim "$@"
+elif [ $# -eq 2 ]; then
+    if [ "$(tput cols)" -lt 80 ]; then
         ${_sudo} vim -p "$@"
+    elif [ "$(tput cols)" -lt 191 ]; then
+        ${_sudo} vim -o "$@"
+    else
+        ${_sudo} vim -O "$@"
     fi
+elif [ $# -ge 3 ]; then
+    ${_sudo} vim -p "$@"
 fi
