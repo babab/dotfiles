@@ -56,6 +56,7 @@ _chkcmd ag
 _chkcmd curl
 _chkcmd dialog
 _chkcmd git
+_chkcmd hostname
 _chkcmd htop
 _chkcmd man
 _chkcmd par
