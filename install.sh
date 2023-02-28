@@ -33,7 +33,7 @@ usage()
 # - on any change to the install/update procedure
 # - when a symlink is added or removed that is handled by this script
 #   (in dotfiles.list)
-export BABABDOT_VERSION=2
+export BABABDOT_VERSION=3
 
 
 # check if we are in the right directory
@@ -98,7 +98,16 @@ _remove()
     done
 
     # unlink bin directory separately
-    rm -f bin 2>/dev/null
+    if [ -h bin ]; then
+        rm -f bin 2>/dev/null
+    else
+        echo Error: bin is not a symbolic link but a directory.
+        echo
+        echo ~/bin should either be non-existent or a symlink to
+        echo ${RELATIVE_DOTFILES_PATH} Please fix and run again.
+        exit 2
+    fi
+
 }
 
 function _confirm {
