@@ -2,8 +2,7 @@
 # script for urxvt-modeline, see:
 # http://code.ryuslash.org/urxvt-modeline/about/
 
-is_sshkey_loaded()
-{
+is_sshkey_loaded() {
     ssh-add -l >/dev/null 2>&1
     case $? in
         0)
@@ -18,8 +17,7 @@ is_sshkey_loaded()
     esac
 }
 
-is_venv()
-{
+is_venv() {
     if [ -z "$VIRTUAL_ENV" ]; then
         echo novenv
     else
@@ -28,11 +26,11 @@ is_venv()
 }
 
 
-echo -n "`whoami`@`hostname`   "
-echo -n "$(is_sshkey_loaded)   "
-echo -n "$(is_venv)   "
-echo -n "$(loadavg 4)   "
+printf '%s@%s' "$(whoami)" "$(hostname)"
+printf '   %s' "$(is_sshkey_loaded)"
+printf '   %s' "$(is_venv)"
+printf '   %s' "$(loadavg 4)"
 # echo -n "$(sensors | grep temp1 | awk '{ print $2 }') "
 # echo -n "$(sensors | grep 'Core 0' | awk '{ print $3 }') "
 # echo -n "$(sensors | grep 'Core 1' | awk '{ print $3 }') "
-echo -n "`date +%H:%M`   "
+printf '   %s' "$(date +%H:%M)"
