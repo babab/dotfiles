@@ -80,6 +80,8 @@ Small programs and utility scripts
  Create ctags for a PHP project.
 `metainfo <bin/metainfo>`_
  Show information like mimetype and SHA1/MD5 checksums of a file.
+`mkscript <bin/mkscript>`_
+ Quickly create an executable script in python, node or shell script with some minimal boilerplate.
 `php-lintr <bin/php-lintr>`_
  search recursively for scripts and only show output when there are errors.
 `random-wallpaper <bin/random-wallpaper>`_

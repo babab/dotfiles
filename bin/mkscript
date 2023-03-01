@@ -1,0 +1,100 @@
+#!/bin/sh
+# mkscript
+# Quickly create an executable script in python, node or shell script
+# with some minimal boilerplate.
+
+# Copyright (c) 2023  Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# SPDX-License-Identifier: ISC
+
+mkscript_main() {
+    # test arguments
+    if test -z "$2" || test -z "$1"; then
+        echo 'usage: mkscript <type> <filename>'
+        echo
+        echo Quickly create an executable script in python, node or
+        echo shell script with some minimal boilerplate.
+        echo
+        echo Types:
+        echo '  [*]sh     - posix shell script (sh, bash, ksh, dash, etc.)'
+        echo '  py[thon]  - python script'
+        echo '  node[js]  - Node.js script'
+        return 1
+    fi
+    # test file path
+    if test -e "$2"; then
+        echo "error: file already exists: '$2'"
+        return 2
+    fi
+    # filename cannot have spaces or /slashes
+    case $2 in
+        *' '*)
+            echo error: filename cannot have spaces in it
+            return 3 ;;
+        *'/'*)
+            echo error: filename cannot have slashes '/' in it
+            echo mkscript can only create files in \$PWD
+            return 4 ;;
+    esac
+    # create file and add shebang
+    case $1 in
+        *sh)
+            echo "#!/bin/$1" > "$2"
+            _create_sh "$2"
+            ;;
+        py*) echo "#!/usr/bin/env python" > "$2" ;;
+        node*) echo "#!/usr/bin/env node" > "$2" ;;
+    esac
+    # set executable bit
+    chmod +x "$2"
+}
+
+_create_sh() {
+    # shellcheck disable=SC2016,SC2086
+    printf '
+# XXX
+# description of XXX
+
+# License header / Copyright / Warranty
+
+
+_XXX_version="v0.1.0"
+
+XXX_help() {
+    echo "usage: XXX [option]"
+    echo
+    echo Options:
+    echo "-h, --help       show this help information"
+    echo "-V, --version    show version information"
+}
+
+XXX_main() {
+    case $1 in
+        -h | --h*) XXX_help; exit 0;;
+        -V | --v*) echo XXX "$_XXX_version"; exit 0;;
+    esac
+
+    echo "arg0=$0"
+    echo "arg1=$1"
+    echo "arg2=$2"
+    echo "arg3=$3"
+    echo "arg4=$4"
+}
+
+XXX_main "$@"
+' | sed "s/XXX/$1/g" >> "$1"
+}
+
+mkscript_main "$@"
