@@ -1,19 +1,17 @@
 #!/bin/sh
 
-_countdown()
-{
-    text="$1"
+_countdown() {
     echo
     for i in 10 9 8 7 6 5 4 3 2 1; do
-        echo -ne "\r$1 in $i secs   "
+        printf '\r%s in %d secs   ' "$1" $i
         sleep 1
     done
-    echo -e "\r$1 now          "
+    printf '\r%s now          \n' "$1"
 }
 
 # wrap sudo if not root
 _sudo=''
-if [ "$(whoami)" != "root" ]; then
+if test "$(whoami)" != "root"; then
     _sudo=sudo
 fi
 
