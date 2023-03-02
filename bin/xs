@@ -1,14 +1,56 @@
 #!/bin/sh
 
+# Copyright (c) 2023 Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+_prog="$(basename "$0")"
+
+_usage() {
+    echo "usage: $_prog <command-or-file>"
+    echo
+    echo "On Unix/BSD/Linux: open X program in background"
+    echo "On Windows/Cygwin: open file in Windows with associated program"
+}
+
+_iscmd() {
+    command -v $1 >/dev/null
+    return $?
+}
+
+
 if [ ! "$1" ]; then
-    echo "USAGE: `basename $0` <command>"
-    exit
+    _usage
+    exit 1
+fi
+if ! _iscmd metainfo; then
+    echo "$_prog error: metainfo script could not be found"
+    echo "find it at https://github.com/babab/dotfiles/blob/master/bin/metainfo"
 fi
 
-which $1 >/dev/null
-if [ $? -gt 0 ]; then
-    echo "Error: $1 could not be found"
-    exit
+if _iscmd cygstart; then
+    if test -r $1; then
+        metainfo $1
+        cygstart $@
+    else
+        echo "$_prog error: file doesn't exist or isn't readable"
+        echo "Maybe try prefixing it with ./ like ./$1"
+    fi
+else
+    if _iscmd "$1"; then
+        echo "$_prog error: $1 could not be found in "'$PATH'
+        exit 2
+    else
+        $@ >/dev/null 2>&1 &
+    fi
 fi
-
-$@ >/dev/null 2>&1 &
