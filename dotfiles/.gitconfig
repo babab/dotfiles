@@ -1,8 +1,17 @@
 [core]
 	excludesfile = ~/.gitignore_global
+
+;### identity and signing ###;
 [user]
 	name = Benjamin Althues
 	email = benjamin@babab.nl
+	signingkey = ~/.ssh/babab_git.pub
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers_git
+
+;### workflow settings ###;
 [alias]
 	st = status
 	ci = commit
@@ -22,5 +31,11 @@
 	default = simple
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[log]
+	showSignature = true
 
 ; vim: set noet ts=4 sw=4 sts=3 ai:
