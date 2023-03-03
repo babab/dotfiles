@@ -22,6 +22,7 @@
 	ls = log --stat
 	mrg = merge --ff-only
 	gh = remote-gh
+	sl = !git branch -a && git stash list
 [color]
 	branch = auto
 	diff = auto
