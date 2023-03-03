@@ -86,6 +86,13 @@ what() {
 }
 # alias which="echo use 'what' instead of 'which'"
 
+
+### SSH aliases ##############################################################
+alias byessh='ssh-add -D; ps -p $(cat ~/.ssh/agent/pid) | grep ssh-agent && kill $(cat ~/.ssh/agent/pid) && sleep 2 && exit'
+alias sshagent='. ~/dotfiles/sources/eval-ssh-agent'
+# alias sshsockstunnel='ssh -C2qTnN -D 8080 hostname'
+
+
 ### Git aliases ##############################################################
 
 # Improved git status command
@@ -262,8 +269,6 @@ alias rm_docker_images='docker rmi $(docker images -q)'
 alias rm_docker_ps='docker rm $(docker ps -qa)'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
-alias sshagent='eval `ssh-agent` >/dev/null'
-alias sshsockstunnel='ssh -C2qTnN -D 8080 sunrise'
 alias tmuxa='tmux new -s main -A'
 alias ytd='yt-dlp --no-playlist --no-check-certificates'
 

@@ -1,0 +1,37 @@
+# eval-ssh-agent: Preserve ssh-agent socket until killed
+
+# This file should be sourced into your shell sessions:
+#
+#     . eval-ssh-agent
+#
+# I use an alias to run this in a command form
+#
+#     alias sshagent='. /location/to/eval-ssh-agent'
+
+# set path
+_agent_path="$HOME/.ssh/agent"
+
+# set umask and change it back at the end
+_oct_umask_orig=$(umask)
+umask 0077
+
+# create path if needed and use these filenames
+test -d "$_agent_path" || mkdir -p "$_agent_path"
+export SSH_AUTH_SOCK="$_agent_path/socket"
+_agentenv="$_agent_path/env.sh"
+_agentpid="$_agent_path/pid"
+
+
+# run an agent on defined socket if it isn't currently running
+ssh-add -l >/dev/null 2>&1
+if [ $? -eq 2 ]; then
+   rm -rf "$SSH_AUTH_SOCK"
+   ssh-agent -a "$SSH_AUTH_SOCK" >| "$_agentenv"
+   . "$_agentenv"
+   echo $SSH_AGENT_PID >| "$_agentpid"
+   rm "$_agentenv"
+fi
+
+umask $_oct_umask_orig
+
+# vim: set ft=sh:
