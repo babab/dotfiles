@@ -15,7 +15,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 cache="$HOME/.cache"
-mkdir -p $cache
+mkdir -p "$cache"
 
 du -h --max-depth=3 "$PWD" | tee "$cache/duh"
 sort -h --reverse "$cache/duh" >| "$cache/sduh"
