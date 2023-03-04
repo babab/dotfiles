@@ -235,7 +235,7 @@ alias envinit='source .virtualenv/bin/activate'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
 alias envmake='python -m venv .virtualenv'
 alias envfind='find . | grep bin/activate$'
-alias envbins='ls "$VIRTUALENV"/bin'
+alias envbins='ls "$VIRTUAL_ENV"/bin'
 
 pi() {
     # start an interactive python session with bpython
