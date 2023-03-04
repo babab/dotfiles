@@ -1,5 +1,10 @@
 # vim:set ft=sh:
 
+## Default overrides #########################################################
+
+alias ag='ag --hidden'
+
+
 ## Listing directories #######################################################
 
 if [ "$(uname)" = 'OpenBSD' ]; then
@@ -182,8 +187,8 @@ viack() {
 }
 # Quickly edit files found by ag
 viag() {
-    if [ $1 ]; then
-        vim -p -- $(ag -l $*)
+    if test -n "$1"; then
+        vim -p -- $(ag  --hidden -l "$@")
     fi
 }
 # Quickly edit files found by grep
