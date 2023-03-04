@@ -161,6 +161,7 @@ gsvndcommit() {
 ### Vim / Emacs / Spacemacs / Text editing ###################################
 
 alias todo='vim ~/TODO.otl'
+alias todoview='vim -R ~/TODO.otl'
 alias trailing_whitespace_prune="perl -pi -e 's/ +$//' **/*"
 alias view='vim -R'
 
@@ -270,10 +271,12 @@ alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48
 alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias pipU='python -m pip install --upgrade pip'
+alias pping='nc -zv'
 alias rm_docker_images='docker rmi $(docker images -q)'
 alias rm_docker_ps='docker rm $(docker ps -qa)'
 alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
+alias sys='sudo systemctl'
 alias tmuxa='tmux new -s main -A'
 alias ytd='yt-dlp --no-playlist --no-check-certificates'
 
