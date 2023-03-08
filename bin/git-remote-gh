@@ -178,7 +178,7 @@ git remote add "${arg_remote}" "https://github.com/${arg_ident}.git"
 
 # Configure push url
 if [ $_sshpushurl = 'yes' ]; then
-    _set_push_url "$_arg_ident" "$_arg_remote"
+    _set_push_url "$arg_ident" "$arg_remote"
 fi
 
 # Fetch from remote; set tracking branch; show verbose remote info
