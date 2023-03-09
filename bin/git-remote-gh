@@ -113,7 +113,7 @@ if [ $_clone = 'yes' ]; then
 
     # Configure push url
     if [ $_sshpushurl = 'yes' ]; then
-        _set_push_url "$_arg_ident" origin
+        _set_push_url "$arg_ident" origin
     fi
     exit 0
 fi
