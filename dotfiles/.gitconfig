@@ -18,17 +18,17 @@
 
 ;### workflow settings ###;
 [alias]
-	st = status
-	ci = commit
+	br = branch
 	ca = commit --amend --reset-author
+	ci = commit
 	co = checkout
 	di = diff
-	br = branch
+	gh = remote-gh
+	log1 = log --oneline --no-show-signature
 	ls = log --stat
 	mrg = merge --ff-only
-	gh = remote-gh
 	sl = !git branch -a && git stash list
-	log1 = log --oneline --no-show-signature
+	st = status
 [color]
 	branch = auto
 	diff = auto
