@@ -97,7 +97,7 @@ Small programs and utility scripts
 `touchpad-toggle <bin/touchpad-toggle>`_
  Toggle touchpad depending on current status using synclient.
 `updateand <bin/updateand>`_
- Update system and reboot or halt computer after a countdown if there are no errors.
+ Do a system upgrade, clean package cache and reboot/shutdown/return
 `urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
 `vii <bin/vii>`_
