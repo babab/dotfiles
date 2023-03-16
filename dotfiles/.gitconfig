@@ -2,10 +2,15 @@
 	excludesfile = ~/.gitignore_global
 
 ;### identity and signing ###;
-[user]
-	name = Benjamin Althues
-	email = benjamin@babab.nl
-	signingkey = ~/.ssh/babab_git.pub
+; User configuration section is saved unversioned in .gitconfig.user
+; with these fields:
+;
+; [user]
+; 	name = Tonnie Diederniettoedoet
+; 	email = tonnie@example.com
+; 	signingkey = ~/.ssh/sshsignkey.pub
+[include]
+	path = ~/.gitconfig.user
 [gpg]
 	format = ssh
 [gpg "ssh"]
