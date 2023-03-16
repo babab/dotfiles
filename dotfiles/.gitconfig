@@ -23,6 +23,7 @@
 	mrg = merge --ff-only
 	gh = remote-gh
 	sl = !git branch -a && git stash list
+	log1 = log --oneline --no-show-signature
 [color]
 	branch = auto
 	diff = auto
