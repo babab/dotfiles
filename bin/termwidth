@@ -1,0 +1,98 @@
+#!/usr/bin/env python
+
+"""Get terminal width and/or print rulers to help set window size."""
+
+# Copyright (c) 2023  Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+import os
+import sys
+
+__author__ = 'Benjamin Althues'
+__copyright__ = 'Copyright (c) 2023 Benjamin Althues'
+__version__ = '1.0.0'
+versionStr = 'termwidth {}'.format(__version__)
+
+
+def usage():
+    print('usage: termwidth [<width>[+<width>]]')
+    print('   or: termwidth -h | --help')
+    print('   or: termwidth -V | --version\n')
+    print('Get terminal width and/or print rulers to help set window size.')
+
+
+def double_panes(nc1=80, nc2=80):
+    """used if + is found, example 80+64"""
+    txt1 = 'pane 1: {} cols '.format(nc1)
+    txt2 = 'pane 2: {} cols '.format(nc2)
+    print('### start {}|{} end ###'.format('#' * (nc1 - 10), '#' * (nc2 - 8)))
+    print(
+        '{}{}|{}{}'.format(
+            txt1, ' ' * (nc1 - len(txt1)), txt2, ' ' * (nc2 - len(txt2))
+        )
+    )
+    print('### start {}|{} end ###'.format('#' * (nc1 - 10), '#' * (nc2 - 8)))
+    print('')
+
+
+def line(cols=80, helptxt=''):
+    txt = '### {} cols{} '.format(cols, helptxt)
+    print('{}{}\n'.format(txt, '#' * (cols - len(txt))))
+
+
+def show_current():
+    term_size = os.get_terminal_size()
+    cols = term_size.columns
+    txt = '### current terminal size: {} cols / {} lines '.format(
+        cols, term_size.lines
+    )
+    print('{}{}\n'.format(txt, '#' * (cols - len(txt))))
+
+
+def main(argv):
+    if argv:
+        if argv[0] == '-h' or argv[0] == '--help':
+            usage()
+            return 0
+        if argv[0] == '-V' or argv[0] == '--version':
+            print(versionStr)
+            return 0
+        if '+' in argv[0]:
+            spl = argv[0].split('+')
+            cols1 = int(spl[0])
+            cols2 = int(spl[1])
+            double_panes(cols1, cols2)
+            show_current()
+            return 0
+        if argv[0].isnumeric():
+            cols = int(argv[0])
+            line(cols, ', user defined')
+            show_current()
+            return 0
+        else:
+            print('error: argument must be a number, .e.g.: 80')
+            print('or a string with number + number, .e.g.: 80+64')
+            return 1
+
+    line(80, ', for code and command terminals')
+    line(64, ', for email, commits, docs')
+    show_current()
+    print('Use + in argument to create an impression of double panes,')
+    print("for example: `80+64`. See 'termwidth --help' for more information")
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
+
+# mkrun: !python %

@@ -94,6 +94,8 @@ Small programs and utility scripts
  Save a screenshot of a window or full screen in a timestamped file using scrot.
 `slowcate <bin/slowcate>`_
  Wrapper for ``sudo find / | grep "searchtext"``
+`termwidth <bin/termwidth>`_
+ Get terminal width and/or print rulers to help set window size.
 `touchpad-toggle <bin/touchpad-toggle>`_
  Toggle touchpad depending on current status using synclient.
 `updateand <bin/updateand>`_
