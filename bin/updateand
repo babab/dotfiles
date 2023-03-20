@@ -72,12 +72,12 @@ _update_archlinux() {
     else
         _cecho 1 "NO INTERNET CONNECTION, can't download packages"
     fi
-    _cecho 3 "$_sudo" 'pacman -Su --noconfirm'
-    $_dbpf $_sudo pacman -Su --noconfirm || return $?
+    _cecho 3 "$_sudo" 'pacman -Su' "$_yes"
+    $_dbpf $_sudo pacman -Su $_yes || return $?
     if command -v paccache >/dev/null
     then
-        _cecho 3 "$_sudo" 'paccache -r'
-        $_dbpf $_sudo paccache -r
+        _cecho 3 "$_sudo" 'paccache -rv'
+        $_dbpf $_sudo paccache -rv
     else
         _cecho 4 "Install 'pacman-contrib' to clean package cache"
     fi
@@ -94,12 +94,18 @@ _main() {
         _sudo=sudo
     fi
 
+    # use --noconfirm or not on install step
+    _yes=''
+    if test "$2" = '-y'; then
+        _yes='--noconfirm'
+    fi
+
     case $1 in
         halt | shutdown) _update && _halt; return $? ;;
         reboot) _update && _reboot; return $? ;;
         return) _update; return $? ;;
         *)
-            echo 'usage: updateand <action>'
+            echo 'usage: updateand <action> [-y]'
             echo
             echo Do a system upgrade, clean package cache and
             echo reboot / shutdown / return to shell.
