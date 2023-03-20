@@ -96,6 +96,8 @@ Small programs and utility scripts
  Wrapper for ``sudo find / | grep "searchtext"``
 `termwidth <bin/termwidth>`_
  Get terminal width and/or print rulers to help set window size.
+`tmux-swprefix <bin/tmux-swprefix>`_
+ Helper for using tmux over ssh in tmux (over ssh in tmux)
 `touchpad-toggle <bin/touchpad-toggle>`_
  Toggle touchpad depending on current status using synclient.
 `updateand <bin/updateand>`_
