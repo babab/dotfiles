@@ -50,16 +50,13 @@ _update() {
 }
 
 _update_archlinux() {
-    if ping -c1 bing.com >/dev/null
-    then
+    if ping -c1 bing.com >/dev/null; then
         _cecho 2 Internet connection is available
         _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm'
         $_dbpf $_sudo pacman -Syuw --noconfirm || return $?
-        if command -v paru >/dev/null
-        then
+        if command -v paru >/dev/null; then
             _paruQum="$(paru -Qum)"
-            if test -n "$_paruQum"
-            then
+            if test -n "$_paruQum"; then
                 _cecho 4 'AUR packages / that can be upgraded manually:'
                 _cecho 3 'paru -Qum'
                 echo "$_paruQum"
@@ -74,8 +71,7 @@ _update_archlinux() {
     fi
     _cecho 3 "$_sudo" 'pacman -Su' "$_yes"
     $_dbpf $_sudo pacman -Su $_yes || return $?
-    if command -v paccache >/dev/null
-    then
+    if command -v paccache >/dev/null; then
         _cecho 3 "$_sudo" 'paccache -rv'
         $_dbpf $_sudo paccache -rv
     else
@@ -89,8 +85,7 @@ _main() {
 
     # sudo prefix - wrap sudo if not root
     _sudo=''
-    if test "$(whoami)" != "root"
-    then
+    if test "$(whoami)" != "root"; then
         _sudo=sudo
     fi
 
@@ -111,10 +106,10 @@ _main() {
             echo reboot / shutdown / return to shell.
             echo
             echo 'Actions:'
-            echo '  return   ...return to shell'
-            echo '  reboot   ...reboot'
-            echo '  halt     ...power off'
-            echo '  shutdown ...power off (alias for halt)'
+            echo '  return     return to shell'
+            echo '  reboot     reboot'
+            echo '  halt       power off'
+            echo '  shutdown   power off (alias for halt)'
             return 1
             ;;
     esac
