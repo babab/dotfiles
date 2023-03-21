@@ -290,7 +290,8 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias sys='sudo systemctl'
 alias tmuxa='tmux new -s main -A'
-alias ytd='yt-dlp --no-playlist --no-check-certificates'
+alias ytd='yt-dlp --no-check-certificates --compat-options format-sort --no-playlist'
+alias ytdpl='yt-dlp --no-check-certificates --compat-options format-sort'
 
 hypo_upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
