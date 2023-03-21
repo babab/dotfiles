@@ -32,6 +32,11 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+mcd() {
+    test -n "$1" || return 1
+    mkdir -p "$1" && cd "$1" || return $?
+}
+
 # Projectpad aliases, see: http://github.com/babab/projectpad
 alias g='cd `projectpad get`'
 alias s='projectpad set && cd `projectpad get` && projectpad add'
@@ -238,6 +243,9 @@ alias envmake='python -m venv .virtualenv'
 alias envfind='find . | grep bin/activate$'
 alias envbins='ls "$VIRTUAL_ENV"/bin'
 
+# OTHER:
+
+alias blackfmt='black -l 79 -S'
 pi() {
     # start an interactive python session with bpython
     filename="$1"
@@ -265,12 +273,14 @@ codecept_alias_init() {
 alias tsc_all='tsc *.ts'
 alias tsc_auto='tsc *.ts --watch'
 
+
 ### Misc aliases #############################################################
 
 alias addpgit='git remote set-url "$(git remote | head -1)" --add --push pgit:$(basename "$(pwd -P)").git'
 alias completely='docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/app" dannyben/completely'
 alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
 alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
+alias pacmir='reflector --age 2 --country nl --latest 5 --sort score | tee /tmp/mirrorlist'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias pipU='python -m pip install --upgrade pip'
 alias pping='nc -zv'
