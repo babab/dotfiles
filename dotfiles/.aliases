@@ -246,6 +246,8 @@ alias envbins='ls "$VIRTUAL_ENV"/bin'
 # OTHER:
 
 alias blackfmt='black -l 79 -S'
+alias pipinstall='python3 -m pip install --user'
+alias pipuninstall='python3 -m pip uninstall'
 pi() {
     # start an interactive python session with bpython
     filename="$1"
