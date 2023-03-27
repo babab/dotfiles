@@ -1,15 +1,17 @@
-import sys
+import sys  # noqa: F401
 from pprint import pprint  # noqa: F401
-import datetime
+import datetime  # noqa: F401
+
+print(':: loaded ~/.pythonrc')
 
 try:
     from django.core.management import setup_environ
     import settings
     setup_environ(settings)
-    print('Django environment found and set up.')
+    print(':: Django environment found and set up.')
 except:  # noqa: E722
     pass
 
-print('imported sys, pprint, datetime')
+print(':: imported sys, pprint, datetime')
 
 # vim: set ft=python:
