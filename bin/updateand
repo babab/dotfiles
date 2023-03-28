@@ -21,7 +21,7 @@
 
 _countdown() {
     echo
-    for i in 10 9 8 7 6 5 4 3 2 1; do
+    for i in 4 3 2 1; do
         printf '\r%s in %d secs   ' "$1" $i
         sleep 1
     done
@@ -52,8 +52,9 @@ _update() {
 _update_archlinux() {
     if ping -c1 bing.com >/dev/null; then
         _cecho 2 Internet connection is available
-        _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm'
-        $_dbpf $_sudo pacman -Syuw --noconfirm || return $?
+        _cecho 2 Downloading upgradeable packages without installing
+        _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm > /dev/null'
+        $_dbpf $_sudo pacman -Syuw --noconfirm >/dev/null || return $?
         if command -v paru >/dev/null; then
             _paruQum="$(paru -Qum)"
             if test -n "$_paruQum"; then
