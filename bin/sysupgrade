@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# updateand
+# sysupgrade
 # Do a system upgrade, clean package cache and reboot/shutdown/return
 
 # Copyright (c) 2018-2023 Benjamin Althues <benjamin@babab.nl>
@@ -101,7 +101,7 @@ _main() {
         reboot) _update && _reboot; return $? ;;
         return) _update; return $? ;;
         *)
-            echo 'usage: updateand <action> [-y]'
+            echo 'usage: sysupgrade <action> [-y]'
             echo
             echo Do a system upgrade, clean package cache and
             echo reboot / shutdown / return to shell.

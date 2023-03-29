@@ -94,14 +94,14 @@ Small programs and utility scripts
  Save a screenshot of a window or full screen in a timestamped file using scrot.
 `slowcate <bin/slowcate>`_
  Wrapper for ``sudo find / | grep "searchtext"``
+`sysupgrade <bin/sysupgrade>`_
+ Do a system upgrade, clean package cache and reboot/shutdown/return
 `termwidth <bin/termwidth>`_
  Get terminal width and/or print rulers to help set window size.
 `tmux-swprefix <bin/tmux-swprefix>`_
  Helper for using tmux over ssh in tmux (over ssh in tmux)
 `touchpad-toggle <bin/touchpad-toggle>`_
  Toggle touchpad depending on current status using synclient.
-`updateand <bin/updateand>`_
- Do a system upgrade, clean package cache and reboot/shutdown/return
 `urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
 `vii <bin/vii>`_
