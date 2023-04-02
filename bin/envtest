@@ -78,12 +78,15 @@ _section_fip() {
         echo "============="
     fi
     _chkcmd python
+    _chkcmd python3
     _chkcmd pip
     if [ "$1" != '-s' ]; then
+        _chkcmd pipenv
+        _chkcmd pipx
+        _chkcmd pyenv
+        _chkcmd pytest
         _chkcmd python2
-        _chkcmd python3
-        _chkcmd 2to3
-        _chkcmd rst2html
+        _chkcmd rst2html.py
     fi
 }
 
@@ -98,7 +101,6 @@ _section_vofip() {
 _section_all_versions() {
     echo "ALL VERSIONS"
     echo "============"
-    _chkcmd pyenv
     _chkcmd python2.7
     _chkcmd python3.7
     _chkcmd python3.8
