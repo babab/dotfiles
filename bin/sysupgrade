@@ -19,6 +19,22 @@
 
 # SPDX-License-Identifier: ISC
 
+_usage() {
+    echo 'usage: sysupgrade <option> [-y]'
+    echo
+    echo Do a system upgrade, clean package cache and
+    echo reboot / shutdown / return to shell.
+    echo
+    echo 'Options:'
+    echo '  -d   download packages without installing them'
+    echo '  -n   download/install packages and clean cache '
+    echo '  -R   like -n but reboot when done'
+    echo '  -H   like -n but power off when done'
+    echo '  -h   show this help information'
+    echo
+    echo Add -y as 2nd argument to OK installing updates without prompting
+}
+
 _countdown() {
     echo
     for i in 4 3 2 1; do
@@ -44,12 +60,15 @@ _reboot() {
 _update() {
     _etc_issue="$(cat /etc/issue)"
     case $_etc_issue in
-        'Arch Linux'*) _update_archlinux; return $? ;;
+        'Arch Linux'*) _update_archlinux "$1"; return $? ;;
         *) echo Unknown operating system.; return 1;;
     esac
 }
 
 _update_archlinux() {
+    _uparg="$1"
+
+    # sync package database with mirror and download packages
     if ping -c1 bing.com >/dev/null; then
         _cecho 2 Internet connection is available
         _cecho 2 Downloading upgradeable packages without installing
@@ -70,13 +89,17 @@ _update_archlinux() {
     else
         _cecho 1 "NO INTERNET CONNECTION, can't download packages"
     fi
-    _cecho 3 "$_sudo" 'pacman -Su' "$_yes"
-    $_dbpf $_sudo pacman -Su $_yes || return $?
-    if command -v paccache >/dev/null; then
-        _cecho 3 "$_sudo" 'paccache -rv'
-        $_dbpf $_sudo paccache -rv
-    else
-        _cecho 4 "Install 'pacman-contrib' to clean package cache"
+
+    # install packages unless -d is given
+    if test -z "$_uparg"; then
+        _cecho 3 "$_sudo" 'pacman -Su' "$_yes"
+        $_dbpf $_sudo pacman -Su $_yes || return $?
+        if command -v paccache >/dev/null; then
+            _cecho 3 "$_sudo" 'paccache -rv'
+            $_dbpf $_sudo paccache -rv
+        else
+            _cecho 4 "Install 'pacman-contrib' to clean package cache"
+        fi
     fi
 }
 
@@ -97,20 +120,16 @@ _main() {
     fi
 
     case $1 in
-        halt | shutdown) _update && _halt; return $? ;;
-        reboot) _update && _reboot; return $? ;;
-        return) _update; return $? ;;
+        -H) _update && _halt; return $? ;;
+        -R) _update && _reboot; return $? ;;
+        -n) _update; return $? ;;
+        -d) _update -d; return $? ;;
+        -o) $_sudo pacman -Qtdq; return 0; ;;
+        '' | -h | --help) _usage; return 0 ;;
         *)
-            echo 'usage: sysupgrade <action> [-y]'
+            echo "error: unknown option"
             echo
-            echo Do a system upgrade, clean package cache and
-            echo reboot / shutdown / return to shell.
-            echo
-            echo 'Actions:'
-            echo '  return     return to shell'
-            echo '  reboot     reboot'
-            echo '  halt       power off'
-            echo '  shutdown   power off (alias for halt)'
+            _usage
             return 1
             ;;
     esac
