@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if command -v neofetch >/dev/null; then
+    echo
+    neofetch
+fi
+
 motd="$(uname -sn) - $(whoami)"
 ssh-add -l >/dev/null 2>&1
 case $? in
