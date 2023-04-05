@@ -1,12 +1,36 @@
-# eval-ssh-agent: Preserve ssh-agent socket until killed
+# eval-ssh-agent
+# Preserve ssh-agent socket until killed and help with locking it.
 
-# This file should be sourced into your shell sessions:
+# Copyright (c) 2023  Benjamin Althues <benjamin@babab.nl>
 #
-#     . eval-ssh-agent
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
 #
-# I use an alias to run this in a command form
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# SPDX-License-Identifier: ISC
+
+# README
+# This file should be sourced into your shell sessions.
+# I use an alias to run this in a command form:
 #
 #     alias sshagent='. /location/to/eval-ssh-agent'
+#
+# And to unload keys and kill the agent, removing the socket:
+#
+#     alias byessh='ssh-add -D; ps -p $(cat ~/.ssh/agent/pid) | grep ssh-agent && kill $(cat ~/.ssh/agent/pid)
+#
+# And these aliases to password lock / unlock the agent:
+#
+#     alias lockssh='ssh-add -x && install -m600 /dev/null ~/.ssh/agent/lock'
+#     alias unlockssh='ssh-add -X && rm ~/.ssh/agent/lock'
 
 # set path
 _agent_path="$HOME/.ssh/agent"
@@ -20,18 +44,42 @@ test -d "$_agent_path" || mkdir -p "$_agent_path"
 export SSH_AUTH_SOCK="$_agent_path/socket"
 _agentenv="$_agent_path/env.sh"
 _agentpid="$_agent_path/pid"
+_agentlock="$_agent_path/lock"
 
 
-# run an agent on defined socket if it isn't currently running
+# Run an agent on defined socket if it isn't currently running
+# If the socket is available and keys are loaded, report that.
+# If it is already running but locked with lockssh, run 'ssh-add -X'.
+# If it is not running or running but has no keys loaded, run 'ssh-add'.
 ssh-add -l >/dev/null 2>&1
-if [ $? -eq 2 ]; then
-   rm -rf "$SSH_AUTH_SOCK"
-   ssh-agent -a "$SSH_AUTH_SOCK" >| "$_agentenv"
-   . "$_agentenv"
-   echo $SSH_AGENT_PID >| "$_agentpid"
-   rm "$_agentenv"
-fi
+_agentstatus=$?
+case $_agentstatus in
+    2)
+        echo :: no previous agent found, starting one
+        rm -rf "$SSH_AUTH_SOCK"
+        ssh-agent -a "$SSH_AUTH_SOCK" >| "$_agentenv"
+        # shellcheck source=/dev/null
+        . "$_agentenv"
+        echo "$SSH_AGENT_PID" >| "$_agentpid"
+        rm "$_agentenv"
+        echo ":: add key(s) to agent"
+        ssh-add ;;
+    1)
+        echo :: using existing agent, no active keys loaded
+        if test -f "$_agentlock"; then
+            echo ":: lock file found, unlocking agent"
+            ssh-add -X && rm "$_agentlock"
+        else
+            echo ":: add key(s) to agent"
+            ssh-add
+        fi ;;
+    0)
+        echo :: using existing agent, keys are loaded ;;
+    *)
+        echo :: unexpected error from ssh-add -l ;;
+esac
 
-umask $_oct_umask_orig
+
+umask "$_oct_umask_orig"
 
 # vim: set ft=sh:

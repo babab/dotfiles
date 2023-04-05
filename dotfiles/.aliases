@@ -99,7 +99,9 @@ what() {
 
 ### SSH aliases ##############################################################
 alias byessh='ssh-add -D; ps -p $(cat ~/.ssh/agent/pid) | grep ssh-agent && kill $(cat ~/.ssh/agent/pid) && sleep 2 && exit'
+alias lockssh='ssh-add -x && install -m600 /dev/null ~/.ssh/agent/lock'
 alias sshagent='. ~/dotfiles/sh/eval-ssh-agent'
+alias unlockssh='ssh-add -X && rm ~/.ssh/agent/lock'
 # alias sshsockstunnel='ssh -C2qTnN -D 8080 hostname'
 
 
