@@ -232,10 +232,12 @@ viwhat() {
 
 ### Python aliases ###########################################################
 #
-# WORKFLOW:
+# WORKFLOW with env* aliases:
+# envfind    - recursively find "bin/activate" files
 # envmake    - create a venv in a new dir .virtualenv with current `python`
 # envinit    - activate/enter the virtual environment
 # envtest    - show information about which python, venv and pkgs are used
+# envbins    - list files in bin directory of virual env
 # ...        - work on project
 # deactivate - deactivate/leave the virtual environment
 
@@ -249,17 +251,25 @@ alias envbins='ls "$VIRTUAL_ENV"/bin'
 
 alias blackfmt='black -l 79 -S'
 alias pipU='python3 -m pip install --upgrade pip'
-alias pipinstall='python3 -m pip install --user'
+alias pipinstall='python3 -m pip install'
+alias pipuserinstall='python3 -m pip install --user'
 alias pipuninstall='python3 -m pip uninstall'
-alias runmailserver='python -m smtpd -n -c DebuggingServer localhost:1025'
-pi() {
-    # start an interactive python session with bpython
+alias runmailserver='python3 -m smtpd -n -c DebuggingServer localhost:1025'
+pyi() {
+    printf ":: available REPL's:"
+    command -v python >/dev/null && _interpreter=python && printf ' python'
+    command -v ipython >/dev/null && _interpreter=ipython && printf ' ipython'
+    command -v bpython >/dev/null && _interpreter=bpython && printf ' bpython'
+    command -v ptpython >/dev/null && _interpreter=ptpython && printf ' ptpython'
+    echo
+
+    # start an interactive python session with "best" available interpreter
+    echo :: using "$_interpreter"
     filename="$1"
     if [ -z "$filename" ]; then
-        bpython
+        "$_interpreter"
     else
-        shift
-        bpython -i $filename $*
+        "$_interpreter" -i "$filename"
     fi
 }
 
