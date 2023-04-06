@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# vbvmconn
+# SSH connect with a Windows Hosted VirtualBox VM from within Cygwin,
+# starting the VM first if needed.
+
+# Copyright (c) 2023 Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# SPDX-License-Identifier: ISC
+
+# environment settings and defaults
+if test -z "$VBVMCONN_VBOXMANAGE"; then
+    VBVMCONN_VBOXMANAGE='/cygdrive/c/Program Files/Oracle/VirtualBox/VBoxManage.exe'
+    echo :: VBVMCONN_VBOXMANAGE was not explicitly set or empty. Using default path.
+fi
+
+
+_help() {
+    echo 'usage: vbvmconn <machine-name>'
+    echo
+    echo 'SSH connect with a Windows Hosted VirtualBox VM from'
+    echo 'within Cygwin, starting the VM first if needed'
+    echo
+    echo 'The machine-name in VirtualBox, must be the the same as'
+    echo 'the ssh destination. This is used in these commands:'
+    echo '- startvm <machine-name>'
+    echo '- ssh <machine-name>'
+    echo 'You can set the ssh destination name through:'
+    echo '- Host declaration in ~/.ssh/config in Cygwin'
+    echo '- Host entry in hosts file in Windows: '
+    printf '    C:\\Windows\\System32\\Drivers\\etc\\hosts\n'
+}
+_countdown() {
+    # $1: title (string)
+    echo
+    for i in 20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
+        printf '\r:: %s in %d secs   ' "$1" "$i"
+        sleep 1
+    done
+    printf '\r:: %s now          \n' "$1"
+}
+_ssh_connect() {
+    # $1: hostname/machine-name (string)
+    ssh "$1"
+    _err=$?
+    # clear the console on a hard disconnect while in a tmux session
+    if test $_err -eq 255; then
+        clear
+        echo ":: hard disconnect, cleared console to remove shell artifacts"
+    fi
+    return $_err
+}
+
+_main () {
+    case $1 in
+        '-h' | '--help' | '-?') _help; return 0 ;;
+        '--') shift ;;
+        '-'*) printf 'error: invalid option\n\n'; _help; return 1 ;;
+        '') printf 'error: no argument given\n\n'; _help; return 1 ;;
+        *) ;; # continue
+    esac
+
+    # check availability of VBoxManage or return
+    if ! test -x "${VBVMCONN_VBOXMANAGE}"; then
+        printf "error: No executable found at VBVMCONN_VBOXMANAGE\n\n"
+        echo "VBVMCONN_VBOXMANAGE='${VBVMCONN_VBOXMANAGE}'"
+        echo "Set this env var with the correct path to VBoxManage as value"
+        return 2
+    fi
+
+    # if running: ssh and return
+    echo "${VBVMCONN_VBOXMANAGE}" list runningvms '| grep' "$1"
+    if "${VBVMCONN_VBOXMANAGE}" list runningvms | grep "$1"; then
+        _ssh_connect "$1"
+        return $?
+    fi
+
+    # if not running: startvm and wait 20 seconds before SSH-ing
+    echo "${VBVMCONN_VBOXMANAGE}" startvm --type headless "$1"
+    "${VBVMCONN_VBOXMANAGE}" startvm --type headless "$1" && \
+        (
+            _countdown 'connecting with SSH'
+            _ssh_connect "$1"
+            return $?
+        )
+        return $?
+}
+
+_main "$@"

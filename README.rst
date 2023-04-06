@@ -104,6 +104,8 @@ Small programs and utility scripts
  Toggle touchpad depending on current status using synclient.
 `urxvt-modeline <bin/urxvt-modeline>`_
  Modeline script for rxvt-unicode terminal.
+`vbvmconn <bin/vbvmconn>`_
+ SSH connect with a Windows Hosted VirtualBox VM from within Cygwin, starting the VM first if needed.
 `vii <bin/vii>`_
  Wrapper for editing files in the most fitting way possible, depending on: terminal size, environment and number of files.
 `wmtoggle <bin/wmtoggle>`_

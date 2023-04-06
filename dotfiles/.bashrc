@@ -54,6 +54,8 @@ complete -d ll
 complete -d lla
 complete -ac xs
 complete -ac loop
+complete -A hostname vbvmconn
+
 
 # Source local settings and overrides
 if [ -f "$HOME/.bashrc.local" ]; then

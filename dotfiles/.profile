@@ -19,3 +19,6 @@ fi
 # QT bindings for Go, see https://github.com/therecipe/qt/
 QT_DIR=/usr/lib/qt
 QT_PKG_CONFIG=true
+
+# Script settings for ~/bin scripts
+export VBVMCONN_VBOXMANAGE='/cygdrive/c/Program Files/Oracle/VirtualBox/VBoxManage.exe'
