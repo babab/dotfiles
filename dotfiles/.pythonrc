@@ -3,6 +3,7 @@ from pprint import pprint  # noqa: F401
 import datetime  # noqa: F401
 
 print(':: loaded ~/.pythonrc')
+print(':: imported sys, pprint, datetime')
 
 try:
     from django.core.management import setup_environ
@@ -12,6 +13,31 @@ try:
 except:  # noqa: E722
     pass
 
-print(':: imported sys, pprint, datetime')
+try:
+    import dispass  # noqa: F401
+    print(':: imported dispass')
+except ImportError:
+    pass
+try:
+    import pycommand  # noqa: F401
+    print(':: imported pycommand')
+except ImportError:
+    pass
+try:
+    import tagfile  # noqa: F401
+    print(':: imported tagfile')
+except ImportError:
+    pass
+try:
+    import tuhinga  # noqa: F401
+    print(':: imported tuhinga')
+except ImportError:
+    pass
+try:
+    import wdocker  # noqa: F401
+    print(':: imported wdocker')
+except ImportError:
+    pass
+
 
 # vim: set ft=python:
