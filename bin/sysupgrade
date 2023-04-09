@@ -70,22 +70,9 @@ _update_archlinux() {
 
     # sync package database with mirror and download packages
     if ping -c1 bing.com >/dev/null; then
-        _cecho 2 Internet connection is available
         _cecho 2 Downloading upgradeable packages without installing
         _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm'
         $_dbpf $_sudo pacman -Syuw --noconfirm || return $?
-        if command -v paru >/dev/null; then
-            _paruQum="$(paru -Qum)"
-            if test -n "$_paruQum"; then
-                _cecho 4 'AUR packages / that can be upgraded manually:'
-                _cecho 3 'paru -Qum'
-                echo "$_paruQum"
-            else
-                _cecho 4 'No AUR package upgrades available.'
-            fi
-        else
-            _cecho 4 "Install 'paru' to show AUR update candidates"
-        fi
     else
         _cecho 1 "NO INTERNET CONNECTION, can't download packages"
     fi
