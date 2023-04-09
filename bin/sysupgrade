@@ -72,8 +72,8 @@ _update_archlinux() {
     if ping -c1 bing.com >/dev/null; then
         _cecho 2 Internet connection is available
         _cecho 2 Downloading upgradeable packages without installing
-        _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm > /dev/null'
-        $_dbpf $_sudo pacman -Syuw --noconfirm >/dev/null || return $?
+        _cecho 3 "$_sudo" 'pacman -Syuw --noconfirm'
+        $_dbpf $_sudo pacman -Syuw --noconfirm || return $?
         if command -v paru >/dev/null; then
             _paruQum="$(paru -Qum)"
             if test -n "$_paruQum"; then
