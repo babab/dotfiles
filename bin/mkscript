@@ -59,6 +59,16 @@ mkscript_main() {
     esac
     # set executable bit
     chmod +x "$2"
+
+    # open in VISUAL or EDITOR
+    if test -n "$VISUAL"; then
+        "$VISUAL" "$2"
+    elif test -n "$EDITOR"; then
+        "$EDITOR" "$2"
+    else
+        echo error: could not open resulting file
+        echo VISUAL and EDITOR are unset or empty.
+    fi
 }
 
 _create_sh() {
