@@ -11,6 +11,7 @@ export RUBYPATH="$HOME/.gem/ruby/2.5.0/bin"
 export PATH="$HOME/bin:$GOPATH/bin:$HOME/.local/bin:$PATH:$HOME/usr/bin:$HOME/.composer/vendor/bin:$RUBYPATH"
 export PYTHONSTARTUP=~/.pythonrc
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
+export VISUAL="/usr/bin/vim"
 
 if [ ! -z "${SSH_CONNECTION}" ]; then
     export TERM=screen
