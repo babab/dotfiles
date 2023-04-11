@@ -61,7 +61,8 @@ case $_agentstatus in
         # shellcheck source=/dev/null
         . "$_agentenv"
         echo "$SSH_AGENT_PID" >| "$_agentpid"
-        rm "$_agentenv"
+        # remove env.sh and any leftover lock file
+        rm -f "$_agentenv" "$_agentlock"
         echo ":: add key(s) to agent"
         ssh-add ;;
     1)
