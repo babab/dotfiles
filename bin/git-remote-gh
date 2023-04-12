@@ -105,11 +105,11 @@ if [ $_clone = 'yes' ]; then
         echo error: "'$_folder'" already exists
         exit 3
     fi
-    echo '$ 'git clone "'https://github.com/${arg_ident}.git'"
+    echo "$ git clone 'https://github.com/${arg_ident}.git'"
     git clone "https://github.com/${arg_ident}.git"
 
     echo cd "$_folder"
-    cd "$_folder"
+    cd "$_folder" || exit $?
 
     # Configure push url
     if [ $_sshpushurl = 'yes' ]; then
@@ -136,7 +136,8 @@ fi
 
 # Handle error when no valid repository can be found.
 remotesfound="$(git remote 2>&1)"
-if [ $? -ne 0 ]; then
+err=$?
+if [ $err -ne 0 ]; then
     echo '$ git remote'
     echo "${remotesfound}"
     exit 2
@@ -149,11 +150,11 @@ case ${remotesfound} in
             git remote --verbose
             echo
             echo "Remote ${arg_remote} already exists."
-            echo -n "Do you wish to overwrite it? [yes/no] "
-            read yn
+            printf "Do you wish to overwrite it? [yes/no] "
+            read -r yn
             case $yn in
                 [Yy]*)
-                    echo '$ 'git remote remove "${arg_remote}"
+                    echo "$ git remote remove ${arg_remote}"
                     git remote remove "${arg_remote}"
                     break
                     ;;
