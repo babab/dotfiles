@@ -14,8 +14,8 @@ autoload -U colors && colors
 # fpath=(~/.zsh/functions $fpath)
 # autoload -U ~/.zsh/functions/*(:t)
 
-source ${HOME}/.aliases # aliases and (wrapper) functions
 source ${HOME}/.profile # environment variables
+source ${HOME}/.aliases # aliases and (wrapper) functions
 
 ### Prompt ###################################################################
 

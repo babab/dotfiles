@@ -20,14 +20,14 @@ if [ -x /usr/bin/scrot ]; then
     alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
 fi
 
+# Source environment variables
+. $HOME/.profile
+
 # Source prompt settings
 . $HOME/.ps1
 
 # Source aliases
 . $HOME/.aliases
-
-# Source environment variables
-. $HOME/.profile
 
 # Bash completion for custom functions and scripts
 complete -d ll
