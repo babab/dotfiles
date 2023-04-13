@@ -29,29 +29,12 @@ fi
 # Source environment variables
 . $HOME/.profile
 
-# Wrapper for sourcing and protecting vim session
-svim()
-{
-    if [ -f "$PWD/.session.vim" ]; then
-        if [ -f "/tmp/$USER.vimsession" ]; then
-            echo Vim session already started
-        else
-            touch /tmp/$USER.vimsession
-            vim -S .session.vim
-            rm /tmp/$USER.vimsession
-        fi
-    else
-        echo No .session.vim file found
-    fi
-}
-
 # Bash completion for custom functions and scripts
 complete -d ll
 complete -d lla
 complete -ac xs
 complete -ac loop
 complete -A hostname vbvmconn
-
 
 # Source local settings and overrides
 if [ -f "$HOME/.bashrc.local" ]; then
