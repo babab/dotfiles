@@ -13,10 +13,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ -d "/usr/local/go" ]; then
-    export GOROOT=/usr/local/go
-fi
-
 if [ -x /usr/bin/scrot ]; then
     if [ ! -d "$HOME/Pictures/scrot" ]; then
         mkdir -p "$HOME/Pictures/scrot"
