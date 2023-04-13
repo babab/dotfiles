@@ -311,6 +311,17 @@ hypo_upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
 }
 
+wscrot() {
+    if [ -x /usr/bin/scrot ]; then
+        if [ ! -d "$HOME/Pictures/scrot" ]; then
+            mkdir -p "$HOME/Pictures/scrot"
+        fi
+        /usr/bin/scrot "$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png"
+    else
+        echo error: scrot is not available at /usr/bin/scrot
+    fi
+}
+
 if [ -f $HOME/.aliases_local ]; then
     . $HOME/.aliases_local
 fi

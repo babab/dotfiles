@@ -17,13 +17,6 @@ autoload -U colors && colors
 source ${HOME}/.aliases # aliases and (wrapper) functions
 source ${HOME}/.profile # environment variables
 
-if [ -x /usr/bin/scrot ]; then
-    if [ ! -d "$HOME/Pictures/scrot" ]; then
-        mkdir -p "$HOME/Pictures/scrot"
-    fi
-    alias wscrot="scrot '$HOME/Pictures/scrot/%s_%Y-%m-%d_\$wx\$h.png'"
-fi
-
 ### Prompt ###################################################################
 
 # function precmd() {
