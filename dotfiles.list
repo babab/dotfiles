@@ -2,6 +2,7 @@
 .agignore
 .aliases
 .bashrc
+.cobra.yaml
 .composer
 .config
 .gitconfig
