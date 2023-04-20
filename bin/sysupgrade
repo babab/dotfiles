@@ -25,6 +25,10 @@ _usage() {
     echo Do a system upgrade, clean package cache and
     echo reboot / shutdown / return to shell.
     echo
+    echo Usable on:
+    echo '* Archlinux (with pacman and opt. paccache)'
+    echo '* Debian GNU/Linux (with dpkg/apt)'
+    echo
     echo 'Options:'
     echo '  -d   download packages without installing them'
     echo '  -n   download/install packages and clean cache '
@@ -58,10 +62,10 @@ _reboot() {
     $_dbpf $_sudo reboot || return $?
 }
 _update() {
-    _etc_issue="$(cat /etc/issue)"
-    case $_etc_issue in
-        'Arch Linux'*) _update_archlinux "$1"; return $? ;;
-        *) echo Unknown operating system.; return 1;;
+    case $_OS in
+        archlinux) _update_archlinux "$1"; return $? ;;
+        debian) _update_debian "$1"; return $? ;;
+        *) echo Unknown \$_OS; return 1 ;;
     esac
 }
 
@@ -90,6 +94,29 @@ _update_archlinux() {
     fi
 }
 
+_update_debian() {
+    _uparg="$1"
+
+    # sync package database with mirror and download packages
+    if ping -c1 bing.com >/dev/null; then
+        _cecho 2 Downloading upgradeable packages without installing
+        _cecho 3 "$_sudo" 'apt update'
+        $_dbpf $_sudo apt update || return $?
+        _cecho 3 "$_sudo" 'apt upgrade --download-only'
+        $_dbpf $_sudo apt upgrade --download-only || return $?
+    else
+        _cecho 1 "NO INTERNET CONNECTION, can't download packages"
+    fi
+
+    # install packages unless -d is given
+    if test -z "$_uparg"; then
+        _cecho 3 "$_sudo" 'apt upgrade --no-download --ignore-missing' "$_yes"
+        $_dbpf $_sudo apt upgrade --no-download --ignore-missing $_yes || return $?
+        _cecho 3 "$_sudo" 'apt autoclean'
+        $_dbpf $_sudo apt autoclean
+    fi
+}
+
 _main() {
     # debug prefix, set to 'echo DRYRUN:' to dry-run commands
     _dbpf=''
@@ -100,10 +127,21 @@ _main() {
         _sudo=sudo
     fi
 
-    # use --noconfirm or not on install step
+    # check OS distribution
+    _etc_issue="$(cat /etc/issue)"
+    case $_etc_issue in
+        'Arch Linux'*) _OS=archlinux ;;
+        'Debian GNU/Linux'*) _OS=debian ;;
+        *) echo Unknown operating system.; return 1;;
+    esac
+
+    # use --yes or --noconfirm on install step (or not)
     _yes=''
     if test "$2" = '-y'; then
-        _yes='--noconfirm'
+        case $_OS in
+            archlinux) _yes='--noconfirm' ;;
+            debian) _yes='--yes' ;;
+        esac
     fi
 
     case $1 in
