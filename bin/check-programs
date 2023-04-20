@@ -72,6 +72,7 @@ _chkcmd cc
 _chkcmd diff
 _chkcmd make
 _chkcmd patch
+_chkcmd pkg-config
 
 _header 'INTERPRETERS / COMPILERS / LANGUAGES'
 _chkcmd java
@@ -112,6 +113,12 @@ _chkcmd wdocker
 _header 'MISC'
 _chkcmd gptfdisk
 _chkcmd locate
+_chkcmd neofetch
+
+_header 'GUI'
+_chkcmd sqlitebrowser
+_chkcmd spectrwm
+_chkcmd thunar
 
 _print "Use 'check-programs -m' to only show executables that are missing"
 
