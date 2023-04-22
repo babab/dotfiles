@@ -4,49 +4,20 @@ These configurations and scripts are ultimately optimized for Zsh on
 Archlinux and support combinations of Bash or Zsh with Archlinux and
 Debian (or its derivatives: Ubuntu, Linux Mint, etc.).
 
-## Installing dotfiles repository
 
-This dotfiles should be installed in a subdirectory of \$HOME called
-`dotfiles`. The install script is then used to create the correct
-symlinks pointing to the dotfiles and shell scripts.
+## Index
+<!-- auto generated with https://github.com/mzlogin/vim-markdown-toc -->
+<!-- vim-markdown-toc GFM -->
 
-Clone the git repository in `~/dotfiles`:
+* [Small programs and utility scripts](#small-programs-and-utility-scripts)
+* [Installing dotfiles repository](#installing-dotfiles-repository)
+    * [Default install - preserving existing configuration](#default-install---preserving-existing-configuration)
+    * [Complete install](#complete-install)
 
-``` shell
-cd ~
-git clone https://github.com/babab/dotfiles.git
-```
+<!-- vim-markdown-toc -->
 
-### Default install - preserving existing configuration
 
-Change to the created directory and run install.sh from that directory:
-
-``` shell
-cd ~/dotfiles
-./install.sh             # shows help information
-./install.sh --confirm   # install files
-```
-
-By default, the install script will not create symlinks for any
-files/directories that already exist.
-
-### Complete install
-
-If you don\'t care about any existing dotfiles and scripts (e.g.:
-\~/bin/, \~/.profile and \~/.bashrc) you can install everything. This
-makes sure there are no clashes with existing configurations and is
-recommended. Optionally create a (temporary) new user account to check
-it out and test it. The following command **will** remove existing
-dotfiles:
-
-``` shell
-cd ~/dotfiles
-./install.sh --force
-```
-
-## Contents
-
-### Small programs and utility scripts
+## Small programs and utility scripts
 
 [afkfish](bin/afkfish)
 
@@ -182,3 +153,44 @@ cd ~/dotfiles
 [youtube-dl-clipboard](bin/youtube-dl-clipboard)
 
 - Send URL in clipboard to youtube-dl (using xclip).
+
+
+## Installing dotfiles repository
+
+This dotfiles should be installed in a subdirectory of \$HOME called
+`dotfiles`. The install script is then used to create the correct
+symlinks pointing to the dotfiles and shell scripts.
+
+Clone the git repository in `~/dotfiles`:
+
+``` shell
+cd ~
+git clone https://github.com/babab/dotfiles.git
+```
+
+### Default install - preserving existing configuration
+
+Change to the created directory and run install.sh from that directory:
+
+``` shell
+cd ~/dotfiles
+./install.sh             # shows help information
+./install.sh --confirm   # install files
+```
+
+By default, the install script will not create symlinks for any
+files/directories that already exist.
+
+### Complete install
+
+If you don\'t care about any existing dotfiles and scripts (e.g.:
+\~/bin/, \~/.profile and \~/.bashrc) you can install everything. This
+makes sure there are no clashes with existing configurations and is
+recommended. Optionally create a (temporary) new user account to check
+it out and test it. The following command **will** remove existing
+dotfiles:
+
+``` shell
+cd ~/dotfiles
+./install.sh --force
+```
