@@ -1,0 +1,81 @@
+# Changelog
+
+This is a changelog for a dotfiles repository, it does not have the same
+structure or purpose as a typical software changelog.
+
+It is meant for documenting changes that need manual intervention of the
+user when updating. It is closely linked with the `install.sh` script.
+
+The version number does not follow semver, and is just a simple natural
+number. Any version change represents a backwards incompatible change.
+The version gets bumped only:
+- when a symlink is added or removed (using dotfiles.list)
+- on any change to the install/update procedure and/or script.
+
+The current version can be found with `./install.sh --version`.
+
+## Index
+<!-- auto generated with https://github.com/mzlogin/vim-markdown-toc -->
+<!-- vim-markdown-toc GFM -->
+
+* [v4 - 2023-04-20](#v4---2023-04-20)
+    * [Manual actions](#manual-actions)
+    * [Changes](#changes)
+* [v3 - 2023-02-28](#v3---2023-02-28)
+    * [Changes](#changes-1)
+* [v2 - 2023-02-23](#v2---2023-02-23)
+* [v1 - 2023-02-12](#v1---2023-02-12)
+    * [Changes](#changes-2)
+
+<!-- vim-markdown-toc -->
+
+
+------------------------------------------------------------------------------
+
+## v4 - 2023-04-20
+
+Fix `~/bin` check and add cobra-cli config.
+
+### Manual actions
+
+Update by running:
+
+    ./install.sh --confirm`.
+
+### Changes
+
+- Added file `dotfiles/.cobra.yaml` with symlink `~/.cobra.yaml`
+
+
+------------------------------------------------------------------------------
+
+## v3 - 2023-02-28
+
+Check if `~/bin` is a symlink or directory. This changes the flow of
+the install script somewhat. No user action needed after upgrade.
+
+### Changes
+
+- Never remove `~/bin` if it is a dir instead of a symlink, not even
+  when forced.
+
+
+------------------------------------------------------------------------------
+
+## v2 - 2023-02-23
+
+Download *baps1* if no cc is found on the system. This changes the flow of
+the install script somewhat. No user action needed for existing configs.
+
+
+------------------------------------------------------------------------------
+
+## v1 - 2023-02-12
+
+Begin versioning. Add version number to `install.sh` script and add
+`--version` flag to display it.
+
+### Changes
+
+- Introduce **BABABDOT_VERSION** number to `install.sh`.
+
