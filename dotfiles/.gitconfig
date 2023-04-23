@@ -36,6 +36,8 @@
 	diff = auto
 	interactive = auto
 	status = auto
+[pull]
+	ff = only
 [push]
 	default = simple
 [init]
