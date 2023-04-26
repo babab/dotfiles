@@ -28,7 +28,7 @@ fi
 
 
 _help() {
-    echo 'usage: vbvmconn <machine-name>'
+    echo 'usage: vbvmconn [options] <machine-name>'
     echo
     echo 'SSH connect with a Windows Hosted VirtualBox VM from'
     echo 'within Cygwin, starting the VM first if needed'
@@ -41,6 +41,10 @@ _help() {
     echo '- Host declaration in ~/.ssh/config in Cygwin'
     echo '- Host entry in hosts file in Windows: '
     printf '    C:\\Windows\\System32\\Drivers\\etc\\hosts\n'
+    echo
+    echo Options:
+    echo '-h | --help    show this help information'
+    echo '-l | --list    list runningvms'
 }
 _countdown() {
     # $1: title (string)
@@ -64,21 +68,27 @@ _ssh_connect() {
 }
 
 _main () {
+    # check availability of VBoxManage or print help and return
+    if ! test -x "${VBVMCONN_VBOXMANAGE}"; then
+        printf "error: No executable found at VBVMCONN_VBOXMANAGE\n\n"
+        echo "VBVMCONN_VBOXMANAGE='${VBVMCONN_VBOXMANAGE}'"
+        echo "Set this env var with the correct path to VBoxManage as value"
+        echo -------------------------------------------------------------
+        _help
+        return 2
+    fi
+
     case $1 in
         '-h' | '--help' | '-?') _help; return 0 ;;
+        '-l' | '--list')
+            echo "${VBVMCONN_VBOXMANAGE}" list runningvms
+            "${VBVMCONN_VBOXMANAGE}" list runningvms
+            return 0 ;;
         '--') shift ;;
         '-'*) printf 'error: invalid option\n\n'; _help; return 1 ;;
         '') printf 'error: no argument given\n\n'; _help; return 1 ;;
         *) ;; # continue
     esac
-
-    # check availability of VBoxManage or return
-    if ! test -x "${VBVMCONN_VBOXMANAGE}"; then
-        printf "error: No executable found at VBVMCONN_VBOXMANAGE\n\n"
-        echo "VBVMCONN_VBOXMANAGE='${VBVMCONN_VBOXMANAGE}'"
-        echo "Set this env var with the correct path to VBoxManage as value"
-        return 2
-    fi
 
     # if running: ssh and return
     echo "${VBVMCONN_VBOXMANAGE}" list runningvms '| grep' "$1"
