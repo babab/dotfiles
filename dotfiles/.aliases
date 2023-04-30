@@ -241,7 +241,7 @@ viwhat() {
 # ...        - work on project
 # deactivate - deactivate/leave the virtual environment
 
-alias envinit='source .virtualenv/bin/activate'
+alias envinit='source .virtualenv/bin/activate && envtest -p'
 alias envmake2='virtualenv2 --no-site-packages .virtualenv'
 alias envmake='python -m venv .virtualenv'
 alias envfind='find . | grep bin/activate$'
