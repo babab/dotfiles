@@ -29,7 +29,7 @@ mkscript_main() {
         echo
         echo Types:
         echo '  [*]sh     - posix shell script (sh, bash, ksh, dash, etc.)'
-        echo '  py[thon]  - python script'
+        echo '  py[thon]  - python3 script'
         echo '  node[js]  - Node.js script'
         return 1
     fi
@@ -54,7 +54,7 @@ mkscript_main() {
             echo "#!/bin/$1" > "$2"
             _create_sh "$2"
             ;;
-        py*) echo "#!/usr/bin/env python" > "$2" ;;
+        py*) echo "#!/usr/bin/env python3" > "$2" ;;
         node*) echo "#!/usr/bin/env node" > "$2" ;;
     esac
     # set executable bit

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Get terminal width and/or print rulers to help set window size."""
 
@@ -95,4 +95,4 @@ def main(argv):
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
 
-# mkrun: !python %
+# mkrun: !python3 %
