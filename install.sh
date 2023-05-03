@@ -149,6 +149,13 @@ if [[ ! "$1" ]]; then
 fi
 
 
+if [ -z "$HOME" ]; then
+    echo error: HOME is empty or unset
+    echo
+    echo Environment variable HOME must be set for this script to work
+    exit 2
+fi
+
 # cd to home; all further actions are relative to $HOME
 cd "$HOME"
 
