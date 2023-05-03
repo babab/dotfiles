@@ -134,8 +134,7 @@ Debian (or its derivatives: Ubuntu, Linux Mint, etc.).
 
 [vii](bin/vii)
 
-- Wrapper for editing files in the most fitting way possible,
-    depending on: terminal size, environment and number of files.
+- Edit files in emacs/vim using a tab/pane layout and sudo if root.
 
 [wmtoggle](bin/wmtoggle)
 

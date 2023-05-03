@@ -1,8 +1,7 @@
 #!/bin/sh
 
 # vii
-# Wrapper for editing files in the most fitting way possible,
-# depending on: terminal size, environment and number of files.
+# Edit files in emacs/vim using a tab/pane layout and sudo if root.
 
 # ISC License
 #
@@ -20,26 +19,29 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# Start emacs/vim with a tab/pane layout and sudo if root
-#
-# 1. Check if file is owned by root and prefix sudo if applicable.
-# 2. Use emacsclient to try to open the files in a new Emacs window
-#    if a server is running,
-# 3. Check to see if vim is available under the vim command, if not
-#    check for vi or else exit with status code 3.
-# 4. Start Vim with a pane/tab layout adapted to the current terminal
-#    when more then one file is given as argument.
-#
-# Error codes:
-# 0 - success
-# 1 - wrong argument
-# 2 - file not owned by root or $USER
-# 3 - vim, vi and /bin/vi are not found
-
 if test -z "$1"; then
     echo "error: missing arguments"
     echo
     echo 'usage: vii <file1> [<file2>] [<file3>] [...] '
+    echo
+    echo 'Edit files in emacs/vim using a tab/pane layout and sudo if root.'
+    echo
+    echo 'This is a wrapper for editing files in the most fitting way possible,'
+    echo 'depending on: terminal size, environment and number of files.'
+    echo
+    echo '1. Check if file is owned by root and prefix sudo if applicable.'
+    echo '2. Use emacsclient to try to open the files in a new Emacs window'
+    echo '   if a server is running.'
+    echo '3. Check to see if vim is available under the vim command, if not'
+    echo '   check for vi or else exit with status code 3.'
+    echo '4. Start Vim with a pane/tab layout adapted to the current terminal'
+    echo '   when more then one file is given as argument.'
+    echo
+    echo 'Error codes:'
+    echo '0 - success'
+    echo '1 - wrong argument'
+    echo '2 - file not owned by root or $USER'
+    echo '3 - vim, vi and /bin/vi are not found'
     exit 1
 fi
 
