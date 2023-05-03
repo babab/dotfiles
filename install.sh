@@ -22,6 +22,7 @@ usage()
     echo "       ./install.sh [--remove]"
     echo "       ./install.sh [--confirm]"
     echo "       ./install.sh [--version]"
+    echo "       ./install.sh [--status]"
     echo
     echo 'Use --confirm to install in a safe way without removing files'
     echo 'Use --remove to remove all (pre-existing) files / symbolic links'
@@ -89,6 +90,38 @@ _getdepends()
 
 LFS="
 "
+_status()
+{
+    _sdf() {
+        _hf="$HOME/$1"
+        if [ -h "$_hf" ]; then
+            echo "OK   $_hf"
+            diff -q "${RELATIVE_DOTFILES_PATH}${2}/${1}" "$_hf" || echo
+        elif [ -d "$_hf" ]; then
+            echo "!!   $_hf is a directory"
+            diff -q "${RELATIVE_DOTFILES_PATH}${2}/${1}" "$_hf" || echo
+        elif [ -f "$_hf" ]; then
+            echo "!!   $_hf is a regular file"
+            diff -q "${RELATIVE_DOTFILES_PATH}${2}/${1}" "$_hf" || echo
+        else
+            echo "!!   $_hf does not exist"
+        fi
+    }
+
+    echo "The files below should all be symlinked to the files and"
+    echo "directories listed in 'dotfiles.list'. Any changes between"
+    echo "files are printed if found (using 'diff -q')"
+    echo
+    echo STATUS OF FILES IN dotfiles.list
+    echo --------------------------------
+    for line in $(cat "${HOME}/${RELATIVE_DOTFILES_PATH}/dotfiles.list"); do
+        _sdf "$line" /dotfiles
+    done
+    echo
+    echo 'STATUS of ~/bin DIRECTORY'
+    echo -------------------------
+    _sdf bin
+}
 
 _remove()
 {
@@ -174,6 +207,9 @@ case $1 in
     ;;
 '--version')
     echo "install.sh v$BABABDOT_VERSION"
+    ;;
+'--status')
+    _status
     ;;
 *)
     usage
