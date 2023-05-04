@@ -56,12 +56,14 @@ _chkcmd ag
 _chkcmd curl
 _chkcmd dialog
 _chkcmd git
+_chkcmd gzip
 _chkcmd hostname
 _chkcmd htop
 _chkcmd man
 _chkcmd par
 _chkcmd ssh
 _chkcmd sudo
+_chkcmd tar
 _chkcmd tmux
 _chkcmd vi
 _chkcmd vim
