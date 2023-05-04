@@ -40,9 +40,9 @@ PROMPT='%(?..%{$fg_bold[red]%}err:%? )%{$fg_bold[magenta]%}%! %{$reset_color%} %
 
 ### Other ####################################################################
 
-source ~/dotfiles/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/dotfiles/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/dotfiles/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "${BABABDOT_ROOT}"/depends/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "${BABABDOT_ROOT}"/depends/zsh-history-substring-search/zsh-history-substring-search.zsh
+source "${BABABDOT_ROOT}"/depends/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh-history-substring-search
 zmodload zsh/terminfo

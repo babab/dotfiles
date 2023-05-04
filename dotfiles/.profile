@@ -1,3 +1,6 @@
+# Location for the root folder of dotfiles repository
+export BABABDOT_ROOT="$HOME/git/dotfiles"
+
 # Environment vars
 export BROWSER="/usr/bin/chromium"
 export EDITOR="/usr/bin/vim"

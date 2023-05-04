@@ -1,10 +1,9 @@
 # Changelog
 
-This is a changelog for a dotfiles repository, it does not have the same
-structure or purpose as a typical software changelog.
-
-It is meant for documenting changes that need manual intervention of the
-user when updating. It is closely linked with the `install.sh` script.
+This is a changelog for a dotfiles repository, it does not have the
+same structure or purpose as a typical software changelog. It is meant
+for documenting changes that need manual intervention of the user when
+updating. It is closely linked with the `install.sh` script.
 
 The version number does not follow semver, and is just a simple natural
 number. Any version change represents a backwards incompatible change.
@@ -18,16 +17,61 @@ The current version can be found with `./install.sh --version`.
 <!-- auto generated with https://github.com/mzlogin/vim-markdown-toc -->
 <!-- vim-markdown-toc GFM -->
 
-* [v4 - 2023-04-20](#v4---2023-04-20)
+* [v5 - 2023-05-04](#v5---2023-05-04)
     * [Manual actions](#manual-actions)
     * [Changes](#changes)
-* [v3 - 2023-02-28](#v3---2023-02-28)
+* [v4 - 2023-04-20](#v4---2023-04-20)
+    * [Manual actions](#manual-actions-1)
     * [Changes](#changes-1)
+* [v3 - 2023-02-28](#v3---2023-02-28)
+    * [Changes](#changes-2)
 * [v2 - 2023-02-23](#v2---2023-02-23)
 * [v1 - 2023-02-12](#v1---2023-02-12)
-    * [Changes](#changes-2)
+    * [Changes](#changes-3)
 
 <!-- vim-markdown-toc -->
+
+
+------------------------------------------------------------------------------
+
+## v5 - 2023-05-04
+
+Added ability to place folder anywhere in `HOME`. Previously a location
+of `~/dotfiles` was expected. The new default location and dirname is
+`~/git/dotfiles`.
+
+The install script now has a `--status` option to check on symlink
+status and/or differences between existing local files and those in this
+repo.
+
+### Manual actions
+
+To update, the dotfiles repo must either:
+
+- Be moved from `~/dotfiles` to `~/git/dotfiles`.
+
+  ``` shell
+  cd ~
+  ctb dotfiles  # create temporary backup using bin/ctb
+  mkdir -p git
+  mv dotfiles git
+  cd git/dotfiles
+  ./install.sh --force  # re-create symlinks
+  ```
+
+**OR**
+
+- `BABABDOT_ROOT` must be changed to point to `~/dotfiles`.
+
+  Pull the latest changes and edit the location for `BABABDOT_ROOT` in
+  `dotfiles/.profile` or overwrite it elsewhere.
+
+### Changes
+
+- Introduced environment variable `BABABDOT_ROOT` in `.profile`.
+- Used `BABABDOT_ROOT` in `.zshrc` to point to the plugins that are
+  downloaded into the depends directory by the install script.
+- Added `--status` option to install script.
 
 
 ------------------------------------------------------------------------------
@@ -40,7 +84,7 @@ Fix `~/bin` check and add cobra-cli config.
 
 Update by running:
 
-    ./install.sh --confirm`.
+    ./install.sh --confirm
 
 ### Changes
 

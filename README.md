@@ -10,7 +10,7 @@ Debian (or its derivatives: Ubuntu, Linux Mint, etc.).
 <!-- vim-markdown-toc GFM -->
 
 * [Small programs and utility scripts](#small-programs-and-utility-scripts)
-* [Installing dotfiles repository](#installing-dotfiles-repository)
+* [Cloning dotfiles repository](#cloning-dotfiles-repository)
     * [Default install - preserving existing configuration](#default-install---preserving-existing-configuration)
     * [Complete install](#complete-install)
 
@@ -154,16 +154,28 @@ Debian (or its derivatives: Ubuntu, Linux Mint, etc.).
 - Send URL in clipboard to youtube-dl (using xclip).
 
 
-## Installing dotfiles repository
+## Cloning dotfiles repository
 
-This dotfiles should be installed in a subdirectory of \$HOME called
-`dotfiles`. The install script is then used to create the correct
+This repository should be cloned somewhere down the path in `HOME`.
+The default location is *~/git/dotfiles*.
+
+Some config files will directly refer to files in this repository
+using the env var `BABABDOT_ROOT`. If you use a location
+other the *~/git/dotfiles*, this var should be changed to
+point to the right location. It is defined at the top of
+[dotfiles/.profile](dotfiles/.profile).
+
+The install script is then used to create the correct
 symlinks pointing to the dotfiles and shell scripts.
 
-Clone the git repository in `~/dotfiles`:
+Clone the git repository somewhere in `HOME`:
 
 ``` shell
-cd ~
+mkdir -p ~/git
+cd ~/git
+
+# Download / clone from either Github or Codeberg
+git clone https://codeberg.org/babab/dotfiles.git
 git clone https://github.com/babab/dotfiles.git
 ```
 
@@ -172,7 +184,7 @@ git clone https://github.com/babab/dotfiles.git
 Change to the created directory and run install.sh from that directory:
 
 ``` shell
-cd ~/dotfiles
+cd ~/git/dotfiles
 ./install.sh             # shows help information
 ./install.sh --confirm   # install files
 ```
@@ -190,6 +202,6 @@ it out and test it. The following command **will** remove existing
 dotfiles:
 
 ``` shell
-cd ~/dotfiles
+cd ~/git/dotfiles
 ./install.sh --force
 ```

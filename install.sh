@@ -34,7 +34,7 @@ usage()
 # - on any change to the install/update procedure
 # - when a symlink is added or removed that is handled by this script
 #   (in dotfiles.list)
-export BABABDOT_VERSION=4
+export BABABDOT_VERSION=5
 
 
 # check if we are in the right directory
