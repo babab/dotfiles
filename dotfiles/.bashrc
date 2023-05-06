@@ -23,9 +23,6 @@ fi
 # Source environment variables
 . $HOME/.profile
 
-# Source prompt settings
-. $HOME/.ps1
-
 # Source aliases
 . $HOME/.aliases
 
@@ -35,6 +32,10 @@ complete -d lla
 complete -ac xs
 complete -ac loop
 complete -A hostname vbvmconn
+
+# Source prompt settings, two options:
+. "$BABABDOT_ROOT/dotfiles/.ps1_basic"  # option 1
+# . "$BABABDOT_ROOT/dotfiles/.ps1_ext"  # option 2
 
 # Source local settings and overrides
 if [ -f "$HOME/.bashrc.local" ]; then
