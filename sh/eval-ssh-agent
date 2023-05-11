@@ -81,6 +81,10 @@ case $_agentstatus in
 esac
 
 
+# set umask to its original value
 umask "$_oct_umask_orig"
+
+# unset all local variables this script initialized
+unset _agent_path _agentenv _agentlock _agentpid _agentstatus _oct_umask_orig
 
 # vim: set ft=sh:
