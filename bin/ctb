@@ -1,19 +1,47 @@
 #!/bin/sh
+# ctb - Create a temporary backup of a directory with tar/gz
 
-# ctb - create temporary backup(s) with tar/gz
+# Copyright (c) 2023 Benjamin Althues <benjamin@babab.nl>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-if [ ! "$1" ]; then
-    echo 'usage: ctb <folder> [--flat]'
+# SPDX-License-Identifier: ISC
+
+if test -z "$1"; then
+    echo 'usage: ctb <file/folder> [<archive-name>]'
+    echo
+    echo Create a temporary backup of a file/directory with tar/gz.
+    echo
+    echo "When passing an archive-name, do not add the extension."
+    echo "A file extension of .tgz will always be applied."
+    echo
+    echo "If no <archive-name> is given, it will default to the"
+    echo "file/folder, suffixed with the word bak and the date/time in"
+    echo "ymd-HIS format, like 'foldername.bak-231231-234516.tgz'."
     exit 1
 fi
-if [ "$2" ]; then
-    if [ "$2" == '--flat' ]; then
-        bakname="$1"
-    else
-        echo "Invalid argument '$2'"
-        exit 2
-    fi
+if test -n "$2"; then
+    bakname="$2"
 else
-    bakname="bak__""$1""$(date +__%Y-%m-%d-%s)"
+    bakname="$1".bak-"$(date +%y%m%d-%H%M%S)"
 fi
-tar -zcvf "${bakname}.tgz" "$1" && echo Saved as "${bakname}.tgz"
+
+_err=0
+if tar -zcvf "${bakname}.tgz" "$1"; then
+    _err=$?
+    echo Saved as "${bakname}.tgz"
+else
+    echo "error: something went wrong while running command: " > /dev/stderr
+    echo "  tar -zcvf '${bakname}.tgz' '$1'" > /dev/stderr
+    return $_err
+fi
