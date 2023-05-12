@@ -34,6 +34,8 @@
 _usage() {
     echo 'usage: envtest [option]'
     echo
+    echo Check paths and versions of python, pip and virtual environment
+    echo
     echo 'By default, envtest shows all information except for sections'
     echo 'PACKAGES and ALL VERSIONS. Use the options below to show more'
     echo 'or less.'
@@ -41,7 +43,8 @@ _usage() {
     echo Options:
     echo '-s, --short      show only python and pip paths'
     echo '-p, --pkg        show only python, pip paths and packages'
-    echo '-v, -a, --all    show all information available'
+    echo '-v, --versions   show all information available except packages'
+    echo '-a, --all        show all information available'
     echo '-h, -?, --help   show this usage information'
     echo
     echo The output of this script is formatted in reStructuredText which
@@ -137,7 +140,13 @@ _main() {
         -p | --p*)
             _section_fip -s; echo
             _section_packages -s ;;
-        -v | -a | --a*)
+        -v | --v*)
+            _section_venv; echo
+            _section_fip; echo
+            _section_vofip; echo
+            _section_all_versions; echo
+            ;;
+        -a | --a*)
             _section_venv; echo
             _section_fip; echo
             _section_vofip; echo
