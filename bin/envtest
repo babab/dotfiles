@@ -54,8 +54,7 @@ _usage() {
 }
 
 _chkcmd() {
-    output="$(command -V $1 2>/dev/null)"
-    if [ $? -eq 0 ]; then
+    if output="$(command -V "$1" 2>/dev/null)"; then
         echo "- ${output}"
     else
         echo "- [!] $1 is not available"
@@ -65,7 +64,7 @@ _chkcmd() {
 _section_venv() {
     echo "VIRTUAL ENVIRONMENT"
     echo "==================="
-    if [[ -z "${VIRTUAL_ENV}" ]]; then
+    if test -z "${VIRTUAL_ENV}"; then
         echo No virtual environment loaded
     else
         echo 'VIRTUAL_ENV='"${VIRTUAL_ENV}"
@@ -91,11 +90,17 @@ _section_fip() {
 }
 
 _section_vofip() {
+    _python_m_pip="$(python -m pip --version)"
     echo "VERSIONS OF FIRST IN PATH PYTHON/PIP"
     echo "------------------------------------"
-    echo -n "- python         "; python --version
-    echo -n "- pip            "; pip --version
-    echo -n "- python -m pip  "; python -m pip --version
+    printf 'python         '; python --version
+    printf 'pip            '; pip --version
+    printf 'python -m pip  '
+    if test "$(pip --version)" = "$_python_m_pip"; then
+        echo '^ same as pip ^'
+    else
+        python -m pip --version
+    fi
 }
 
 _section_all_versions() {
@@ -114,6 +119,7 @@ _section_packages() {
     if [ "$1" != '-s' ]; then
         echo "PIP LIST"
         echo "========"
+        # shellcheck disable=SC2016
         echo 'List is created with ``python -m pip list``::'
         echo
         python -m pip list | sed 's/^/    /'
