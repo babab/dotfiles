@@ -100,7 +100,7 @@ what() {
 ### SSH aliases ##############################################################
 alias byessh='ssh-add -D; ps -p $(cat ~/.ssh/agent/pid) | grep ssh-agent && kill $(cat ~/.ssh/agent/pid) && sleep 2 && exit'
 alias lockssh='ssh-add -x && install -m600 /dev/null ~/.ssh/agent/lock'
-alias sshagent='. ~/dotfiles/sh/eval-ssh-agent'
+alias sshagent=". $BABABDOT_ROOT/sh/eval-ssh-agent"
 alias unlockssh='ssh-add -X && rm ~/.ssh/agent/lock'
 # alias sshsockstunnel='ssh -C2qTnN -D 8080 hostname'
 
@@ -121,12 +121,16 @@ kk() {
     fi
     echo "$_gitstatus" | head -2
 
-    if [ "$PWD" = "$HOME/dotfiles/dotfiles" ]; then
-        echo "untracked files are filtered when PWD is $PWD"
-        git status --short --untracked-files=no
-    elif [ "$PWD" = "$HOME/dotfiles/bin" ]; then
-        echo "filtered all files that are outside of $PWD"
-        git status --short | grep -v '../'
+    if [ -n "$BABABDOT_ROOT" ]; then
+        if [ "$PWD" = "$BABABDOT_ROOT/dotfiles" ]; then
+            echo "untracked files are filtered when PWD is $PWD"
+            git status --short --untracked-files=no
+        elif [ "$PWD" = "$BABABDOT_ROOT/bin" ]; then
+            echo "filtered all files that are outside of $PWD"
+            git status --short | grep -v '../'
+        else
+            git status --short $*
+        fi
     else
         git status --short $*
     fi
