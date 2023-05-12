@@ -9,12 +9,26 @@ Debian (or its derivatives: Ubuntu, Linux Mint, etc.).
 <!-- auto generated with https://github.com/mzlogin/vim-markdown-toc -->
 <!-- vim-markdown-toc GFM -->
 
+* [Code hosting / Links](#code-hosting--links)
 * [Small programs and utility scripts](#small-programs-and-utility-scripts)
 * [Cloning dotfiles repository](#cloning-dotfiles-repository)
+* [Linking dotfiles](#linking-dotfiles)
     * [Default install - preserving existing configuration](#default-install---preserving-existing-configuration)
     * [Complete install](#complete-install)
 
 <!-- vim-markdown-toc -->
+
+
+## Code hosting / Links
+
+- [babab/dotfiles](https://codeberg.org/babab/dotfiles) on Codeberg
+- [babab/dotfiles](https://github.com/babab/dotfiles) on Github
+
+Dotfiles for Vim (*~/.vim*) are kept in a separate repository called
+vim-config.
+
+- [babab/vim-config](https://codeberg.org/babab/vim-config) on Codeberg
+- [babab/vim-config](https://github.com/babab/vim-config) on Github
 
 
 ## Small programs and utility scripts
@@ -177,6 +191,18 @@ cd ~/git
 # Download / clone from either Github or Codeberg
 git clone https://codeberg.org/babab/dotfiles.git
 git clone https://github.com/babab/dotfiles.git
+```
+
+## Linking dotfiles
+
+Before any linking is done, you can compare these dotfiles with the ones
+in your userdir. It will show if the files are symlinked and shows if
+the files/symlinks exists but differ with these repo.
+
+To check status, use:
+
+``` shell
+./install.sh --status
 ```
 
 ### Default install - preserving existing configuration
