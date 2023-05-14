@@ -308,7 +308,7 @@ alias completely='docker run --rm -it --user $(id -u):$(id -g) --volume "$PWD:/a
 alias dfh='df -hTx devtmpfs -x tmpfs'
 alias magick_ico='magick convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico'
 alias make7z='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
-alias pacmir='reflector --age 2 --country nl --latest 5 --sort score | tee /tmp/mirrorlist'
+alias pacmir='reflector --age 6 --country nl --latest 5 --sort score -p https | tee /tmp/mirrorlist'
 alias pdf_combine='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=combined.pdf'
 alias pping='nc -zv'
 alias rm_docker_images='docker rmi $(docker images -q)'
