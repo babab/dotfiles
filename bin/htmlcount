@@ -38,6 +38,7 @@ class Parser(HTMLParser):
     def handle_endtag(self, tag):
         self.tags[tag]['end'].append(self.getpos())
 
+
 if __name__ == '__main__':
     contents = ''
 
