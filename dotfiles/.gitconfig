@@ -24,7 +24,8 @@
 	ci = commit
 	co = checkout
 	di = diff
-	fa = fetch --all --verbose
+	fa = fetch --all
+	fav = fetch --all --verbose
 	gh = remote-gh
 	log1 = log --oneline --no-show-signature
 	ls = log --stat
