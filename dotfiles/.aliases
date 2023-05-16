@@ -317,8 +317,8 @@ alias rm_vimsession='find . -name ".session.vim" | xargs /bin/rm -f'
 alias sys='sudo systemctl'
 alias tm='tmux new -s main -A'
 alias tmuxa='tmux new -s main -A'
-alias ytd='yt-dlp --no-check-certificates --compat-options format-sort --no-playlist'
-alias ytdpl='yt-dlp --no-check-certificates --compat-options format-sort'
+alias ytd='yt-dlp --no-check-certificates --compat-options format-sort --trim-filenames 100 --no-playlist'
+alias ytdpl='yt-dlp --no-check-certificates --compat-options format-sort --trim-filenames 100'
 
 hypo_upload() {
     curl --upload-file "$1" https://cloud.babab.nl/hypo/ #2>/dev/null
