@@ -5,10 +5,15 @@ if command -v neofetch >/dev/null; then
     neofetch
 fi
 
+case $1 in
+    -b | --back) returntxt="Returned to " ;;
+    *) returntxt="" ;;
+esac
+
 motd="$(uname -sn) - $(whoami)"
 ssh-add -l >/dev/null 2>&1
 case $? in
-    0) echo "${motd} - key loaded" ;;
-    1) echo "${motd} - no key loaded";;
-    2) echo "${motd} - agent n/a";;
+    0) echo "${returntxt}${motd} - key loaded" ;;
+    1) echo "${returntxt}${motd} - no key loaded";;
+    2) echo "${returntxt}${motd} - agent n/a";;
 esac
