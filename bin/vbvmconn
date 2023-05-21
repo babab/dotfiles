@@ -28,23 +28,27 @@ fi
 
 
 _help() {
-    echo 'usage: vbvmconn [options] <machine-name>'
+    echo 'usage: vbvmconn [--ssh <hostname>] <machine-name>'
+    echo '       vbvmconn [-l | --list] | [-h | --help]'
     echo
     echo 'SSH connect with a Windows Hosted VirtualBox VM from'
     echo 'within Cygwin, starting the VM first if needed'
     echo
-    echo 'The machine-name in VirtualBox, must be the the same as'
-    echo 'the ssh destination. This is used in these commands:'
+    echo 'The same machine-name in VirtualBox, is also used as the ssh'
+    echo 'destination by default. This is used in these commands:'
     echo '- startvm <machine-name>'
     echo '- ssh <machine-name>'
-    echo 'You can set the ssh destination name through:'
+    echo "Use '--ssh <hostname>' to specify a different destination"
+    echo
+    echo 'You can set the destination name SSH uses in various ways, including:'
     echo '- Host declaration in ~/.ssh/config in Cygwin'
     echo '- Host entry in hosts file in Windows: '
     printf '    C:\\Windows\\System32\\Drivers\\etc\\hosts\n'
     echo
     echo Options:
-    echo '-h | --help    show this help information'
-    echo '-l | --list    list runningvms'
+    echo '-h | --help       show this help information'
+    echo '-l | --list       list runningvms'
+    echo '--ssh <hostname>  use a name for ssh, different to machine-name'
 }
 _countdown() {
     # $1: title (string)
@@ -56,8 +60,11 @@ _countdown() {
     printf '\r:: %s now          \n' "$1"
 }
 _ssh_connect() {
-    # $1: hostname/machine-name (string)
-    ssh "$1"
+    if test -z "$_ssh_host"; then
+        echo ":: error: var _ssh_host is unset or empty"
+        return 1
+    fi
+    ssh "$_ssh_host"
     _err=$?
     # clear the console on a hard disconnect while in a tmux session
     if test $_err -eq 255; then
@@ -84,16 +91,23 @@ _main () {
             echo "${VBVMCONN_VBOXMANAGE}" list runningvms
             "${VBVMCONN_VBOXMANAGE}" list runningvms
             return 0 ;;
+        '--ssh')
+            shift
+            _ssh_host="$1"
+            shift
+            ;;
         '--') shift ;;
         '-'*) printf 'error: invalid option\n\n'; _help; return 1 ;;
         '') printf 'error: no argument given\n\n'; _help; return 1 ;;
         *) ;; # continue
     esac
 
+    test -z "$_ssh_host" && _ssh_host="$1"
+
     # if running: ssh and return
     echo "${VBVMCONN_VBOXMANAGE}" list runningvms '| grep' "$1"
     if "${VBVMCONN_VBOXMANAGE}" list runningvms | grep "$1"; then
-        _ssh_connect "$1"
+        _ssh_connect
         return $?
     fi
 
@@ -102,7 +116,7 @@ _main () {
     "${VBVMCONN_VBOXMANAGE}" startvm --type headless "$1" && \
         (
             _countdown 'connecting with SSH'
-            _ssh_connect "$1"
+            _ssh_connect
             return $?
         )
         return $?
