@@ -11,9 +11,16 @@ export LANG=en_US.UTF-8
 export LESS="iFXRS"
 export GOPATH="$HOME/go"
 export PATH="$HOME/bin:$HOME/.local/bin:$GOPATH/bin:$PATH"
-export PYTHONSTARTUP=~/.pythonrc
+export PYTHONSTARTUP="$BABABDOT_ROOT/conf/pythonrc"
 export VIRTUAL_ENV_DISABLE_PROMPT=disabled
 export VISUAL="/usr/bin/vim"
+
+# Git config env vars
+export GIT_CONFIG_COUNT=2
+export GIT_CONFIG_KEY_0=core.excludesfile
+export GIT_CONFIG_VALUE_0="$BABABDOT_ROOT/conf/gitignore_global"
+export GIT_CONFIG_KEY_1=include.path
+export GIT_CONFIG_VALUE_1="$BABABDOT_ROOT/conf/user.gitconfig"
 
 if [ -d "/usr/local/go" ]; then
     export GOROOT=/usr/local/go

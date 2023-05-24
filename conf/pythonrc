@@ -1,9 +1,10 @@
+import datetime  # noqa: F401
+import os  # noqa: F401
 import sys  # noqa: F401
 from pprint import pprint  # noqa: F401
-import datetime  # noqa: F401
 
-print(':: loaded ~/.pythonrc')
-print(':: imported sys, pprint, datetime')
+print(':: loaded PYTHONSTARTUP {}'.format(os.environ['PYTHONSTARTUP']))
+print(':: imported datetime, os, sys and pprint from pprint')
 
 try:
     from django.core.management import setup_environ

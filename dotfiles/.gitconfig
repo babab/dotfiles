@@ -1,16 +1,20 @@
-[core]
-	excludesfile = ~/.gitignore_global
+# [core]
+# The core.excludesfile is set using envvars in .profile
+#
+# export GIT_CONFIG_KEY_0=core.excludesfile
+# export GIT_CONFIG_VALUE_0="$BABABDOT_ROOT/conf/gitignore_global"
 
-;### identity and signing ###;
-; User configuration section is saved unversioned in .gitconfig.user
-; with these fields:
-;
-; [user]
-; 	name = Tonnie Diederniettoedoet
-; 	email = tonnie@example.com
-; 	signingkey = ~/.ssh/sshsignkey.pub
-[include]
-	path = ~/.gitconfig.user
+
+# [user]
+# The [user] section of my gitconfig is defined in a separate
+# unversioned file that get included in this main user.gitconfig by using envvars in .profile
+#
+# export GIT_CONFIG_KEY_1=include.path
+# export GIT_CONFIG_VALUE_1="$BABABDOT_ROOT/conf/user.gitconfig"
+#
+# See conf/user.gitconfig.example, copy it over and edit it.
+# Check if configured properly with: git config --show-origin user.name
+
 [gpg]
 	format = ssh
 [gpg "ssh"]

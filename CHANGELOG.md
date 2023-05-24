@@ -17,11 +17,13 @@ The current version can be found with `./install.sh --version`.
 <!-- auto generated with https://github.com/mzlogin/vim-markdown-toc -->
 <!-- vim-markdown-toc GFM -->
 
-* [v5 - 2023-05-04](#v5---2023-05-04)
+* [v6 - 2023-05-24](#v6---2023-05-24)
     * [Manual actions](#manual-actions)
+* [v5 - 2023-05-04](#v5---2023-05-04)
+    * [Manual actions](#manual-actions-1)
     * [Changes](#changes)
 * [v4 - 2023-04-20](#v4---2023-04-20)
-    * [Manual actions](#manual-actions-1)
+    * [Manual actions](#manual-actions-2)
     * [Changes](#changes-1)
 * [v3 - 2023-02-28](#v3---2023-02-28)
     * [Changes](#changes-2)
@@ -30,6 +32,51 @@ The current version can be found with `./install.sh --version`.
     * [Changes](#changes-3)
 
 <!-- vim-markdown-toc -->
+
+
+------------------------------------------------------------------------------
+
+## v6 - 2023-05-24
+
+Declutter hidden files in HOME, by removing the dotfiles/symlinks from
+$HOME for files that can be programmatically pointed at through includes
+and environment variables.
+
+The ps1 prompt is now configured by including the correct file in
+`.bashrc`. The global gitignore file and the include.path pointing to
+user.gitconfig is now configured through envvar key/value pairs set in
+`~/.profile`.
+
+The files with their old and new locations:
+
+- `~/.ps1_basic` -> `$BABABBOT_ROOT/sh/ps1_basic.bash`
+- `~/.ps1_ext` -> `$BABABBOT_ROOT/sh/ps1_ext.bash`
+- `~/.gitignore_global` -> `$BABABDOT_ROOT/conf/gitignore_global`
+
+Changed in configuration, but still unversioned in Git:
+
+- `~/.gitconfig.user` -> `$BABABDOT_ROOT/conf/user.gitconfig`
+
+The old symlinks can/must be removed, since they will point to
+non-existing files from now on.
+
+
+### Manual actions
+
+
+The easiest way is to remove symlinks by hand.
+
+``` shell
+cd ~
+rm .ps1_basic .ps1_ext .gitignore_global
+mv .gitconfig.user $BABABDOT_ROOT/conf/user.gitconfig
+```
+
+**OR**
+
+You can use the install script to remove and populate all symlinks.
+In v5 do: `./install.sh --remove`.
+Then, in v6 do: `./install.sh --confirm`.
 
 
 ------------------------------------------------------------------------------

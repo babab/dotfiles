@@ -5,6 +5,8 @@
 /bin/sti
 /bin/tagfile
 
+/conf/user.gitconfig
+
 /.config/
 /depends/
 /dotfiles/.composer/

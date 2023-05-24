@@ -34,8 +34,8 @@ complete -ac loop
 complete -A hostname vbvmconn
 
 # Source prompt settings, two options:
-. "$BABABDOT_ROOT/dotfiles/.ps1_basic"  # option 1
-# . "$BABABDOT_ROOT/dotfiles/.ps1_ext"  # option 2
+. "$BABABDOT_ROOT/sh/ps1_basic.bash"  # option 1
+# . "$BABABDOT_ROOT/sh/ps1_ext.bash"  # option 2
 
 # Source local settings and overrides
 if [ -f "$HOME/.bashrc.local" ]; then

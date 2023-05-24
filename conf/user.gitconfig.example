@@ -1,0 +1,10 @@
+;### identity and signing ###;
+; User configuration section is saved unversioned in user.gitconfig with
+; these fields:
+;
+[user]
+	name = Tonnie Diederniettoedoet
+	email = tonnie@example.com
+	signingkey = ~/.ssh/sshsignkey.pub
+
+; vim: set ft=gitconfig:

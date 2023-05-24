@@ -6,11 +6,7 @@
 .composer
 .config
 .gitconfig
-.gitignore_global
 .profile
-.ps1_basic
-.ps1_ext
-.pythonrc
 .spacemacs
 .spectrwm.conf
 .tern-config
