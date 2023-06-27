@@ -93,6 +93,7 @@ _chkcmd flake8
 
 _header 'ARCHLINUX SPECIFIC'
 _chkcmd paccache
+_chkcmd pkgfile
 _chkcmd reflector
 
 _header 'FRIENDS'
@@ -122,6 +123,11 @@ _chkcmd sqlitebrowser
 _chkcmd spectrwm
 _chkcmd thunar
 
+_header 'SERVER SOFTWARE'
+_chkcmd certbot
+_chkcmd docker
+
+_print
 _print "Use 'check-programs -m' to only show executables that are missing"
 
 test -n "$_print_only_missing" && printf '%b' "$_missing_exe"
