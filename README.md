@@ -148,7 +148,7 @@ vim-config.
 
 [vii](bin/vii)
 
-- Edit files in emacs/vim using a tab/pane layout and sudo if root.
+- Edit files in emacs/vim using a tab/pane layout and sudo if needed.
 
 [wmtoggle](bin/wmtoggle)
 
